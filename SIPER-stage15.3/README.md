@@ -238,30 +238,6 @@ The final manifest, inventory and checksums are written under
 [`docs/evidence_guide.md`](docs/evidence_guide.md) and the final hand-in list is
 in [`docs/submission_checklist.md`](docs/submission_checklist.md).
 
-## Known limitations
-
-- Rules and thresholds are provisional and require broader benign/malicious
-  validation before high-risk deployment.
-- File-write eBPF events identify device/inode and user-supplied identifiers;
-  they do not claim a verified canonical full path.
-- The portable process-exit tracepoint does not expose every exit code.
-- The audit hash chain is tamper-evident within its threat model; a privileged
-  attacker able to replace all logs and manifests could recompute the chain.
-- Real-malware validation and large-scale production performance testing remain
-  separate authorised laboratory activities.
-- Automatic terminate/quarantine is intentionally disabled by default.
-
-## Documentation
-
-- [Architecture](docs/architecture.md)
-- [Operations and recovery](docs/operations.md)
-- [Evidence guide](docs/evidence_guide.md)
-- [Final verification matrix](docs/final_verification_matrix.md)
-- [Submission checklist](docs/submission_checklist.md)
-- [Controlled live-malware laboratory gate](docs/controlled_live_malware_lab.md)
-- [Security policy](SECURITY.md)
-- [Release notes](RELEASE_NOTES.md)
-- [Changelog](CHANGELOG.md)
 
 ## License
 
