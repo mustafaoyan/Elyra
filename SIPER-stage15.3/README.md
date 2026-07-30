@@ -266,22 +266,3 @@ in [`docs/submission_checklist.md`](docs/submission_checklist.md).
 ## License
 
 Apache License 2.0. See [`LICENSE`](LICENSE).
-
-### Stage 15.1 verifier note
-
-The final installed-workflow verifier accounts for the daemon's intentionally
-bounded 200-event dashboard buffer. When a verified fixture event ages out
-between polling and the final dashboard refresh, GUI projection is checked
-against the exact event records previously returned through `PardusModel`'s
-official Unix-socket API. This does not use mock telemetry and does not weaken
-IPC-error checks.
-
-### Stage 15.2 scoring-evidence note
-
-The Stage 4 evidence generator now emits schema version `1.1`, explicit derived
-validation checks and a top-level `overall_status`. The status is `OK` only when
-ordinary text is allowed, entropy-only evidence is not denied, the labelled
-combined synthetic fixture reaches the denial path, and all results retain
-structured explainability fields. Existing Stage 4 evidence must be regenerated
-with `scripts/demonstrate_pre_execution_scoring.py`; the finalizer never inserts
-an unconditional success value.
