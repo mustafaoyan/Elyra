@@ -1,0 +1,34 @@
+{
+  "timestamp_utc": "2026-07-28T17:32:29.863008+00:00",
+  "method": "temporary Unix socket; no root, kernel hooks, network listener, or malware",
+  "protocol_version": 1,
+  "results": [
+    {
+      "scenario": "versioned_round_trip_and_peer_credentials",
+      "status": "OK",
+      "peer_pid": 1893,
+      "peer_uid": 1000
+    },
+    {
+      "scenario": "protected_socket_mode",
+      "status": "OK",
+      "mode": "0660"
+    },
+    {
+      "scenario": "malformed_json_rejection",
+      "status": "OK",
+      "error_code": "INVALID_JSON"
+    },
+    {
+      "scenario": "oversized_request_rejection",
+      "status": "OK",
+      "error_code": "MESSAGE_TOO_LARGE"
+    },
+    {
+      "scenario": "synthetic_unprivileged_sensitive_action_denial",
+      "status": "OK",
+      "note": "policy evaluation only; no file was restored"
+    }
+  ],
+  "overall_status": "OK"
+}

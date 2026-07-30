@@ -1,0 +1,15 @@
+$ python3 -m compileall -q src
+compileall: PASS
+
+$ PYTHONPATH=src python3 -m pytest -q
+......................................................................   [100%]
+70 passed in 2.79s
+
+$ PYTHONPATH=src python3 scripts/demonstrate_ipc.py --output evidence/ipc/stage6_ipc_generic_linux.json
+versioned_round_trip_and_peer_credentials: OK
+protected_socket_mode: OK
+malformed_json_rejection: OK
+oversized_request_rejection: OK
+synthetic_unprivileged_sensitive_action_denial: OK
+overall_status: OK
+Evidence written to: evidence/ipc/stage6_ipc_generic_linux.json

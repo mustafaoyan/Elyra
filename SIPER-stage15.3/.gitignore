@@ -1,0 +1,16 @@
+__pycache__/
+dist/
+build/
+*.spec
+.venv/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.deb
+*.deb.sha256
+evidence/submission/final_manifest.json
+evidence/submission/final_checksums.sha256
+evidence/submission/final_inventory.txt
+evidence/submission/FINAL_STATUS.md
+evidence/environment/final_environment_pardus.json

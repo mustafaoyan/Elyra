@@ -1,0 +1,91 @@
+{
+  "timestamp_utc": "2026-07-29T13:47:15.180359+00:00",
+  "method": "temporary JSONL logs only; no root, kernel hooks, network listener, malware, or persistent user files",
+  "schema_version": "2.0",
+  "results": [
+    {
+      "scenario": "structured_json_records",
+      "status": "OK"
+    },
+    {
+      "scenario": "protected_permissions",
+      "status": "OK",
+      "directory_mode": "0o750",
+      "file_mode": "0o640",
+      "lock_mode": "0o600"
+    },
+    {
+      "scenario": "hash_chain_verification",
+      "status": "OK",
+      "integrity": {
+        "valid": true,
+        "record_count": 10,
+        "segment_count": 10,
+        "coverage": "FULL_FROM_GENESIS",
+        "first_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "last_hash": "41bed2245c1420b4ae1c1575f525c9036d85e4b00a61ff6dd49f50a425bac966",
+        "last_sequence": 10,
+        "error": null,
+        "error_segment": null,
+        "error_line": null,
+        "repaired_trailing_partial": false,
+        "recovery_artifact": null
+      }
+    },
+    {
+      "scenario": "rotation_preserves_chain",
+      "status": "OK",
+      "rotated_segments": [
+        "audit.jsonl.000001",
+        "audit.jsonl.000002",
+        "audit.jsonl.000003",
+        "audit.jsonl.000004",
+        "audit.jsonl.000005",
+        "audit.jsonl.000006",
+        "audit.jsonl.000007",
+        "audit.jsonl.000008",
+        "audit.jsonl.000009"
+      ]
+    },
+    {
+      "scenario": "startup_integrity_check",
+      "status": "OK",
+      "startup_integrity": {
+        "valid": true,
+        "record_count": 10,
+        "segment_count": 10,
+        "coverage": "FULL_FROM_GENESIS",
+        "first_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "last_hash": "41bed2245c1420b4ae1c1575f525c9036d85e4b00a61ff6dd49f50a425bac966",
+        "last_sequence": 10,
+        "error": null,
+        "error_segment": null,
+        "error_line": null,
+        "repaired_trailing_partial": false,
+        "recovery_artifact": null
+      }
+    },
+    {
+      "scenario": "tamper_detection",
+      "status": "OK",
+      "detected_error": "RECORD_HASH_MISMATCH"
+    },
+    {
+      "scenario": "trailing_partial_recovery",
+      "status": "OK",
+      "recovery_artifact": "/tmp/elliot-stage12-audit-xby94khp/partial/corrupt/trailing-partial-1785332835178200182.bin"
+    },
+    {
+      "scenario": "corrupt_log_quarantine",
+      "status": "OK",
+      "new_chain_records": 1,
+      "preserved_artifact": "/tmp/elliot-stage12-audit-xby94khp/quarantine-corruption/corrupt/chain-1785332835179281999"
+    },
+    {
+      "scenario": "threat_model_limitation_disclosed",
+      "status": "OK",
+      "statement": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+    }
+  ],
+  "overall_status": "OK"
+}

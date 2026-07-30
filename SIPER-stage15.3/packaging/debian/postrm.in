@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+VERSION='@PROJECT_VERSION@'
+if [ "$1" = remove ] || [ "$1" = purge ]; then
+    if [ -L /opt/elliot/current ] && [ "$(readlink /opt/elliot/current)" = "releases/${VERSION}" ]; then
+        rm -f /opt/elliot/current
+    fi
+    rm -rf "/opt/elliot/releases/${VERSION}"
+    systemctl daemon-reload >/dev/null 2>&1 || true
+fi
+if [ "$1" = purge ]; then
+    rm -rf /var/lib/elliot /var/log/elliot
+fi

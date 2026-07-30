@@ -1,0 +1,38 @@
+{
+  "timestamp_utc": "2026-07-28T16:40:33.048345+00:00",
+  "python": "3.13.5",
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "method": "harmless temporary files only; no malware and no persistent user files",
+  "results": [
+    {
+      "scenario": "basic_quarantine_restore",
+      "status": "OK",
+      "quarantine_id": "11777026-5715-4305-8c44-9c442f9cfca0",
+      "sha256": "04c6250d6f3ed97e371b6bdaa3ea93d359948a2e40ebc7b672f5b2c7df31a997",
+      "payload_mode": "0o600",
+      "metadata_mode": "0o600",
+      "restored_mode": "0o640",
+      "restoration_status": "restored"
+    },
+    {
+      "scenario": "identical_content_distinct_paths",
+      "status": "OK",
+      "same_hash": true,
+      "distinct_quarantine_ids": true,
+      "distinct_original_paths": true
+    },
+    {
+      "scenario": "existing_destination_conflict",
+      "status": "OK",
+      "overwrite_rejected": true,
+      "replacement_preserved": true
+    },
+    {
+      "scenario": "symlink_source_rejection",
+      "status": "OK",
+      "symlink_rejected": true,
+      "target_preserved": true
+    }
+  ],
+  "overall_status": "OK"
+}

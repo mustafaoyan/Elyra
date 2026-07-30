@@ -1,0 +1,4193 @@
+{
+  "euid": 0,
+  "expected_user": "wafa",
+  "fixture": {
+    "correlation_state": {
+      "action_execution_status": "NOT_EXECUTED_STAGE11",
+      "combined_score": 25,
+      "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+      "exec_timestamp_ns": 1588894977225,
+      "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+      "executable_path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+      "exit_timestamp_ns": null,
+      "generation": 1,
+      "last_action_result": null,
+      "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+      "pid": 2180,
+      "ppid": 2173,
+      "pre_execution_decision": "ALLOW",
+      "pre_execution_indicators": [
+        {
+          "category": "context",
+          "description": "The file is located under /tmp or /var/tmp.",
+          "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "rule": "TEMPORARY_DIRECTORY",
+          "weight": 15
+        }
+      ],
+      "pre_execution_score": 15,
+      "recommended_action": "CONTINUE_MONITORING",
+      "runtime_counters": {
+        "distinct_files": 0,
+        "outbound_connections": 0,
+        "rename_identifiers": 0,
+        "rule_occurrences": {
+          "CHILD_PROCESS_EXEC": 1
+        }
+      },
+      "runtime_indicators": [
+        {
+          "description": "A runtime-only child process was linked to a monitored parent.",
+          "evidence": {
+            "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+            "parent_pid": 2173
+          },
+          "maximum_occurrences": 1,
+          "occurrence": 1,
+          "rule": "CHILD_PROCESS_EXEC",
+          "weight": 10
+        }
+      ],
+      "runtime_score": 10,
+      "schema_version": "1.0",
+      "source": "FANOTIFY_LATE_BOUND",
+      "status": "ACTIVE",
+      "terminal_reason": null,
+      "tgid": 2180,
+      "transitions": [
+        {
+          "combined_score": 0,
+          "from": "CONTINUE_MONITORING",
+          "reason": "STATE_CREATED",
+          "timestamp_monotonic": 1588.900889,
+          "to": "CONTINUE_MONITORING"
+        }
+      ],
+      "uid": 0
+    },
+    "event_count": 200,
+    "fanotify_record": {
+      "analysis_status": "OK",
+      "correlation": {
+        "accepted": true,
+        "late_bound": true,
+        "state": {
+          "action_execution_status": "NOT_EXECUTED_STAGE11",
+          "combined_score": 25,
+          "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+          "exec_timestamp_ns": 1588894977225,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "executable_path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "exit_timestamp_ns": null,
+          "generation": 1,
+          "last_action_result": null,
+          "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+          "pid": 2180,
+          "ppid": 2173,
+          "pre_execution_decision": "ALLOW",
+          "pre_execution_indicators": [
+            {
+              "category": "context",
+              "description": "The file is located under /tmp or /var/tmp.",
+              "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+              "rule": "TEMPORARY_DIRECTORY",
+              "weight": 15
+            }
+          ],
+          "pre_execution_score": 15,
+          "recommended_action": "CONTINUE_MONITORING",
+          "runtime_counters": {
+            "distinct_files": 0,
+            "outbound_connections": 0,
+            "rename_identifiers": 0,
+            "rule_occurrences": {
+              "CHILD_PROCESS_EXEC": 1
+            }
+          },
+          "runtime_indicators": [
+            {
+              "description": "A runtime-only child process was linked to a monitored parent.",
+              "evidence": {
+                "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                "parent_pid": 2173
+              },
+              "maximum_occurrences": 1,
+              "occurrence": 1,
+              "rule": "CHILD_PROCESS_EXEC",
+              "weight": 10
+            }
+          ],
+          "runtime_score": 10,
+          "schema_version": "1.0",
+          "source": "FANOTIFY_LATE_BOUND",
+          "status": "ACTIVE",
+          "terminal_reason": null,
+          "tgid": 2180,
+          "transitions": [
+            {
+              "combined_score": 0,
+              "from": "CONTINUE_MONITORING",
+              "reason": "STATE_CREATED",
+              "timestamp_monotonic": 1588.900889,
+              "to": "CONTINUE_MONITORING"
+            }
+          ],
+          "uid": 0
+        }
+      },
+      "event_type": "PRE_EXECUTION_DECISION",
+      "executable_kind": "ELF",
+      "final_action": "ALLOW",
+      "indicators": [
+        {
+          "category": "context",
+          "description": "The file is located under /tmp or /var/tmp.",
+          "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "rule": "TEMPORARY_DIRECTORY",
+          "weight": 15
+        }
+      ],
+      "kernel_response": "FAN_ALLOW",
+      "mask": 262144,
+      "mode": "MONITOR_ONLY",
+      "path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+      "pid": 2180,
+      "reason": "EXPLAINABLE_STATIC_SCORING",
+      "received_monotonic": 1588.888344539,
+      "requested_decision": "ALLOW",
+      "response_latency_ms": 5.511,
+      "response_ok": true,
+      "risk_score": "15/100",
+      "score": 15,
+      "source": "fanotify"
+    },
+    "observed_events": [
+      {
+        "analysis_status": "OK",
+        "correlation": {
+          "accepted": true,
+          "late_bound": true,
+          "state": {
+            "action_execution_status": "NOT_EXECUTED_STAGE11",
+            "combined_score": 25,
+            "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+            "exec_timestamp_ns": 1588894977225,
+            "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "executable_path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "exit_timestamp_ns": null,
+            "generation": 1,
+            "last_action_result": null,
+            "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "ALLOW",
+            "pre_execution_indicators": [
+              {
+                "category": "context",
+                "description": "The file is located under /tmp or /var/tmp.",
+                "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+                "rule": "TEMPORARY_DIRECTORY",
+                "weight": 15
+              }
+            ],
+            "pre_execution_score": 15,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {
+                "CHILD_PROCESS_EXEC": 1
+              }
+            },
+            "runtime_indicators": [
+              {
+                "description": "A runtime-only child process was linked to a monitored parent.",
+                "evidence": {
+                  "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                  "parent_pid": 2173
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "CHILD_PROCESS_EXEC",
+                "weight": 10
+              }
+            ],
+            "runtime_score": 10,
+            "schema_version": "1.0",
+            "source": "FANOTIFY_LATE_BOUND",
+            "status": "ACTIVE",
+            "terminal_reason": null,
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.900889,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "event_type": "PRE_EXECUTION_DECISION",
+        "executable_kind": "ELF",
+        "final_action": "ALLOW",
+        "indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "kernel_response": "FAN_ALLOW",
+        "mask": 262144,
+        "mode": "MONITOR_ONLY",
+        "path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "pid": 2180,
+        "reason": "EXPLAINABLE_STATIC_SCORING",
+        "received_monotonic": 1588.888344539,
+        "requested_decision": "ALLOW",
+        "response_latency_ms": 5.511,
+        "response_ok": true,
+        "risk_score": "15/100",
+        "score": 15,
+        "source": "fanotify"
+      },
+      {
+        "comm": "elliot-stage14-",
+        "correlation": {
+          "accepted": true,
+          "state": {
+            "action_execution_status": "NOT_EXECUTED_STAGE11",
+            "combined_score": 10,
+            "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+            "exec_timestamp_ns": 1588894977225,
+            "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "executable_path": null,
+            "exit_timestamp_ns": null,
+            "generation": 1,
+            "last_action_result": null,
+            "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "UNKNOWN",
+            "pre_execution_indicators": [],
+            "pre_execution_score": 0,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {
+                "CHILD_PROCESS_EXEC": 1
+              }
+            },
+            "runtime_indicators": [
+              {
+                "description": "A runtime-only child process was linked to a monitored parent.",
+                "evidence": {
+                  "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                  "parent_pid": 2173
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "CHILD_PROCESS_EXEC",
+                "weight": 10
+              }
+            ],
+            "runtime_score": 10,
+            "schema_version": "1.0",
+            "source": "RUNTIME_ONLY",
+            "status": "ACTIVE",
+            "terminal_reason": null,
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.900889,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "destination_address": null,
+        "destination_port": null,
+        "device": null,
+        "distinct_file_key": null,
+        "event_type": "PROCESS_EXEC",
+        "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "exit_code": null,
+        "inode": null,
+        "pid": 2180,
+        "ppid": 2173,
+        "probe_path_capability": "IDENTIFIER_ONLY",
+        "runtime_summary": {
+          "accepted": true,
+          "distinct_files_modified": 0,
+          "event_count": 1,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "outbound_connection_attempts": 0,
+          "tgid": 2180
+        },
+        "source": "ebpf",
+        "tgid": 2180,
+        "timestamp_ns": 1588894977225,
+        "uid": 0
+      },
+      {
+        "comm": "elliot-stage14-",
+        "correlation": {
+          "accepted": true,
+          "state": {
+            "action_execution_status": "SUCCEEDED",
+            "combined_score": 0,
+            "correlation_id": "90251955b0554967afae74c594e4ea98",
+            "exec_timestamp_ns": null,
+            "executable_identifier": null,
+            "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "exit_timestamp_ns": 1590895766329,
+            "generation": 2,
+            "last_action_result": {
+              "action_id": "25956c847c044d199734e610cf9c6eba",
+              "correlation_id": "90251955b0554967afae74c594e4ea98",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "pid": 2180,
+              "reason": "Execution continues under runtime monitoring",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 0,
+              "status": "SUCCEEDED",
+              "timestamp": 1785398353.0017858,
+              "timestamp_utc": "2026-07-30T07:59:13.001786+00:00",
+              "triggered_rules": []
+            },
+            "parent_correlation_id": null,
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "ALLOW",
+            "pre_execution_indicators": [],
+            "pre_execution_score": 0,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {}
+            },
+            "runtime_indicators": [],
+            "runtime_score": 0,
+            "schema_version": "1.0",
+            "source": "FANOTIFY",
+            "status": "EXITED",
+            "terminal_reason": "PROCESS_EXIT_OBSERVED",
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.926827,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "destination_address": null,
+        "destination_port": null,
+        "device": null,
+        "distinct_file_key": null,
+        "event_type": "PROCESS_EXIT",
+        "executable_identifier": null,
+        "exit_code": 0,
+        "inode": null,
+        "pid": 2180,
+        "ppid": 2173,
+        "probe_path_capability": "IDENTIFIER_ONLY",
+        "runtime_summary": {
+          "accepted": true,
+          "distinct_files_modified": 0,
+          "event_count": 2,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "outbound_connection_attempts": 0,
+          "tgid": 2180
+        },
+        "source": "ebpf",
+        "tgid": 2180,
+        "timestamp_ns": 1590895766329,
+        "uid": 0
+      }
+    ],
+    "pid": 2180,
+    "process_exec_record": {
+      "comm": "elliot-stage14-",
+      "correlation": {
+        "accepted": true,
+        "state": {
+          "action_execution_status": "NOT_EXECUTED_STAGE11",
+          "combined_score": 10,
+          "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+          "exec_timestamp_ns": 1588894977225,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "executable_path": null,
+          "exit_timestamp_ns": null,
+          "generation": 1,
+          "last_action_result": null,
+          "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+          "pid": 2180,
+          "ppid": 2173,
+          "pre_execution_decision": "UNKNOWN",
+          "pre_execution_indicators": [],
+          "pre_execution_score": 0,
+          "recommended_action": "CONTINUE_MONITORING",
+          "runtime_counters": {
+            "distinct_files": 0,
+            "outbound_connections": 0,
+            "rename_identifiers": 0,
+            "rule_occurrences": {
+              "CHILD_PROCESS_EXEC": 1
+            }
+          },
+          "runtime_indicators": [
+            {
+              "description": "A runtime-only child process was linked to a monitored parent.",
+              "evidence": {
+                "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                "parent_pid": 2173
+              },
+              "maximum_occurrences": 1,
+              "occurrence": 1,
+              "rule": "CHILD_PROCESS_EXEC",
+              "weight": 10
+            }
+          ],
+          "runtime_score": 10,
+          "schema_version": "1.0",
+          "source": "RUNTIME_ONLY",
+          "status": "ACTIVE",
+          "terminal_reason": null,
+          "tgid": 2180,
+          "transitions": [
+            {
+              "combined_score": 0,
+              "from": "CONTINUE_MONITORING",
+              "reason": "STATE_CREATED",
+              "timestamp_monotonic": 1588.900889,
+              "to": "CONTINUE_MONITORING"
+            }
+          ],
+          "uid": 0
+        }
+      },
+      "destination_address": null,
+      "destination_port": null,
+      "device": null,
+      "distinct_file_key": null,
+      "event_type": "PROCESS_EXEC",
+      "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+      "exit_code": null,
+      "inode": null,
+      "pid": 2180,
+      "ppid": 2173,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "runtime_summary": {
+        "accepted": true,
+        "distinct_files_modified": 0,
+        "event_count": 1,
+        "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "outbound_connection_attempts": 0,
+        "tgid": 2180
+      },
+      "source": "ebpf",
+      "tgid": 2180,
+      "timestamp_ns": 1588894977225,
+      "uid": 0
+    },
+    "process_exit_record": {
+      "comm": "elliot-stage14-",
+      "correlation": {
+        "accepted": true,
+        "state": {
+          "action_execution_status": "SUCCEEDED",
+          "combined_score": 0,
+          "correlation_id": "90251955b0554967afae74c594e4ea98",
+          "exec_timestamp_ns": null,
+          "executable_identifier": null,
+          "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "exit_timestamp_ns": 1590895766329,
+          "generation": 2,
+          "last_action_result": {
+            "action_id": "25956c847c044d199734e610cf9c6eba",
+            "correlation_id": "90251955b0554967afae74c594e4ea98",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 2180,
+            "reason": "Execution continues under runtime monitoring",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 0,
+            "status": "SUCCEEDED",
+            "timestamp": 1785398353.0017858,
+            "timestamp_utc": "2026-07-30T07:59:13.001786+00:00",
+            "triggered_rules": []
+          },
+          "parent_correlation_id": null,
+          "pid": 2180,
+          "ppid": 2173,
+          "pre_execution_decision": "ALLOW",
+          "pre_execution_indicators": [],
+          "pre_execution_score": 0,
+          "recommended_action": "CONTINUE_MONITORING",
+          "runtime_counters": {
+            "distinct_files": 0,
+            "outbound_connections": 0,
+            "rename_identifiers": 0,
+            "rule_occurrences": {}
+          },
+          "runtime_indicators": [],
+          "runtime_score": 0,
+          "schema_version": "1.0",
+          "source": "FANOTIFY",
+          "status": "EXITED",
+          "terminal_reason": "PROCESS_EXIT_OBSERVED",
+          "tgid": 2180,
+          "transitions": [
+            {
+              "combined_score": 0,
+              "from": "CONTINUE_MONITORING",
+              "reason": "STATE_CREATED",
+              "timestamp_monotonic": 1588.926827,
+              "to": "CONTINUE_MONITORING"
+            }
+          ],
+          "uid": 0
+        }
+      },
+      "destination_address": null,
+      "destination_port": null,
+      "device": null,
+      "distinct_file_key": null,
+      "event_type": "PROCESS_EXIT",
+      "executable_identifier": null,
+      "exit_code": 0,
+      "inode": null,
+      "pid": 2180,
+      "ppid": 2173,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "runtime_summary": {
+        "accepted": true,
+        "distinct_files_modified": 0,
+        "event_count": 2,
+        "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "outbound_connection_attempts": 0,
+        "tgid": 2180
+      },
+      "source": "ebpf",
+      "tgid": 2180,
+      "timestamp_ns": 1590895766329,
+      "uid": 0
+    },
+    "returncode": 0,
+    "state_count": 23
+  },
+  "method": "installed MONITOR_ONLY workflow using a private /bin/sleep copy; official Unix IPC; real fanotify/eBPF observations; no malware; no enforcement; no automatic destructive response",
+  "overall_status": "OK",
+  "results": [
+    {
+      "check": "root_verifier",
+      "critical": true,
+      "detail": {
+        "euid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "installed_service_active",
+      "critical": true,
+      "detail": "active",
+      "status": "OK"
+    },
+    {
+      "check": "official_daemon_ipc",
+      "critical": true,
+      "detail": {
+        "api_version": 1,
+        "audit": {
+          "backup_count": 10,
+          "directory_mode": "0o0750",
+          "file_mode": "0o0640",
+          "log_path": "/var/log/elliot/audit.jsonl",
+          "max_bytes": 10485760,
+          "startup_integrity": {
+            "coverage": "RETAINED_WINDOW",
+            "error": null,
+            "error_line": null,
+            "error_segment": null,
+            "first_prev_hash": "6f3bfc8f93a5a997920b7ea4f64b53b3243c57189c5a97d2676346263412f408",
+            "last_hash": "c604d3f28f685e49ea5d5cff651dd27755401cb96398ada289e130d02a0321ff",
+            "last_sequence": 1079801,
+            "record_count": 117543,
+            "recovery_artifact": null,
+            "repaired_trailing_partial": false,
+            "segment_count": 11,
+            "valid": true
+          },
+          "threat_model": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+        },
+        "correlation": {
+          "actions_executed": true,
+          "active_state_count": 21,
+          "archived_state_count": 8,
+          "combination_formula": "combined_score=min(100, pre_execution_score+runtime_score)",
+          "decision_thresholds": {
+            "alert_min": 40,
+            "quarantine_min": 90,
+            "terminate_min": 70
+          },
+          "policy_name": "ELLIOT_STAGE10_RUNTIME_CORRELATION",
+          "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+          "recommended_action_counts": {
+            "ALERT": 2,
+            "CONTINUE_MONITORING": 19
+          },
+          "status_counts": {
+            "ACTIVE": 15,
+            "EXITED": 4,
+            "PENDING_EXEC": 2
+          }
+        },
+        "degraded_components": [],
+        "ebpf_active": true,
+        "fanotify_active": true,
+        "recent_event_count": 200,
+        "recent_events": [
+          {
+            "comm": "avahi-daemon",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "8d81af5b9972476fa5decc589292f667",
+                  "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 688,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398346.2768018,
+                  "timestamp_utc": "2026-07-30T07:59:06.276802+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8639"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 688,
+                "ppid": 1,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607567:8639"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 688,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1477.28444,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 102
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607567,
+            "distinct_file_key": "51539607567:8639",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 8639,
+            "pid": 688,
+            "ppid": 1,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 779,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 688
+            },
+            "source": "ebpf",
+            "tgid": 688,
+            "timestamp_ns": 1582142619160,
+            "uid": 102
+          },
+          {
+            "action_id": "5b773164a2114408b85fb572905a20ad",
+            "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 688,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398346.2885575,
+            "timestamp_utc": "2026-07-30T07:59:06.288558+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607567:8639"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "avahi-daemon",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "5b773164a2114408b85fb572905a20ad",
+                  "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 688,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398346.2885575,
+                  "timestamp_utc": "2026-07-30T07:59:06.288558+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8639"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 688,
+                "ppid": 1,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607567:8639"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 688,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1477.28444,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 102
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607567,
+            "distinct_file_key": "51539607567:8639",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 8639,
+            "pid": 688,
+            "ppid": 1,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 780,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 688
+            },
+            "source": "ebpf",
+            "tgid": 688,
+            "timestamp_ns": 1582142623071,
+            "uid": 102
+          },
+          {
+            "action_id": "144fbf15fa2140b9a02d7bcecefe94e7",
+            "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 688,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398346.3004632,
+            "timestamp_utc": "2026-07-30T07:59:06.300463+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607567:8639"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "InputThread",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "a6068ee0c4724a6f95d8630d4d75818a",
+                  "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 846,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398323.7575433,
+                  "timestamp_utc": "2026-07-30T07:58:43.757543+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8876"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 846,
+                "ppid": 830,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607567:8876"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 846,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1477.447882,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607567,
+            "distinct_file_key": "51539607567:8876",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 8876,
+            "pid": 867,
+            "ppid": 830,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 3356,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 846
+            },
+            "source": "ebpf",
+            "tgid": 846,
+            "timestamp_ns": 1582852768054,
+            "uid": 0
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "7de580214316488197c6042dac465e1b",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/bin/sudo",
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 2170,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 2170,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1582.866589,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/bin/sudo",
+            "pid": 2170,
+            "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 1582.857545015,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.993,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          },
+          {
+            "action_id": "27298707c8bc47ffbdd04c9eeaa66eb7",
+            "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 846,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398346.9289591,
+            "timestamp_utc": "2026-07-30T07:59:06.928959+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607567:8876"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "xfce4-terminal",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 16,
+                "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "3458dc9ab5164af39f76f9e51d2b7169",
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1687,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 16,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398319.988427,
+                  "timestamp_utc": "2026-07-30T07:58:39.988427+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1687,
+                "ppid": 1,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 2,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 2
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:1041"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607558:87"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 2,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 16,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1687,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1485.149554,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607558,
+            "distinct_file_key": "51539607558:87",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 87,
+            "pid": 1687,
+            "ppid": 1,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 2,
+              "event_count": 119,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1687
+            },
+            "source": "ebpf",
+            "tgid": 1687,
+            "timestamp_ns": 1582853254022,
+            "uid": 1000
+          },
+          {
+            "action_id": "b6e2ab5a264e4a20a414636603bde946",
+            "correlation_id": "7de580214316488197c6042dac465e1b",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/bin/sudo",
+            "pid": 2170,
+            "reason": "Execution continues under runtime monitoring",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 0,
+            "source": "response",
+            "status": "SUCCEEDED",
+            "timestamp": 1785398346.9543989,
+            "timestamp_utc": "2026-07-30T07:59:06.954399+00:00",
+            "triggered_rules": []
+          },
+          {
+            "action_id": "418783fe23a0413d84b24fa361053eab",
+            "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1687,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 16,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398346.976365,
+            "timestamp_utc": "2026-07-30T07:59:06.976365+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:1041"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607558:87"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 2,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "xfce4-terminal",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 16,
+                "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "418783fe23a0413d84b24fa361053eab",
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1687,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 16,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398346.976365,
+                  "timestamp_utc": "2026-07-30T07:59:06.976365+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1687,
+                "ppid": 1,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 2,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 2
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:1041"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607558:87"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 2,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 16,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1687,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1485.149554,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:1041",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 1041,
+            "pid": 1687,
+            "ppid": 1,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 2,
+              "event_count": 120,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1687
+            },
+            "source": "ebpf",
+            "tgid": 1687,
+            "timestamp_ns": 1582853576164,
+            "uid": 1000
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "af33478954bf4c4e88a3eb2d98c048cc",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 2170,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 2170,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1582.9174,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 2170,
+            "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 1582.859304814,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.833,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          },
+          {
+            "action_id": "8c30bc20b9764ebe9c26bfa3932b6352",
+            "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1687,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 16,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398346.9886453,
+            "timestamp_utc": "2026-07-30T07:59:06.988645+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:1041"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607558:87"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 2,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "xfce4-terminal",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 16,
+                "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "8c30bc20b9764ebe9c26bfa3932b6352",
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1687,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 16,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398346.9886453,
+                  "timestamp_utc": "2026-07-30T07:59:06.988645+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1687,
+                "ppid": 1,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 2,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 2
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:1041"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607558:87"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 2,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 16,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1687,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1485.149554,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:1041",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 1041,
+            "pid": 1687,
+            "ppid": 1,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 2,
+              "event_count": 121,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1687
+            },
+            "source": "ebpf",
+            "tgid": 1687,
+            "timestamp_ns": 1582853623038,
+            "uid": 1000
+          },
+          {
+            "action_id": "fbfe3478b2a04985a3c3db38e52192af",
+            "correlation_id": "af33478954bf4c4e88a3eb2d98c048cc",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 2170,
+            "reason": "Execution continues under runtime monitoring",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 0,
+            "source": "response",
+            "status": "SUCCEEDED",
+            "timestamp": 1785398346.9985464,
+            "timestamp_utc": "2026-07-30T07:59:06.998546+00:00",
+            "triggered_rules": []
+          },
+          {
+            "action_id": "f0144b6536a344da96e8e9882f059694",
+            "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1687,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 16,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398347.0026982,
+            "timestamp_utc": "2026-07-30T07:59:07.002698+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:1041"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607558:87"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 2,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "bash",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 16,
+                "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "37df21d3d04449938c6bbb0100c03f4e",
+                  "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1693,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 16,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398320.0004969,
+                  "timestamp_utc": "2026-07-30T07:58:40.000497+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "42949672983:3"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51547996177:11534452"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                "pid": 1693,
+                "ppid": 1687,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 2,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 2
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "42949672983:3"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51547996177:11534452"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 2,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 16,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1693,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1485.657778,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 42949672983,
+            "distinct_file_key": "42949672983:3",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 3,
+            "pid": 1693,
+            "ppid": 1687,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 2,
+              "event_count": 25,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1693
+            },
+            "source": "ebpf",
+            "tgid": 1693,
+            "timestamp_ns": 1582853511433,
+            "uid": 1000
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "d93ec404133f44f19278dab0c8378149",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/sbin/unix_chkpwd",
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 2171,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 2171,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1582.943847,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/sbin/unix_chkpwd",
+            "pid": 2171,
+            "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 1582.869434564,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.906,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          },
+          {
+            "action_id": "140797305d2f4d569843a38f452036d6",
+            "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1693,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 16,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785398347.0151827,
+            "timestamp_utc": "2026-07-30T07:59:07.015183+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "42949672983:3"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51547996177:11534452"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 2,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "bash",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 16,
+                "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "140797305d2f4d569843a38f452036d6",
+                  "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1693,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 16,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785398347.0151827,
+                  "timestamp_utc": "2026-07-30T07:59:07.015183+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "42949672983:3"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51547996177:11534452"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                "pid": 1693,
+                "ppid": 1687,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 2,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 2
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "42949672983:3"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51547996177:11534452"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 2,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 16,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1693,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 1485.657778,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 42949672983,
+            "distinct_file_key": "42949672983:3",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 3,
+            "pid": 1693,
+            "ppid": 1687,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 2,
+              "event_count": 26,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1693
+            },
+            "source": "ebpf",
+            "tgid": 1693,
+            "timestamp_ns": 1582853552006,
+            "uid": 1000
+          }
+        ]
+      },
+      "status": "OK"
+    },
+    {
+      "check": "safe_monitor_only_policy",
+      "critical": true,
+      "detail": {
+        "policy": {
+          "excluded_paths": [
+            "/opt/elliot",
+            "/var/log/elliot",
+            "/var/lib/elliot",
+            "/run/elliot",
+            "/usr/lib",
+            "/usr/lib64",
+            "/lib",
+            "/lib64",
+            "/usr/bin",
+            "/bin",
+            "/sbin",
+            "/usr/sbin"
+          ],
+          "fail_closed_paths": [],
+          "fail_policy": "FAIL_OPEN",
+          "max_preexec_file_bytes": 134217728,
+          "max_response_seconds": 2.5,
+          "mode": "MONITOR_ONLY",
+          "monitored_paths": [
+            "/tmp",
+            "/var/tmp",
+            "/home/wafa",
+            "/home/wafa/İndirilenler",
+            "/media",
+            "/mnt"
+          ]
+        },
+        "status": {
+          "api_version": 1,
+          "audit": {
+            "backup_count": 10,
+            "directory_mode": "0o0750",
+            "file_mode": "0o0640",
+            "log_path": "/var/log/elliot/audit.jsonl",
+            "max_bytes": 10485760,
+            "startup_integrity": {
+              "coverage": "RETAINED_WINDOW",
+              "error": null,
+              "error_line": null,
+              "error_segment": null,
+              "first_prev_hash": "6f3bfc8f93a5a997920b7ea4f64b53b3243c57189c5a97d2676346263412f408",
+              "last_hash": "c604d3f28f685e49ea5d5cff651dd27755401cb96398ada289e130d02a0321ff",
+              "last_sequence": 1079801,
+              "record_count": 117543,
+              "recovery_artifact": null,
+              "repaired_trailing_partial": false,
+              "segment_count": 11,
+              "valid": true
+            },
+            "threat_model": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+          },
+          "correlation": {
+            "actions_executed": true,
+            "active_state_count": 21,
+            "archived_state_count": 8,
+            "combination_formula": "combined_score=min(100, pre_execution_score+runtime_score)",
+            "decision_thresholds": {
+              "alert_min": 40,
+              "quarantine_min": 90,
+              "terminate_min": 70
+            },
+            "policy_name": "ELLIOT_STAGE10_RUNTIME_CORRELATION",
+            "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+            "recommended_action_counts": {
+              "ALERT": 2,
+              "CONTINUE_MONITORING": 19
+            },
+            "status_counts": {
+              "ACTIVE": 15,
+              "EXITED": 4,
+              "PENDING_EXEC": 2
+            }
+          },
+          "degraded_components": [],
+          "ebpf_active": true,
+          "fanotify_active": true,
+          "recent_event_count": 200,
+          "recent_events": [
+            {
+              "comm": "avahi-daemon",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 8,
+                  "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "8d81af5b9972476fa5decc589292f667",
+                    "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 688,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 8,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398346.2768018,
+                    "timestamp_utc": "2026-07-30T07:59:06.276802+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607567:8639"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 688,
+                  "ppid": 1,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 1,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 1
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8639"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 8,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 688,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1477.28444,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 102
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607567,
+              "distinct_file_key": "51539607567:8639",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 8639,
+              "pid": 688,
+              "ppid": 1,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 1,
+                "event_count": 779,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 688
+              },
+              "source": "ebpf",
+              "tgid": 688,
+              "timestamp_ns": 1582142619160,
+              "uid": 102
+            },
+            {
+              "action_id": "5b773164a2114408b85fb572905a20ad",
+              "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 688,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 8,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398346.2885575,
+              "timestamp_utc": "2026-07-30T07:59:06.288558+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607567:8639"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "avahi-daemon",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 8,
+                  "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "5b773164a2114408b85fb572905a20ad",
+                    "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 688,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 8,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398346.2885575,
+                    "timestamp_utc": "2026-07-30T07:59:06.288558+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607567:8639"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 688,
+                  "ppid": 1,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 1,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 1
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8639"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 8,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 688,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1477.28444,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 102
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607567,
+              "distinct_file_key": "51539607567:8639",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 8639,
+              "pid": 688,
+              "ppid": 1,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 1,
+                "event_count": 780,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 688
+              },
+              "source": "ebpf",
+              "tgid": 688,
+              "timestamp_ns": 1582142623071,
+              "uid": 102
+            },
+            {
+              "action_id": "144fbf15fa2140b9a02d7bcecefe94e7",
+              "correlation_id": "b17018476c0245b1b6a31b7b62a2953a",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 688,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 8,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398346.3004632,
+              "timestamp_utc": "2026-07-30T07:59:06.300463+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607567:8639"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "InputThread",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 8,
+                  "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "a6068ee0c4724a6f95d8630d4d75818a",
+                    "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 846,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 8,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398323.7575433,
+                    "timestamp_utc": "2026-07-30T07:58:43.757543+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607567:8876"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 846,
+                  "ppid": 830,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 1,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 1
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607567:8876"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 8,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 846,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1477.447882,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 0
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607567,
+              "distinct_file_key": "51539607567:8876",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 8876,
+              "pid": 867,
+              "ppid": 830,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 1,
+                "event_count": 3356,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 846
+              },
+              "source": "ebpf",
+              "tgid": 846,
+              "timestamp_ns": 1582852768054,
+              "uid": 0
+            },
+            {
+              "analysis_status": null,
+              "correlation": {
+                "accepted": true,
+                "late_bound": false,
+                "state": {
+                  "action_execution_status": "NOT_EXECUTED_STAGE11",
+                  "combined_score": 0,
+                  "correlation_id": "7de580214316488197c6042dac465e1b",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": "/usr/bin/sudo",
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": null,
+                  "parent_correlation_id": null,
+                  "pid": 2170,
+                  "ppid": 0,
+                  "pre_execution_decision": "ALLOW",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 0,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {}
+                  },
+                  "runtime_indicators": [],
+                  "runtime_score": 0,
+                  "schema_version": "1.0",
+                  "source": "FANOTIFY",
+                  "status": "PENDING_EXEC",
+                  "terminal_reason": null,
+                  "tgid": 2170,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1582.866589,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 0
+                }
+              },
+              "event_type": "PRE_EXECUTION_DECISION",
+              "executable_kind": "ELF",
+              "final_action": "ALLOW",
+              "indicators": [],
+              "kernel_response": "FAN_ALLOW",
+              "mask": 262144,
+              "mode": "MONITOR_ONLY",
+              "path": "/usr/bin/sudo",
+              "pid": 2170,
+              "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+              "received_monotonic": 1582.857545015,
+              "requested_decision": "ALLOW",
+              "response_latency_ms": 0.993,
+              "response_ok": true,
+              "risk_score": null,
+              "score": null,
+              "source": "fanotify"
+            },
+            {
+              "action_id": "27298707c8bc47ffbdd04c9eeaa66eb7",
+              "correlation_id": "5415d8fb36e94d3c8582efaf2ab7fa5b",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 846,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 8,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398346.9289591,
+              "timestamp_utc": "2026-07-30T07:59:06.928959+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607567:8876"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "xfce4-terminal",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 16,
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "3458dc9ab5164af39f76f9e51d2b7169",
+                    "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 1687,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 16,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398319.988427,
+                    "timestamp_utc": "2026-07-30T07:58:39.988427+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607568:1041"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      },
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607558:87"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 2,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 1687,
+                  "ppid": 1,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 2,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 2
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 16,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 1687,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1485.149554,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 1000
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607558,
+              "distinct_file_key": "51539607558:87",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 87,
+              "pid": 1687,
+              "ppid": 1,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 2,
+                "event_count": 119,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 1687
+              },
+              "source": "ebpf",
+              "tgid": 1687,
+              "timestamp_ns": 1582853254022,
+              "uid": 1000
+            },
+            {
+              "action_id": "b6e2ab5a264e4a20a414636603bde946",
+              "correlation_id": "7de580214316488197c6042dac465e1b",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": "/usr/bin/sudo",
+              "pid": 2170,
+              "reason": "Execution continues under runtime monitoring",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 0,
+              "source": "response",
+              "status": "SUCCEEDED",
+              "timestamp": 1785398346.9543989,
+              "timestamp_utc": "2026-07-30T07:59:06.954399+00:00",
+              "triggered_rules": []
+            },
+            {
+              "action_id": "418783fe23a0413d84b24fa361053eab",
+              "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 1687,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 16,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398346.976365,
+              "timestamp_utc": "2026-07-30T07:59:06.976365+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607568:1041"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                },
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607558:87"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 2,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "xfce4-terminal",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 16,
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "418783fe23a0413d84b24fa361053eab",
+                    "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 1687,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 16,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398346.976365,
+                    "timestamp_utc": "2026-07-30T07:59:06.976365+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607568:1041"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      },
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607558:87"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 2,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 1687,
+                  "ppid": 1,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 2,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 2
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 16,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 1687,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1485.149554,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 1000
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607568,
+              "distinct_file_key": "51539607568:1041",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 1041,
+              "pid": 1687,
+              "ppid": 1,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 2,
+                "event_count": 120,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 1687
+              },
+              "source": "ebpf",
+              "tgid": 1687,
+              "timestamp_ns": 1582853576164,
+              "uid": 1000
+            },
+            {
+              "analysis_status": null,
+              "correlation": {
+                "accepted": true,
+                "late_bound": false,
+                "state": {
+                  "action_execution_status": "NOT_EXECUTED_STAGE11",
+                  "combined_score": 0,
+                  "correlation_id": "af33478954bf4c4e88a3eb2d98c048cc",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                  "exit_timestamp_ns": null,
+                  "generation": 2,
+                  "last_action_result": null,
+                  "parent_correlation_id": null,
+                  "pid": 2170,
+                  "ppid": 0,
+                  "pre_execution_decision": "ALLOW",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 0,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {}
+                  },
+                  "runtime_indicators": [],
+                  "runtime_score": 0,
+                  "schema_version": "1.0",
+                  "source": "FANOTIFY",
+                  "status": "PENDING_EXEC",
+                  "terminal_reason": null,
+                  "tgid": 2170,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1582.9174,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 0
+                }
+              },
+              "event_type": "PRE_EXECUTION_DECISION",
+              "executable_kind": "ELF",
+              "final_action": "ALLOW",
+              "indicators": [],
+              "kernel_response": "FAN_ALLOW",
+              "mask": 262144,
+              "mode": "MONITOR_ONLY",
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "pid": 2170,
+              "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+              "received_monotonic": 1582.859304814,
+              "requested_decision": "ALLOW",
+              "response_latency_ms": 0.833,
+              "response_ok": true,
+              "risk_score": null,
+              "score": null,
+              "source": "fanotify"
+            },
+            {
+              "action_id": "8c30bc20b9764ebe9c26bfa3932b6352",
+              "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 1687,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 16,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398346.9886453,
+              "timestamp_utc": "2026-07-30T07:59:06.988645+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607568:1041"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                },
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607558:87"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 2,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "xfce4-terminal",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 16,
+                  "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "8c30bc20b9764ebe9c26bfa3932b6352",
+                    "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 1687,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 16,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398346.9886453,
+                    "timestamp_utc": "2026-07-30T07:59:06.988645+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607568:1041"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      },
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51539607558:87"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 2,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": null,
+                  "pid": 1687,
+                  "ppid": 1,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 2,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 2
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:1041"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607558:87"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 16,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 1687,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1485.149554,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 1000
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 51539607568,
+              "distinct_file_key": "51539607568:1041",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 1041,
+              "pid": 1687,
+              "ppid": 1,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 2,
+                "event_count": 121,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 1687
+              },
+              "source": "ebpf",
+              "tgid": 1687,
+              "timestamp_ns": 1582853623038,
+              "uid": 1000
+            },
+            {
+              "action_id": "fbfe3478b2a04985a3c3db38e52192af",
+              "correlation_id": "af33478954bf4c4e88a3eb2d98c048cc",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "pid": 2170,
+              "reason": "Execution continues under runtime monitoring",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 0,
+              "source": "response",
+              "status": "SUCCEEDED",
+              "timestamp": 1785398346.9985464,
+              "timestamp_utc": "2026-07-30T07:59:06.998546+00:00",
+              "triggered_rules": []
+            },
+            {
+              "action_id": "f0144b6536a344da96e8e9882f059694",
+              "correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 1687,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 16,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398347.0026982,
+              "timestamp_utc": "2026-07-30T07:59:07.002698+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607568:1041"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                },
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51539607558:87"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 2,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "bash",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 16,
+                  "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "37df21d3d04449938c6bbb0100c03f4e",
+                    "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 1693,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 16,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398320.0004969,
+                    "timestamp_utc": "2026-07-30T07:58:40.000497+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "42949672983:3"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      },
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51547996177:11534452"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 2,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "pid": 1693,
+                  "ppid": 1687,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 2,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 2
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "42949672983:3"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51547996177:11534452"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 16,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 1693,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1485.657778,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 1000
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 42949672983,
+              "distinct_file_key": "42949672983:3",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 3,
+              "pid": 1693,
+              "ppid": 1687,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 2,
+                "event_count": 25,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 1693
+              },
+              "source": "ebpf",
+              "tgid": 1693,
+              "timestamp_ns": 1582853511433,
+              "uid": 1000
+            },
+            {
+              "analysis_status": null,
+              "correlation": {
+                "accepted": true,
+                "late_bound": false,
+                "state": {
+                  "action_execution_status": "NOT_EXECUTED_STAGE11",
+                  "combined_score": 0,
+                  "correlation_id": "d93ec404133f44f19278dab0c8378149",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": "/usr/sbin/unix_chkpwd",
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": null,
+                  "parent_correlation_id": null,
+                  "pid": 2171,
+                  "ppid": 0,
+                  "pre_execution_decision": "ALLOW",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 0,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {}
+                  },
+                  "runtime_indicators": [],
+                  "runtime_score": 0,
+                  "schema_version": "1.0",
+                  "source": "FANOTIFY",
+                  "status": "PENDING_EXEC",
+                  "terminal_reason": null,
+                  "tgid": 2171,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1582.943847,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 0
+                }
+              },
+              "event_type": "PRE_EXECUTION_DECISION",
+              "executable_kind": "ELF",
+              "final_action": "ALLOW",
+              "indicators": [],
+              "kernel_response": "FAN_ALLOW",
+              "mask": 262144,
+              "mode": "MONITOR_ONLY",
+              "path": "/usr/sbin/unix_chkpwd",
+              "pid": 2171,
+              "reason": "ELLIOT_OR_SYSTEM_PATH_EXCLUDED",
+              "received_monotonic": 1582.869434564,
+              "requested_decision": "ALLOW",
+              "response_latency_ms": 0.906,
+              "response_ok": true,
+              "risk_score": null,
+              "score": null,
+              "source": "fanotify"
+            },
+            {
+              "action_id": "140797305d2f4d569843a38f452036d6",
+              "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": null,
+              "pid": 1693,
+              "reason": "This correlation already executed an equal or stronger response",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 16,
+              "source": "response",
+              "status": "DUPLICATE_SUPPRESSED",
+              "timestamp": 1785398347.0151827,
+              "timestamp_utc": "2026-07-30T07:59:07.015183+00:00",
+              "triggered_rules": [
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "42949672983:3"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 1,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                },
+                {
+                  "description": "The process modified a previously unseen file identifier.",
+                  "evidence": {
+                    "distinct_file_key": "51547996177:11534452"
+                  },
+                  "maximum_occurrences": 4,
+                  "occurrence": 2,
+                  "rule": "DISTINCT_FILE_WRITE",
+                  "weight": 8
+                }
+              ]
+            },
+            {
+              "comm": "bash",
+              "correlation": {
+                "accepted": true,
+                "state": {
+                  "action_execution_status": "DUPLICATE_SUPPRESSED",
+                  "combined_score": 16,
+                  "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                  "exec_timestamp_ns": null,
+                  "executable_identifier": null,
+                  "executable_path": null,
+                  "exit_timestamp_ns": null,
+                  "generation": 1,
+                  "last_action_result": {
+                    "action_id": "140797305d2f4d569843a38f452036d6",
+                    "correlation_id": "274381cc252148b4bfbcb16a6401447c",
+                    "details": {},
+                    "executed_action": "ALLOW_MONITOR",
+                    "failure_explanation": null,
+                    "path": null,
+                    "pid": 1693,
+                    "reason": "This correlation already executed an equal or stronger response",
+                    "requested_action": "CONTINUE_MONITORING",
+                    "schema_version": "1.0",
+                    "score": 16,
+                    "status": "DUPLICATE_SUPPRESSED",
+                    "timestamp": 1785398347.0151827,
+                    "timestamp_utc": "2026-07-30T07:59:07.015183+00:00",
+                    "triggered_rules": [
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "42949672983:3"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 1,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      },
+                      {
+                        "description": "The process modified a previously unseen file identifier.",
+                        "evidence": {
+                          "distinct_file_key": "51547996177:11534452"
+                        },
+                        "maximum_occurrences": 4,
+                        "occurrence": 2,
+                        "rule": "DISTINCT_FILE_WRITE",
+                        "weight": 8
+                      }
+                    ]
+                  },
+                  "parent_correlation_id": "e10ca19a41a64227b9248b7058c6f441",
+                  "pid": 1693,
+                  "ppid": 1687,
+                  "pre_execution_decision": "UNKNOWN",
+                  "pre_execution_indicators": [],
+                  "pre_execution_score": 0,
+                  "recommended_action": "CONTINUE_MONITORING",
+                  "runtime_counters": {
+                    "distinct_files": 2,
+                    "outbound_connections": 0,
+                    "rename_identifiers": 0,
+                    "rule_occurrences": {
+                      "DISTINCT_FILE_WRITE": 2
+                    }
+                  },
+                  "runtime_indicators": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "42949672983:3"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51547996177:11534452"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 2,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ],
+                  "runtime_score": 16,
+                  "schema_version": "1.0",
+                  "source": "RUNTIME_ONLY",
+                  "status": "ACTIVE",
+                  "terminal_reason": null,
+                  "tgid": 1693,
+                  "transitions": [
+                    {
+                      "combined_score": 0,
+                      "from": "CONTINUE_MONITORING",
+                      "reason": "STATE_CREATED",
+                      "timestamp_monotonic": 1485.657778,
+                      "to": "CONTINUE_MONITORING"
+                    }
+                  ],
+                  "uid": 1000
+                }
+              },
+              "destination_address": null,
+              "destination_port": null,
+              "device": 42949672983,
+              "distinct_file_key": "42949672983:3",
+              "event_type": "FILE_WRITE",
+              "executable_identifier": null,
+              "exit_code": null,
+              "inode": 3,
+              "pid": 1693,
+              "ppid": 1687,
+              "probe_path_capability": "IDENTIFIER_ONLY",
+              "runtime_summary": {
+                "accepted": true,
+                "distinct_files_modified": 2,
+                "event_count": 26,
+                "executable_identifier": null,
+                "outbound_connection_attempts": 0,
+                "tgid": 1693
+              },
+              "source": "ebpf",
+              "tgid": 1693,
+              "timestamp_ns": 1582853552006,
+              "uid": 1000
+            }
+          ]
+        }
+      },
+      "status": "OK"
+    },
+    {
+      "check": "startup_audit_integrity",
+      "critical": true,
+      "detail": {
+        "backup_count": 10,
+        "directory_mode": "0o0750",
+        "file_mode": "0o0640",
+        "log_path": "/var/log/elliot/audit.jsonl",
+        "max_bytes": 10485760,
+        "startup_integrity": {
+          "coverage": "RETAINED_WINDOW",
+          "error": null,
+          "error_line": null,
+          "error_segment": null,
+          "first_prev_hash": "6f3bfc8f93a5a997920b7ea4f64b53b3243c57189c5a97d2676346263412f408",
+          "last_hash": "c604d3f28f685e49ea5d5cff651dd27755401cb96398ada289e130d02a0321ff",
+          "last_sequence": 1079801,
+          "record_count": 117543,
+          "recovery_artifact": null,
+          "repaired_trailing_partial": false,
+          "segment_count": 11,
+          "valid": true
+        },
+        "threat_model": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+      },
+      "status": "OK"
+    },
+    {
+      "check": "audit_chain_valid_before",
+      "critical": true,
+      "detail": {
+        "coverage": "RETAINED_WINDOW",
+        "error": null,
+        "error_line": null,
+        "error_segment": null,
+        "first_prev_hash": "6583696ae28e55c9cbddef7151a218aaecf7bd2264bfa00dbfdd16e8d05d5ebe",
+        "last_hash": "1622cfd8f9bfa547092b26333e6ad7614a1c709bfa001b5c8d34c18e7ebe585b",
+        "last_sequence": 1090585,
+        "record_count": 120152,
+        "recovery_artifact": null,
+        "repaired_trailing_partial": false,
+        "segment_count": 11,
+        "valid": true
+      },
+      "status": "OK"
+    },
+    {
+      "check": "official_ipc_real_static_scan",
+      "critical": true,
+      "detail": {
+        "block_entropies": [
+          3.239265,
+          0.786456,
+          5.828033,
+          6.062005,
+          6.214146,
+          5.924814,
+          5.651685,
+          5.559356,
+          4.843405,
+          0.80079,
+          2.550481
+        ],
+        "block_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "blocks_truncated": false,
+        "decision": "ALLOW",
+        "duration_ms": 10.658,
+        "errors": [],
+        "filepath": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "is_elf": true,
+        "mime_extension_consistency": "NO_EXTENSION",
+        "mime_type": "application/x-pie-executable",
+        "pre_execution_score": 15,
+        "runtime_score": null,
+        "status": "OK",
+        "warnings": [],
+        "whole_file_entropy": 5.138668
+      },
+      "status": "OK"
+    },
+    {
+      "check": "harmless_execution_completed",
+      "critical": true,
+      "detail": {
+        "pid": 2180,
+        "returncode": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "fanotify_pre_execution_record_observed",
+      "critical": true,
+      "detail": {
+        "analysis_status": "OK",
+        "correlation": {
+          "accepted": true,
+          "late_bound": true,
+          "state": {
+            "action_execution_status": "NOT_EXECUTED_STAGE11",
+            "combined_score": 25,
+            "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+            "exec_timestamp_ns": 1588894977225,
+            "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "executable_path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "exit_timestamp_ns": null,
+            "generation": 1,
+            "last_action_result": null,
+            "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "ALLOW",
+            "pre_execution_indicators": [
+              {
+                "category": "context",
+                "description": "The file is located under /tmp or /var/tmp.",
+                "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+                "rule": "TEMPORARY_DIRECTORY",
+                "weight": 15
+              }
+            ],
+            "pre_execution_score": 15,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {
+                "CHILD_PROCESS_EXEC": 1
+              }
+            },
+            "runtime_indicators": [
+              {
+                "description": "A runtime-only child process was linked to a monitored parent.",
+                "evidence": {
+                  "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                  "parent_pid": 2173
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "CHILD_PROCESS_EXEC",
+                "weight": 10
+              }
+            ],
+            "runtime_score": 10,
+            "schema_version": "1.0",
+            "source": "FANOTIFY_LATE_BOUND",
+            "status": "ACTIVE",
+            "terminal_reason": null,
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.900889,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "event_type": "PRE_EXECUTION_DECISION",
+        "executable_kind": "ELF",
+        "final_action": "ALLOW",
+        "indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "kernel_response": "FAN_ALLOW",
+        "mask": 262144,
+        "mode": "MONITOR_ONLY",
+        "path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "pid": 2180,
+        "reason": "EXPLAINABLE_STATIC_SCORING",
+        "received_monotonic": 1588.888344539,
+        "requested_decision": "ALLOW",
+        "response_latency_ms": 5.511,
+        "response_ok": true,
+        "risk_score": "15/100",
+        "score": 15,
+        "source": "fanotify"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "ebpf_process_execution_observed",
+      "critical": true,
+      "detail": {
+        "comm": "elliot-stage14-",
+        "correlation": {
+          "accepted": true,
+          "state": {
+            "action_execution_status": "NOT_EXECUTED_STAGE11",
+            "combined_score": 10,
+            "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+            "exec_timestamp_ns": 1588894977225,
+            "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "executable_path": null,
+            "exit_timestamp_ns": null,
+            "generation": 1,
+            "last_action_result": null,
+            "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "UNKNOWN",
+            "pre_execution_indicators": [],
+            "pre_execution_score": 0,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {
+                "CHILD_PROCESS_EXEC": 1
+              }
+            },
+            "runtime_indicators": [
+              {
+                "description": "A runtime-only child process was linked to a monitored parent.",
+                "evidence": {
+                  "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+                  "parent_pid": 2173
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "CHILD_PROCESS_EXEC",
+                "weight": 10
+              }
+            ],
+            "runtime_score": 10,
+            "schema_version": "1.0",
+            "source": "RUNTIME_ONLY",
+            "status": "ACTIVE",
+            "terminal_reason": null,
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.900889,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "destination_address": null,
+        "destination_port": null,
+        "device": null,
+        "distinct_file_key": null,
+        "event_type": "PROCESS_EXEC",
+        "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "exit_code": null,
+        "inode": null,
+        "pid": 2180,
+        "ppid": 2173,
+        "probe_path_capability": "IDENTIFIER_ONLY",
+        "runtime_summary": {
+          "accepted": true,
+          "distinct_files_modified": 0,
+          "event_count": 1,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "outbound_connection_attempts": 0,
+          "tgid": 2180
+        },
+        "source": "ebpf",
+        "tgid": 2180,
+        "timestamp_ns": 1588894977225,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "ebpf_process_exit_observed",
+      "critical": true,
+      "detail": {
+        "comm": "elliot-stage14-",
+        "correlation": {
+          "accepted": true,
+          "state": {
+            "action_execution_status": "SUCCEEDED",
+            "combined_score": 0,
+            "correlation_id": "90251955b0554967afae74c594e4ea98",
+            "exec_timestamp_ns": null,
+            "executable_identifier": null,
+            "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "exit_timestamp_ns": 1590895766329,
+            "generation": 2,
+            "last_action_result": {
+              "action_id": "25956c847c044d199734e610cf9c6eba",
+              "correlation_id": "90251955b0554967afae74c594e4ea98",
+              "details": {},
+              "executed_action": "ALLOW_MONITOR",
+              "failure_explanation": null,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "pid": 2180,
+              "reason": "Execution continues under runtime monitoring",
+              "requested_action": "CONTINUE_MONITORING",
+              "schema_version": "1.0",
+              "score": 0,
+              "status": "SUCCEEDED",
+              "timestamp": 1785398353.0017858,
+              "timestamp_utc": "2026-07-30T07:59:13.001786+00:00",
+              "triggered_rules": []
+            },
+            "parent_correlation_id": null,
+            "pid": 2180,
+            "ppid": 2173,
+            "pre_execution_decision": "ALLOW",
+            "pre_execution_indicators": [],
+            "pre_execution_score": 0,
+            "recommended_action": "CONTINUE_MONITORING",
+            "runtime_counters": {
+              "distinct_files": 0,
+              "outbound_connections": 0,
+              "rename_identifiers": 0,
+              "rule_occurrences": {}
+            },
+            "runtime_indicators": [],
+            "runtime_score": 0,
+            "schema_version": "1.0",
+            "source": "FANOTIFY",
+            "status": "EXITED",
+            "terminal_reason": "PROCESS_EXIT_OBSERVED",
+            "tgid": 2180,
+            "transitions": [
+              {
+                "combined_score": 0,
+                "from": "CONTINUE_MONITORING",
+                "reason": "STATE_CREATED",
+                "timestamp_monotonic": 1588.926827,
+                "to": "CONTINUE_MONITORING"
+              }
+            ],
+            "uid": 0
+          }
+        },
+        "destination_address": null,
+        "destination_port": null,
+        "device": null,
+        "distinct_file_key": null,
+        "event_type": "PROCESS_EXIT",
+        "executable_identifier": null,
+        "exit_code": 0,
+        "inode": null,
+        "pid": 2180,
+        "ppid": 2173,
+        "probe_path_capability": "IDENTIFIER_ONLY",
+        "runtime_summary": {
+          "accepted": true,
+          "distinct_files_modified": 0,
+          "event_count": 2,
+          "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+          "outbound_connection_attempts": 0,
+          "tgid": 2180
+        },
+        "source": "ebpf",
+        "tgid": 2180,
+        "timestamp_ns": 1590895766329,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "fanotify_ebpf_correlation_state",
+      "critical": true,
+      "detail": {
+        "action_execution_status": "NOT_EXECUTED_STAGE11",
+        "combined_score": 25,
+        "correlation_id": "123af18dfae84f00b95c63ba29be21f1",
+        "exec_timestamp_ns": 1588894977225,
+        "executable_identifier": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "executable_path": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+        "exit_timestamp_ns": null,
+        "generation": 1,
+        "last_action_result": null,
+        "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+        "pid": 2180,
+        "ppid": 2173,
+        "pre_execution_decision": "ALLOW",
+        "pre_execution_indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elliot-stage14-live-fgsmha9a/elliot-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "pre_execution_score": 15,
+        "recommended_action": "CONTINUE_MONITORING",
+        "runtime_counters": {
+          "distinct_files": 0,
+          "outbound_connections": 0,
+          "rename_identifiers": 0,
+          "rule_occurrences": {
+            "CHILD_PROCESS_EXEC": 1
+          }
+        },
+        "runtime_indicators": [
+          {
+            "description": "A runtime-only child process was linked to a monitored parent.",
+            "evidence": {
+              "parent_correlation_id": "61e95db8bfa54607a52deae2dc1b28bd",
+              "parent_pid": 2173
+            },
+            "maximum_occurrences": 1,
+            "occurrence": 1,
+            "rule": "CHILD_PROCESS_EXEC",
+            "weight": 10
+          }
+        ],
+        "runtime_score": 10,
+        "schema_version": "1.0",
+        "source": "FANOTIFY_LATE_BOUND",
+        "status": "ACTIVE",
+        "terminal_reason": null,
+        "tgid": 2180,
+        "transitions": [
+          {
+            "combined_score": 0,
+            "from": "CONTINUE_MONITORING",
+            "reason": "STATE_CREATED",
+            "timestamp_monotonic": 1588.900889,
+            "to": "CONTINUE_MONITORING"
+          }
+        ],
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "gui_official_api_projection_updated",
+      "critical": true,
+      "detail": {
+        "captured_event_count": 3,
+        "captured_official_event_seen": true,
+        "errors": [],
+        "event_seen": true,
+        "event_source": "CAPTURED_OFFICIAL_GUI_API",
+        "live_dashboard_event_seen": false,
+        "policy_mode": "MONITOR_ONLY",
+        "service_state": "CONNECTED"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "audit_chain_valid_after",
+      "critical": true,
+      "detail": {
+        "coverage": "RETAINED_WINDOW",
+        "error": null,
+        "error_line": null,
+        "error_segment": null,
+        "first_prev_hash": "6583696ae28e55c9cbddef7151a218aaecf7bd2264bfa00dbfdd16e8d05d5ebe",
+        "last_hash": "360a34e1440d3bc2f3c7d19cfdf61731cd9000fbd5627208a63b8471786188da",
+        "last_sequence": 1092095,
+        "record_count": 121662,
+        "recovery_artifact": null,
+        "repaired_trailing_partial": false,
+        "segment_count": 11,
+        "valid": true
+      },
+      "status": "OK"
+    },
+    {
+      "check": "integrated_workflow_audited",
+      "critical": true,
+      "detail": {
+        "after_records": 121662,
+        "after_sequence": 1092095,
+        "before_records": 120152,
+        "before_sequence": 1090585
+      },
+      "status": "OK"
+    },
+    {
+      "check": "current_service_journal_clean",
+      "critical": true,
+      "detail": {
+        "forbidden_markers": [],
+        "invocation_id": "4332df763e444ecea6163e516c5eeed1",
+        "returncode": 0,
+        "tail": "0:59:15 pardus elliot-daemon[2143]: 2026-07-30 10:59:15,682 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:15 pardus elliot-daemon[2143]: 2026-07-30 10:59:15,887 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:15 pardus elliot-daemon[2143]: 2026-07-30 10:59:15,906 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,111 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,125 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,330 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,344 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,548 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,562 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,767 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,781 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:16 pardus elliot-daemon[2143]: 2026-07-30 10:59:16,985 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,000 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,206 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,219 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,424 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,439 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,644 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,662 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,866 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:17 pardus elliot-daemon[2143]: 2026-07-30 10:59:17,883 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,088 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,103 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,310 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,325 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,533 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,551 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,756 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,773 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,979 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:18 pardus elliot-daemon[2143]: 2026-07-30 10:59:18,993 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,197 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,212 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,418 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,432 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,638 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,652 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,858 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:19 pardus elliot-daemon[2143]: 2026-07-30 10:59:19,869 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,074 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,088 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,294 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,308 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,513 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,527 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,732 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,743 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,948 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:20 pardus elliot-daemon[2143]: 2026-07-30 10:59:20,963 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,170 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,181 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,384 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,399 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,606 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,624 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,828 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:21 pardus elliot-daemon[2143]: 2026-07-30 10:59:21,842 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,050 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,065 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,271 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,286 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,492 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,505 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,710 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,725 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,930 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:22 pardus elliot-daemon[2143]: 2026-07-30 10:59:22,945 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_runtime_states\nTem 30 10:59:23 pardus elliot-daemon[2143]: 2026-07-30 10:59:23,150 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=get_status\nTem 30 10:59:23 pardus elliot-daemon[2143]: 2026-07-30 10:59:23,152 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_events\nTem 30 10:59:23 pardus elliot-daemon[2143]: 2026-07-30 10:59:23,161 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=list_quarantine\nTem 30 10:59:23 pardus elliot-daemon[2143]: 2026-07-30 10:59:23,164 INFO elliot.service.daemon: IPC request: pid=2173 uid=0 user=root action=get_policy\nTem 30 10:59:29 pardus elliot-daemon[2143]: 2026-07-30 10:59:29,335 INFO elliot.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/systemctl pid=2274\nTem 30 10:59:29 pardus elliot-daemon[2143]: 2026-07-30 10:59:29,338 INFO elliot.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=2274\nTem 30 10:59:29 pardus elliot-daemon[2143]: 2026-07-30 10:59:29,349 INFO elliot.service.daemon: response target binding unavailable: neither process nor file identity could be bound\nTem 30 10:59:29 pardus elliot-daemon[2143]: 2026-07-30 10:59:29,350 INFO elliot.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/journalctl pid=2275\nTem 30 10:59:29 pardus elliot-daemon[2143]: 2026-07-30 10:59:29,351 INFO elliot.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=2275\n"
+      },
+      "status": "OK"
+    }
+  ],
+  "timestamp_utc": "2026-07-30T07:59:29.381059+00:00"
+}

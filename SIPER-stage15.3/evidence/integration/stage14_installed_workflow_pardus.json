@@ -1,0 +1,13 @@
+{
+  "method": "installed Stage 14 workflow verification",
+  "overall_status": "FAIL",
+  "results": [
+    {
+      "check": "verifier_exception",
+      "critical": true,
+      "detail": "IpcRemoteError: AUTHORIZATION_DENIED: Unknown action: list_runtime_states",
+      "status": "FAIL"
+    }
+  ],
+  "timestamp_utc": "2026-07-29T16:44:59.618645+00:00"
+}

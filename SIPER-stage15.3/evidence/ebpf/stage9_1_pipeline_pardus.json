@@ -1,0 +1,40 @@
+{
+  "timestamp_utc": "2026-07-29T11:11:30.938944+00:00",
+  "method": "safe synthetic user-space telemetry; no kernel hooks, malware, or external network",
+  "platform": "Linux-6.12.96+deb13-amd64-x86_64-with-glibc2.41",
+  "results": [
+    {
+      "scenario": "required_event_types_structured",
+      "status": "OK",
+      "event_types": [
+        "PROCESS_EXEC",
+        "FILE_WRITE",
+        "FILE_WRITE",
+        "FILE_RENAME",
+        "NETWORK_CONNECT",
+        "PROCESS_EXIT"
+      ]
+    },
+    {
+      "scenario": "distinct_file_count_uses_unique_identifiers",
+      "status": "OK",
+      "distinct_files_modified": 2
+    },
+    {
+      "scenario": "outbound_connection_counted_in_user_space",
+      "status": "OK",
+      "outbound_connection_attempts": 1
+    },
+    {
+      "scenario": "process_exit_state_cleanup",
+      "status": "OK",
+      "remaining_states": 0
+    },
+    {
+      "scenario": "file_path_claim_is_limited",
+      "status": "OK",
+      "capability": "IDENTIFIER_ONLY_FOR_FILE_EVENTS"
+    }
+  ],
+  "overall_status": "OK"
+}

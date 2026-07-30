@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-07-29T10:39:27.813553+00:00",
+  "method": "real BCC/eBPF telemetry; harmless temporary files and loopback TCP only",
+  "environment": {
+    "platform": "Linux-6.12.96+deb13-amd64-x86_64-with-glibc2.41",
+    "kernel": "6.12.96+deb13-amd64",
+    "python": "3.13.5",
+    "euid": 0
+  },
+  "results": [],
+  "overall_status": "UNAVAILABLE",
+  "reason": "BCC_LOAD_FAILED:Exception:Failed to compile BPF module <text>",
+  "collector_status": {
+    "available": false,
+    "degraded_reason": "BCC_LOAD_FAILED:Exception:Failed to compile BPF module <text>",
+    "attached_probes": [],
+    "dropped_events": 0,
+    "queued_events": 0,
+    "path_capability": "IDENTIFIER_ONLY_FOR_FILE_EVENTS"
+  }
+}

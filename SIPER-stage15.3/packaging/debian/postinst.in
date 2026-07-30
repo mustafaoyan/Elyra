@@ -1,0 +1,40 @@
+#!/bin/sh
+set -eu
+
+VERSION='@PROJECT_VERSION@'
+RELEASE="/opt/elliot/releases/${VERSION}"
+PAYLOAD=/usr/share/siper
+CURRENT=/opt/elliot/current
+
+if command -v systemd-sysusers >/dev/null 2>&1; then
+    systemd-sysusers /usr/lib/sysusers.d/elliot.conf
+else
+    getent group elliot >/dev/null 2>&1 || groupadd --system elliot
+    getent group elliot-admin >/dev/null 2>&1 || groupadd --system elliot-admin
+fi
+
+install -d -o root -g root -m 0755 /opt/elliot /opt/elliot/releases "$RELEASE"
+install -d -o root -g root -m 0700 /var/lib/elliot /var/lib/elliot/quarantine /var/lib/elliot/metadata
+install -d -o root -g root -m 0750 /var/log/elliot
+install -d -o root -g elliot -m 0750 /run/elliot
+
+rm -rf "$RELEASE/.venv"
+python3 -m venv --system-site-packages "$RELEASE/.venv"
+"$RELEASE/.venv/bin/python" -m pip install --no-index --find-links "$PAYLOAD/wheelhouse" --upgrade pip setuptools wheel
+"$RELEASE/.venv/bin/pip" install --no-index --find-links "$PAYLOAD/wheelhouse" -r "$PAYLOAD/requirements.txt"
+"$RELEASE/.venv/bin/pip" install --no-index --find-links "$PAYLOAD/wheelhouse" "$PAYLOAD/wheelhouse"/siper_pardus-*.whl
+
+cp -a "$PAYLOAD/release/." "$RELEASE/"
+ln -sfn "releases/${VERSION}" "$CURRENT"
+
+systemctl daemon-reload
+systemctl enable elliot.service >/dev/null 2>&1 || true
+systemctl restart elliot.service
+
+cat <<'NOTICE'
+Siper was installed in MONITOR_ONLY mode.
+Add a desktop user to the IPC group with:
+  sudo usermod -aG elliot <username>
+Then log out and back in before launching siper-gui.
+No user was added to elliot-admin automatically.
+NOTICE

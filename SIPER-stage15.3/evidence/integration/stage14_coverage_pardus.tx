@@ -1,0 +1,93 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-8.3.5, pluggy-1.5.0
+rootdir: /home/wafa/Masaüstü/ELLIOT-stage14
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0, typeguard-4.4.2
+collected 221 items
+
+tests/integration/test_gui_official_ipc.py .                             [  0%]
+tests/integration/test_ipc_server.py ......                              [  3%]
+tests/integration/test_stage14_safe_workflow.py .                        [  3%]
+tests/unit/test_audit_logger.py .................                        [ 11%]
+tests/unit/test_authorization.py ....                                    [ 13%]
+tests/unit/test_dependency_contract.py ...                               [ 14%]
+tests/unit/test_ebpf_aggregator.py ...                                   [ 15%]
+tests/unit/test_ebpf_collector.py ...............                        [ 22%]
+tests/unit/test_ebpf_probe_contract.py ....                              [ 24%]
+tests/unit/test_entropy.py ........                                      [ 28%]
+tests/unit/test_execution_correlation.py ...................             [ 36%]
+tests/unit/test_fanotify_controller.py .......                           [ 39%]
+tests/unit/test_fanotify_policy.py ...                                   [ 41%]
+tests/unit/test_fanotify_syscalls.py ..                                  [ 42%]
+tests/unit/test_fanotify_verifier_watchdog.py ...                        [ 43%]
+tests/unit/test_gui_controller.py .......                                [ 46%]
+tests/unit/test_gui_model.py .....                                       [ 48%]
+tests/unit/test_gui_presentation.py .......                              [ 52%]
+tests/unit/test_gui_source_contract.py ..                                [ 52%]
+tests/unit/test_install_layout.py ......                                 [ 55%]
+tests/unit/test_ipc_protocol.py .....                                    [ 57%]
+tests/unit/test_ipc_single_transport.py .                                [ 58%]
+tests/unit/test_package_imports.py ..                                    [ 59%]
+tests/unit/test_pre_execution_adapter.py ....                            [ 61%]
+tests/unit/test_quarantine_manager.py .................                  [ 68%]
+tests/unit/test_response_engine.py ..............                        [ 75%]
+tests/unit/test_scoring_engine.py ...........                            [ 80%]
+tests/unit/test_service_preflight.py .....                               [ 82%]
+tests/unit/test_stage10_daemon_contract.py ..                            [ 83%]
+tests/unit/test_stage11_integration_contract.py ...                      [ 84%]
+tests/unit/test_stage12_daemon_contract.py ..                            [ 85%]
+tests/unit/test_stage13_packaging_contract.py ............               [ 90%]
+tests/unit/test_stage14_integration_check.py ..........                  [ 95%]
+tests/unit/test_static_analyzer.py .........                             [ 99%]
+tests/unit/test_static_analyzer_open_fd.py .                             [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.5-final-0 ________________
+
+Name                                        Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------
+src/elliot/__init__.py                          2      0   100%
+src/elliot/analyzer/__init__.py                 3      0   100%
+src/elliot/analyzer/entropy.py                168     27    84%   47, 59, 117-120, 123, 127, 134-137, 149, 152-153, 155, 162-163, 193-198, 249-250, 253, 290, 295
+src/elliot/analyzer/pre_execution.py           61      7    89%   33, 35, 55-56, 95-96, 116
+src/elliot/analyzer/static_analyzer.py        271     61    77%   28-29, 34-36, 71, 110-112, 123-126, 130-151, 160-172, 180, 234, 236, 245, 289-295, 303, 318, 335, 340, 342-343, 345-346, 353-354, 379, 407-416, 427-431, 482-483
+src/elliot/audit/__init__.py                    2      0   100%
+src/elliot/audit/audit_logger.py              427     37    91%   106, 113, 120, 137, 159-162, 166, 188-189, 204, 221, 224-225, 240, 257, 275, 293, 330, 390, 392, 394, 396, 398, 461, 471-472, 584, 587-588, 603, 622, 657, 692, 739, 776
+src/elliot/config/__init__.py                   0      0   100%
+src/elliot/correlation/__init__.py              2      0   100%
+src/elliot/correlation/engine.py              359     40    89%   83-84, 97, 100-101, 105, 112, 116, 123, 125, 129, 136, 148, 153, 157, 161, 290, 293-299, 305, 308-309, 326-330, 362, 390, 412, 439, 444, 460, 522, 635-642
+src/elliot/gui/__init__.py                      3      0   100%
+src/elliot/gui/controller.py                   78     13    83%   67-70, 81, 89-91, 106, 121, 149-150, 166
+src/elliot/gui/main.py                         13      6    54%   13-20, 24
+src/elliot/gui/model.py                        52      2    96%   46, 60
+src/elliot/gui/presentation.py                 79      4    95%   26, 52, 129-130
+src/elliot/gui/view.py                        277    232    16%   27-28, 37, 45-63, 66-130, 133-215, 226-230, 233-235, 238-248, 251-282, 285-334, 337-351, 357-358, 361, 364-372, 375, 378, 381-382, 385-388, 391-394, 397-415, 419-422, 426-427, 430-442, 445-461, 464-468
+src/elliot/monitor/__init__.py                  0      0   100%
+src/elliot/monitor/ebpf/__init__.py             5      0   100%
+src/elliot/monitor/ebpf/aggregator.py          58      3    95%   38, 56, 76
+src/elliot/monitor/ebpf/collector.py          291     75    74%   23-24, 41, 44, 48, 58, 100-101, 106-108, 114-116, 122-126, 151-152, 168-169, 231, 238, 241-242, 246, 260-261, 267-270, 274, 277-279, 289-295, 309-313, 317-319, 321-322, 328-334, 340, 346-347, 387, 389-392, 395, 397, 405-408, 413-414
+src/elliot/monitor/ebpf/events.py              28      0   100%
+src/elliot/monitor/ebpf/loader.py              29     18    38%   12-14, 17-25, 28, 31, 34, 37-39
+src/elliot/monitor/fanotify/__init__.py         0      0   100%
+src/elliot/monitor/fanotify/controller.py     207     73    65%   35-42, 48-60, 68-69, 71, 73, 116, 122-125, 127-129, 149, 155-158, 161-162, 164-165, 189-200, 238, 243-245, 256-267, 277, 284, 286, 290-291, 293, 320, 332, 339, 350-351, 359-360
+src/elliot/monitor/fanotify/policy.py          95     29    69%   33-34, 38-50, 54, 93, 95, 99, 101, 103, 114, 117, 122, 134, 143-146
+src/elliot/monitor/fanotify/syscalls.py       183     96    48%   81, 94-99, 102-111, 114-147, 150-154, 157-170, 190-191, 193-194, 202-203, 219, 224-239, 242-246, 249-256, 263-264, 267
+src/elliot/response/__init__.py                 3      0   100%
+src/elliot/response/engine.py                 402    111    72%   67-68, 79, 82-83, 85, 90, 94, 96, 98, 174-193, 220-222, 225-270, 337, 340-341, 355, 358-359, 369-370, 372, 376-377, 381, 396, 407-409, 422, 428-429, 436-438, 440, 452, 454-460, 475-478, 526, 618, 621, 628, 638-639, 652, 654, 726-736, 745-771
+src/elliot/response/quarantine_manager.py     608    133    78%   130, 133, 148, 156, 160, 164, 188, 197, 236-237, 250, 278, 306, 339-340, 344-345, 348, 373, 377, 391-402, 439-450, 455-457, 462, 471, 473, 478-479, 482, 490-493, 501, 506, 539, 551, 553, 555, 587, 597, 619-635, 645, 669, 673-676, 684-686, 692, 695, 704, 707-708, 713, 719, 724, 728, 730, 732, 734, 736, 742, 749, 759, 766, 772, 798-799, 803, 806, 822-823, 831-832, 837, 840, 855, 861, 869-871, 884-886, 894-897, 908-909, 912-914, 923-924
+src/elliot/scoring/__init__.py                  2      0   100%
+src/elliot/scoring/engine.py                  201     18    91%   80-81, 101, 108, 112, 114, 118, 127, 140, 146, 150, 154, 158, 223-224, 238, 293, 321
+src/elliot/service/__init__.py                  3      0   100%
+src/elliot/service/authorization.py           101     40    60%   43-46, 50-53, 59-62, 65-69, 72, 86-87, 103-107, 111-121, 144-147, 153, 160-164
+src/elliot/service/daemon.py                  193    152    21%   36-40, 43-51, 54-57, 60-61, 64-65, 85-111, 114-139, 142-144, 147-149, 152-157, 160-169, 172-185, 193-207, 212-233, 236-300, 304-317, 321
+src/elliot/service/install_layout.py           86      7    92%   52, 74-75, 85, 89, 94-95
+src/elliot/service/installation_check.py      139    107    23%   45, 49, 59, 63-67, 71-76, 80-82, 86-238, 250-252, 256-265, 269
+src/elliot/service/integration_check.py       181    119    34%   48, 52, 61, 94, 98, 118-137, 152-227, 243-446, 459-461, 477-480, 484-503, 507
+src/elliot/service/ipc_client.py               61     15    75%   50-55, 58, 60, 62, 67, 79, 82, 85, 88-89
+src/elliot/service/ipc_protocol.py            149     29    81%   66, 68, 74, 76, 92, 96, 98, 104, 109-112, 125, 145, 150-158, 160, 170, 180, 184, 197, 216, 221-222, 276-277, 279
+src/elliot/service/ipc_server.py              200     54    73%   62, 64, 75, 78-81, 87, 92, 96, 98-103, 139-145, 152-159, 180, 182-186, 207-223, 233-234, 245-246, 251-254, 263, 266-270, 281-283, 288-289
+src/elliot/service/preflight.py                75     22    71%   35, 39-43, 93-94, 143-163, 167
+-------------------------------------------------------------------------
+TOTAL                                        5097   1530    70%
+============================= 221 passed in 6.70s ==============================

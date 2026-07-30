@@ -1,0 +1,29 @@
+{
+  "timestamp_utc": "2026-07-28T15:27:13.075299+00:00",
+  "python": "3.13.5",
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "method": "deterministic bytes 0..255 repeated; harmless synthetic data",
+  "results": [
+    {
+      "size_bytes": 1024,
+      "status": "OK",
+      "elapsed_ms": 1.892,
+      "whole_file_entropy": 8.0,
+      "block_count": 1
+    },
+    {
+      "size_bytes": 1048576,
+      "status": "OK",
+      "elapsed_ms": 7.864,
+      "whole_file_entropy": 8.0,
+      "block_count": 256
+    },
+    {
+      "size_bytes": 8388608,
+      "status": "OK",
+      "elapsed_ms": 41.61,
+      "whole_file_entropy": 8.0,
+      "block_count": 2048
+    }
+  ]
+}

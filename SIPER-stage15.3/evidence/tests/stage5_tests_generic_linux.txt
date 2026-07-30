@@ -1,0 +1,32 @@
+$ python3 -m compileall -q src
+compileall: PASS
+
+$ PYTHONPATH=src python3 -m pytest -q
+......................................................                   [100%]
+54 passed in 0.28s
+
+$ PYTHONPATH=src python3 -m pytest --cov=src/elliot/response --cov-report=term-missing -q
+......................................................                   [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.5-final-0 ________________
+
+Name                                        Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------
+src/elliot/response/__init__.py                 2      0   100%
+src/elliot/response/quarantine_manager.py     596    129    78%   124, 127, 160, 169, 208-209, 222, 250, 278, 311-312, 316-317, 320, 345, 349, 363-374, 411-422, 427-429, 434, 443, 445, 450-451, 454, 462-465, 473, 478, 511, 523, 525, 527, 559, 569, 591-607, 617, 641, 645-648, 656-658, 664, 667, 676, 679-680, 685, 691, 696, 700, 702, 704, 706, 708, 714, 721, 731, 738, 744, 770-771, 775, 778, 794-795, 802, 809, 812, 827, 833, 841-843, 856-858, 863-865, 880-881, 884-886, 893-896
+-------------------------------------------------------------------------
+TOTAL                                         598    129    78%
+54 passed in 0.40s
+
+$ PYTHONPATH=src python3 scripts/demonstrate_quarantine.py --output evidence/quarantine/stage5_quarantine_generic_linux.json
+File quarantined: /tmp/elliot-stage5-xdyfilm6/work/safe_sample.bin -> /tmp/elliot-stage5-xdyfilm6/protected/quarantine/11777026-5715-4305-8c44-9c442f9cfca0 (id=11777026-5715-4305-8c44-9c442f9cfca0)
+File restored: 11777026-5715-4305-8c44-9c442f9cfca0 -> /tmp/elliot-stage5-xdyfilm6/work/safe_sample.bin
+File quarantined: /tmp/elliot-stage5-xdyfilm6/duplicates/first.bin -> /tmp/elliot-stage5-xdyfilm6/protected/quarantine/ea45c0e9-5025-48dd-8cf7-b955390bbfd5 (id=ea45c0e9-5025-48dd-8cf7-b955390bbfd5)
+File quarantined: /tmp/elliot-stage5-xdyfilm6/duplicates/second.bin -> /tmp/elliot-stage5-xdyfilm6/protected/quarantine/2f3e63b9-d5ac-4fc5-bb66-16acfb4db414 (id=2f3e63b9-d5ac-4fc5-bb66-16acfb4db414)
+File quarantined: /tmp/elliot-stage5-xdyfilm6/work/conflict.bin -> /tmp/elliot-stage5-xdyfilm6/protected/quarantine/1186cf08-5793-4f71-88dd-4b569421f822 (id=1186cf08-5793-4f71-88dd-4b569421f822)
+basic_quarantine_restore: OK
+identical_content_distinct_paths: OK
+existing_destination_conflict: OK
+symlink_source_rejection: OK
+overall_status: OK
+Evidence written to: evidence/quarantine/stage5_quarantine_generic_linux.json

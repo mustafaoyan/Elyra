@@ -1,0 +1,37 @@
+Stage 8 generic Linux verification
+==================================
+
+Command:
+  python3 -m compileall -q src scripts tests
+Result:
+  PASS (no output)
+
+Command:
+  PYTHONPATH=src pytest -q
+Result:
+  105 passed in 3.38s
+
+Command:
+  PYTHONPATH=src pytest --cov=src --cov-report=term-missing -q
+Result:
+  105 passed in 3.64s
+  Total source coverage: 65%
+
+Fanotify-specific automated coverage includes:
+- safe MONITOR_ONLY projection;
+- enforcement DENY projection through a labelled synthetic result;
+- fail-open response deadline;
+- queue saturation response;
+- separate event and analysis execution pools;
+- concurrent event responses;
+- open-file-descriptor static/entropy analysis;
+- self exclusion;
+- path containment;
+- large-file degradation;
+- audit-chain recording;
+- multi-event metadata parsing and metadata-version rejection.
+
+Not performed in this generic environment:
+- fanotify_init root/CAP_SYS_ADMIN verification;
+- real FAN_OPEN_EXEC_PERM interception;
+- real kernel FAN_DENY enforcement.

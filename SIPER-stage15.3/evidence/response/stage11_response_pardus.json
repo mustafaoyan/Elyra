@@ -1,0 +1,362 @@
+{
+  "timestamp_utc": "2026-07-29T13:20:04.306322+00:00",
+  "method": "harmless temporary files and copied /bin/sleep only; pidfd termination; protected temporary quarantine; no malware, no root, no persistent user files",
+  "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+  "automatic_runtime_actions_enabled_for_demo": true,
+  "results": [
+    {
+      "scenario": "allow_action",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "64b90738555c403ca8367e97a4421d10",
+        "correlation_id": "demo-allow",
+        "requested_action": "ALLOW",
+        "executed_action": "ALLOW",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.296495,
+        "timestamp_utc": "2026-07-29T13:20:04.296495+00:00",
+        "score": 0,
+        "reason": "Execution was allowed by the current policy",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 0
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 0
+          }
+        ],
+        "pid": null,
+        "path": null,
+        "details": {},
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "allow_monitor_action",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "4f0b911edfe04575815d310f9b784d7c",
+        "correlation_id": "demo-monitor",
+        "requested_action": "CONTINUE_MONITORING",
+        "executed_action": "ALLOW_MONITOR",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.2968063,
+        "timestamp_utc": "2026-07-29T13:20:04.296806+00:00",
+        "score": 10,
+        "reason": "Execution continues under runtime monitoring",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 10
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 0
+          }
+        ],
+        "pid": null,
+        "path": null,
+        "details": {},
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "warn_action",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "c1b95ca1ad504b8e8dc2ca09cff1ed4a",
+        "correlation_id": "demo-warn",
+        "requested_action": "ALERT",
+        "executed_action": "WARN",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.2970283,
+        "timestamp_utc": "2026-07-29T13:20:04.297028+00:00",
+        "score": 50,
+        "reason": "A warning event was emitted for the correlated execution",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 20
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 30
+          }
+        ],
+        "pid": null,
+        "path": null,
+        "details": {},
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "fanotify_deny_acknowledged",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "692e5d881d234cad942c8034da9d4e4d",
+        "correlation_id": "demo-deny",
+        "requested_action": "DENY",
+        "executed_action": "DENY",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.2972248,
+        "timestamp_utc": "2026-07-29T13:20:04.297225+00:00",
+        "score": 100,
+        "reason": "fanotify pre-execution denial was confirmed and recorded",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 20
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 80
+          }
+        ],
+        "pid": null,
+        "path": null,
+        "details": {},
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "pidfd_terminate_harmless_child",
+      "status": "OK",
+      "returncode": -15,
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "ef9d3d3ad53a4bf48ec4929c416e3161",
+        "correlation_id": "demo-terminate",
+        "requested_action": "TERMINATE",
+        "executed_action": "TERMINATE",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.299044,
+        "timestamp_utc": "2026-07-29T13:20:04.299044+00:00",
+        "score": 75,
+        "reason": "The correlation-bound process was terminated using a pidfd",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 20
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 55
+          }
+        ],
+        "pid": 4074,
+        "path": "/tmp/elliot-stage11-dpo1_cny/terminate-safe-sleep",
+        "details": {
+          "process_identity": {
+            "pid": 4074,
+            "start_time_ticks": 1206513,
+            "executable_path": "/tmp/elliot-stage11-dpo1_cny/terminate-safe-sleep",
+            "executable_device": 35,
+            "executable_inode": 2728,
+            "uid": 1000
+          },
+          "process_already_exited": false,
+          "signal": "SIGTERM",
+          "escalated": false
+        },
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "terminate_then_quarantine_harmless_copy",
+      "status": "OK",
+      "returncode": -15,
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "fa226d8a272146cd8c35018d4298fd62",
+        "correlation_id": "demo-quarantine",
+        "requested_action": "QUARANTINE",
+        "executed_action": "QUARANTINE",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.3027651,
+        "timestamp_utc": "2026-07-29T13:20:04.302765+00:00",
+        "score": 95,
+        "reason": "The correlation-bound file was placed in protected quarantine",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 20
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 75
+          }
+        ],
+        "pid": 4075,
+        "path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+        "details": {
+          "termination": {
+            "process_already_exited": false,
+            "signal": "SIGTERM",
+            "escalated": false
+          },
+          "quarantine_record": {
+            "schema_version": 1,
+            "quarantine_id": "db75e874-1585-4df6-80ab-b705b38d32bb",
+            "original_path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+            "sha256": "0637e6d47579929cb72efa46f361861b319d62c62fe8a9d10731fd7655eb5936",
+            "size_bytes": 43432,
+            "file_type": "application/x-elf",
+            "timestamp": 1785331204.3017676,
+            "timestamp_utc": "2026-07-29T13:20:04.301768+00:00",
+            "reason": "Stage 11 correlated response: score=95",
+            "related_pid": 4075,
+            "process_info": {
+              "correlation_id": "demo-quarantine",
+              "process_identity": {
+                "pid": 4075,
+                "start_time_ticks": 1206513,
+                "executable_path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+                "executable_device": 35,
+                "executable_inode": 2729,
+                "uid": 1000
+              }
+            },
+            "triggered_rules": [
+              {
+                "rule": "SAFE_DEMO_PRE_EXEC",
+                "weight": 20
+              },
+              {
+                "rule": "SAFE_DEMO_RUNTIME",
+                "weight": 75
+              }
+            ],
+            "original_mode": 493,
+            "original_uid": 1000,
+            "original_gid": 1000,
+            "source_device": 35,
+            "source_inode": 2729,
+            "source_link_count": 1,
+            "restoration_status": "quarantined",
+            "restored_at": null,
+            "restored_at_utc": null,
+            "restored_path": null,
+            "restored_mode": null,
+            "ownership_restored": false,
+            "deleted_at": null,
+            "deleted_at_utc": null
+          }
+        },
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "authorised_safe_restore",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "d5679018f6074afb87a3e6d624115ccf",
+        "correlation_id": null,
+        "requested_action": "RESTORE",
+        "executed_action": "RESTORE",
+        "status": "SUCCEEDED",
+        "timestamp": 1785331204.3046346,
+        "timestamp_utc": "2026-07-29T13:20:04.304635+00:00",
+        "score": 0,
+        "reason": "An authorised quarantine restoration completed",
+        "triggered_rules": [],
+        "pid": 4073,
+        "path": null,
+        "details": {
+          "actor": "safe-stage11-demonstration",
+          "quarantine_record": {
+            "schema_version": 1,
+            "quarantine_id": "db75e874-1585-4df6-80ab-b705b38d32bb",
+            "original_path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+            "sha256": "0637e6d47579929cb72efa46f361861b319d62c62fe8a9d10731fd7655eb5936",
+            "size_bytes": 43432,
+            "file_type": "application/x-elf",
+            "timestamp": 1785331204.3017676,
+            "timestamp_utc": "2026-07-29T13:20:04.301768+00:00",
+            "reason": "Stage 11 correlated response: score=95",
+            "related_pid": 4075,
+            "process_info": {
+              "correlation_id": "demo-quarantine",
+              "process_identity": {
+                "executable_device": 35,
+                "executable_inode": 2729,
+                "executable_path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+                "pid": 4075,
+                "start_time_ticks": 1206513,
+                "uid": 1000
+              }
+            },
+            "triggered_rules": [
+              {
+                "rule": "SAFE_DEMO_PRE_EXEC",
+                "weight": 20
+              },
+              {
+                "rule": "SAFE_DEMO_RUNTIME",
+                "weight": 75
+              }
+            ],
+            "original_mode": 493,
+            "original_uid": 1000,
+            "original_gid": 1000,
+            "source_device": 35,
+            "source_inode": 2729,
+            "source_link_count": 1,
+            "restoration_status": "restored",
+            "restored_at": 1785331204.3040638,
+            "restored_at_utc": "2026-07-29T13:20:04.304064+00:00",
+            "restored_path": "/tmp/elliot-stage11-dpo1_cny/quarantine-safe-sleep",
+            "restored_mode": 493,
+            "ownership_restored": false,
+            "deleted_at": null,
+            "deleted_at_utc": null
+          }
+        },
+        "failure_explanation": null
+      }
+    },
+    {
+      "scenario": "path_replacement_refused",
+      "status": "OK",
+      "result": {
+        "schema_version": "1.0",
+        "action_id": "e95a9fd3ab724a0ebf15e4396d25e068",
+        "correlation_id": "demo-replacement",
+        "requested_action": "QUARANTINE",
+        "executed_action": "QUARANTINE",
+        "status": "REFUSED",
+        "timestamp": 1785331204.305286,
+        "timestamp_utc": "2026-07-29T13:20:04.305286+00:00",
+        "score": 95,
+        "reason": "Safe quarantine requirements were not satisfied",
+        "triggered_rules": [
+          {
+            "rule": "SAFE_DEMO_PRE_EXEC",
+            "weight": 20
+          },
+          {
+            "rule": "SAFE_DEMO_RUNTIME",
+            "weight": 75
+          }
+        ],
+        "pid": null,
+        "path": "/tmp/elliot-stage11-dpo1_cny/replacement-safe.bin",
+        "details": {},
+        "failure_explanation": "Source file identity changed before quarantine; no file was removed"
+      }
+    },
+    {
+      "scenario": "all_actions_audited",
+      "status": "OK",
+      "audit_record_count": 10,
+      "audit_chain_valid": true
+    }
+  ],
+  "overall_status": "OK"
+}

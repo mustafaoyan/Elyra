@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "2026-07-28T17:53:55.708829+00:00",
+  "method": "temporary Unix socket and harmless text file; no root, kernel hooks, network listener, quarantine action, or malware",
+  "fixture_label": "SAFE_GUI_DEMONSTRATION_NOT_LIVE_PROTECTION",
+  "results": [
+    {
+      "scenario": "official_model_over_unix_socket",
+      "status": "OK"
+    },
+    {
+      "scenario": "degraded_components_are_visible",
+      "status": "OK"
+    },
+    {
+      "scenario": "real_static_scan_values_projected",
+      "status": "OK",
+      "score": 15,
+      "decision": "ALLOW",
+      "whole_file_entropy": 4.215061,
+      "reported_block_count": 1
+    },
+    {
+      "scenario": "runtime_score_not_fabricated",
+      "status": "OK"
+    }
+  ],
+  "overall_status": "OK"
+}
