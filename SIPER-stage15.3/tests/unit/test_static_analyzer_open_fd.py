@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from elliot.analyzer.static_analyzer import StaticFileScanner
 
 
+@pytest.mark.skipif(os.name == "nt", reason="fanotify descriptor paths use /proc on Linux")
 def test_scan_open_fd_uses_descriptor_bytes_and_original_path_context(tmp_path):
     candidate = tmp_path / ".safe.txt"
     candidate.write_bytes(b"ordinary harmless text\n" * 20)

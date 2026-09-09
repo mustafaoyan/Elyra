@@ -33,6 +33,7 @@ elliot-install-check = "elliot.service.installation_check:main"
 elliot-integration-check = "elliot.service.integration_check:main"
 elliot-submission-check = "elliot.release.submission:main"
 elliot-release-build = "elliot.release.bundle:main"
+elliot-windows-local = "elliot.service.windows_local:main"
 
 [project.optional-dependencies]
 dev = [

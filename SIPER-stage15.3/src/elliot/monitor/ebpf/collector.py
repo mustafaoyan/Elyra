@@ -24,6 +24,7 @@ except ImportError:  # Pardus system dependency, intentionally not from PyPI.
     BPF = None
 
 from .events import EbpfEvent, EventType
+from .kernel_headers import KernelHeaderAssessment, assess_kernel_headers
 
 logger = logging.getLogger("elliot.monitor.ebpf.collector")
 
@@ -66,12 +67,15 @@ class EBPFCollector:
         filter_config: EbpfFilterConfig | None = None,
         bpf_factory: Callable[..., Any] | None = None,
         rename_tracepoint_detector: Callable[[], list[str]] | None = None,
+        kernel_header_assessor: Callable[[], KernelHeaderAssessment] | None = None,
         queue_size: int = 4096,
     ) -> None:
         self.bpf_program_path = str(Path(bpf_program_path))
         self.filter_config = filter_config or EbpfFilterConfig(ignored_tgids={os.getpid()})
         self._bpf_factory = bpf_factory
         self._rename_tracepoint_detector = rename_tracepoint_detector
+        self._kernel_header_assessor = kernel_header_assessor
+        self._kernel_header_assessment: KernelHeaderAssessment | None = None
         self.bpf: Any | None = None
         self.event_queue: queue.Queue[dict[str, Any]] = queue.Queue(maxsize=queue_size)
         self.stop_event = threading.Event()
@@ -95,19 +99,41 @@ class EBPFCollector:
             self.degraded_reason = "BCC_PYTHON_BINDINGS_UNAVAILABLE"
             logger.warning("eBPF degraded: %s", self.degraded_reason)
             return False
+        # Unit-test or externally injected BPF factories are intentionally not
+        # gated on the host's /lib/modules tree. Real BCC compilation is.
+        if self._bpf_factory is None:
+            assessor = self._kernel_header_assessor or assess_kernel_headers
+            self._kernel_header_assessment = assessor()
+            if not self._kernel_header_assessment.ready:
+                self.degraded_reason = (
+                    f"KERNEL_HEADERS_{self._kernel_header_assessment.status}"
+                )
+                logger.warning(
+                    "eBPF degraded: %s; run scripts/resolve_kernel_headers.py "
+                    "for a dry-run repair plan",
+                    self.degraded_reason,
+                )
+                return False
         path = Path(self.bpf_program_path)
         if not path.is_file():
             self.degraded_reason = "PROBE_SOURCE_MISSING"
             return False
         try:
             source = path.read_text(encoding="utf-8")
-            exec_field = self._detect_exec_filename_field()
-            if exec_field is None:
-                self.degraded_reason = "TRACEPOINT_FORMAT_UNSUPPORTED:sched_process_exec filename field missing"
-                logger.warning("eBPF degraded: %s", self.degraded_reason)
-                return False
-            source = source.replace("ELLIOT_EXEC_FILENAME_FIELD", exec_field)
-            self._tracepoint_compatibility["sched_process_exec.filename_field"] = exec_field
+            if "ELLIOT_EXEC_FILENAME_FIELD" in source:
+                exec_field = self._detect_exec_filename_field()
+                if exec_field is None:
+                    self.degraded_reason = "TRACEPOINT_FORMAT_UNSUPPORTED:sched_process_exec filename field missing"
+                    logger.warning("eBPF degraded: %s", self.degraded_reason)
+                    return False
+                source = source.replace("ELLIOT_EXEC_FILENAME_FIELD", exec_field)
+                self._tracepoint_compatibility["sched_process_exec.filename_field"] = exec_field
+            else:
+                # Tiny injected test probes and externally supplied probes can
+                # omit this project-specific template token entirely.  Their
+                # BCC source must not be gated on tracefs discovery they do
+                # not use.
+                self._tracepoint_compatibility["sched_process_exec.filename_field"] = "NOT_REQUIRED"
             detector = self._rename_tracepoint_detector or self._detect_rename_tracepoints
             self._rename_tracepoints = self._normalise_rename_tracepoints(detector())
             if "ELLIOT_RENAME_PROBES" in source and not self._rename_tracepoints:
@@ -150,8 +176,11 @@ class EBPFCollector:
                 continue
             if re.search(r"field:__data_loc\s+char\[\]\s+filename;", text):
                 return "data_loc_filename"
-        # The generated BCC field on supported Pardus/Debian 6.12 kernels.
-        return "data_loc_filename" if Path("/sys/kernel").exists() else None
+        # The generated BCC field on supported Pardus/Debian kernels.  When
+        # tracefs is intentionally hidden (containers, restricted virtual
+        # machines, or source-only tests), let BCC perform the final ABI check
+        # instead of treating unavailable metadata as proof of incompatibility.
+        return "data_loc_filename"
 
 
     @classmethod
@@ -425,6 +454,11 @@ class EBPFCollector:
             "rename_tracepoints": list(self._rename_tracepoints),
             "rename_dedup_window_ns": self._rename_dedup_window_ns,
             "exit_code_capability": "NOT_EXPOSED_BY_PORTABLE_SCHED_PROCESS_EXIT",
+            "kernel_header_compatibility": (
+                self._kernel_header_assessment.to_dict()
+                if self._kernel_header_assessment is not None
+                else None
+            ),
         }
 
     def stop(self) -> None:

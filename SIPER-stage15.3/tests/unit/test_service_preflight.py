@@ -1,11 +1,18 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
 
 from elliot.service import preflight
+
+
+requires_linux_install_layout = pytest.mark.skipif(
+    os.name == "nt",
+    reason="the Linux release-layout contract uses privileged POSIX symlinks",
+)
 
 
 def _prepared_layout(tmp_path: Path):
@@ -26,6 +33,7 @@ def _prepared_layout(tmp_path: Path):
     return current, runtime, state, logs
 
 
+@requires_linux_install_layout
 def test_preflight_accepts_safe_layout_with_optional_warnings(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -43,6 +51,7 @@ def test_preflight_accepts_safe_layout_with_optional_warnings(
     assert not [item for item in results if item.status == "FAIL"]
 
 
+@requires_linux_install_layout
 def test_preflight_service_mode_requires_root(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -61,6 +70,7 @@ def test_preflight_service_mode_requires_root(
     assert preflight.overall_status(results) == "FAIL"
 
 
+@requires_linux_install_layout
 def test_preflight_requires_both_groups(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     current, runtime, state, logs = _prepared_layout(tmp_path)
     monkeypatch.setattr(preflight, "_group_exists", lambda name: name == "elliot")
@@ -79,6 +89,7 @@ def test_optional_ebpf_warning_does_not_fail_preflight() -> None:
     assert preflight.overall_status(results) == "OK"
 
 
+@requires_linux_install_layout
 def test_missing_current_link_is_a_failure(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     runtime = tmp_path / "run"
     state = tmp_path / "state"
@@ -95,3 +106,19 @@ def test_missing_current_link_is_a_failure(tmp_path: Path, monkeypatch: pytest.M
     )
     current = next(item for item in results if item.check == "current_release_link")
     assert current.status == "FAIL"
+
+
+def test_windows_preflight_does_not_require_linux_service_layout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(preflight.platform, "system", lambda: "Windows")
+    results = preflight.run_preflight(
+        service_mode=True,
+        current_link=tmp_path / "linux-only-current",
+        runtime_directory=tmp_path / "linux-only-run",
+        state_directory=tmp_path / "linux-only-state",
+        log_directory=tmp_path / "linux-only-logs",
+    )
+    assert preflight.overall_status(results) == "OK"
+    assert next(item for item in results if item.check == "current_release_link").status == "OK"
+    assert next(item for item in results if item.check == "windows_local_monitor").status == "OK"

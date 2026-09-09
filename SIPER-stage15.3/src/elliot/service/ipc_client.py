@@ -14,7 +14,13 @@ from .ipc_protocol import (
     build_request,
     encode_json_line,
 )
-from .ipc_server import DEFAULT_SOCKET_PATH
+
+# Keep the unprivileged client importable on Windows.  Importing the Linux
+# server here used to pull in POSIX-only group and peer-credential modules
+# before the Windows GUI could select its direct local-monitor model.  The
+# endpoint is a protocol default, not server implementation state, so keeping
+# it alongside the client avoids that platform coupling.
+DEFAULT_SOCKET_PATH = "/run/elliot/elliot.sock"
 
 
 class IpcClientError(RuntimeError):

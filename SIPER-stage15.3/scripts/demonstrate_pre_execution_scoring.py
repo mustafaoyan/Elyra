@@ -77,9 +77,10 @@ def main() -> int:
     scorer = PreExecutionScoringEngine()
     scenarios: list[dict[str, Any]] = []
 
-    with tempfile.TemporaryDirectory(
-        prefix="elliot_stage4_", dir=Path.home()
-    ) as temporary_directory:
+    # Use the platform temporary directory.  It works in restricted desktop
+    # sessions and CI containers where a user profile may be readable but not
+    # writable, while keeping all fixtures local and automatically removed.
+    with tempfile.TemporaryDirectory(prefix="elliot_stage4_") as temporary_directory:
         temp = Path(temporary_directory)
         ordinary = temp / "ordinary.txt"
         ordinary.write_text("ELLIOT harmless Pardus test\n" * 100, encoding="utf-8")

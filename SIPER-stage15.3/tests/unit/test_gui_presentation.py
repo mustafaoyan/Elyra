@@ -35,6 +35,27 @@ def test_dashboard_projection_reports_degraded_components() -> None:
     assert projected["policy_mode"] == "MONITOR_ONLY"
 
 
+def test_dashboard_projection_keeps_windows_monitor_distinct_from_ebpf() -> None:
+    projected = dashboard_projection(
+        {
+            "connected": True,
+            "status": {
+                "platform": "WINDOWS",
+                "monitor_kind": "ReadDirectoryChangesW",
+                "fanotify_active": False,
+                "ebpf_active": False,
+                "windows_monitor_active": True,
+            },
+            "policy": {"mode": "MONITOR_ONLY"},
+            "events": [],
+            "quarantine": [],
+            "errors": [],
+        }
+    )
+    assert projected["component_states"] == {"windows_monitor": True}
+    assert projected["monitor_kind"] == "ReadDirectoryChangesW"
+
+
 def test_scan_projection_uses_exact_block_values() -> None:
     projected = scan_projection(
         {

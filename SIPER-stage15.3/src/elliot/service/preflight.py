@@ -3,15 +3,20 @@
 from __future__ import annotations
 
 import argparse
-import grp
 import importlib.util
 import json
 import os
+import platform
 import shutil
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
+
+try:
+    import grp
+except ImportError:  # Windows has no POSIX group database.
+    grp = None  # type: ignore[assignment]
 
 from .install_layout import (
     ADMIN_GROUP,
@@ -23,6 +28,7 @@ from .install_layout import (
     STATE_DIRECTORY,
     inspect_path,
 )
+from ..monitor.ebpf.kernel_headers import assess_kernel_headers
 
 
 @dataclass(frozen=True, slots=True)
@@ -36,11 +42,20 @@ class PreflightResult:
 
 
 def _group_exists(name: str) -> bool:
+    if grp is None:
+        return False
     try:
         grp.getgrnam(name)
     except KeyError:
         return False
     return True
+
+
+def _effective_uid() -> int:
+    """Return a POSIX effective UID, or a non-root sentinel on Windows."""
+
+    getter = getattr(os, "geteuid", None)
+    return int(getter()) if callable(getter) else -1
 
 
 def _result(check: str, ok: bool, detail: str, *, warning: bool = False) -> PreflightResult:
@@ -59,67 +74,111 @@ def run_preflight(
     """Return production readiness checks without loading fanotify or eBPF."""
 
     results: list[PreflightResult] = []
+    is_linux = platform.system() == "Linux"
+    effective_uid = _effective_uid()
     results.append(
         _result(
             "root_service_identity",
-            (not service_mode) or os.geteuid() == 0,
-            f"effective_uid={os.geteuid()}",
+            (not service_mode) or (not is_linux) or effective_uid == 0,
+            f"effective_uid={effective_uid}; platform={platform.system()}",
         )
     )
-    results.append(_result("ipc_group_exists", _group_exists(IPC_GROUP), IPC_GROUP))
-    results.append(_result("admin_group_exists", _group_exists(ADMIN_GROUP), ADMIN_GROUP))
+    results.append(
+        _result(
+            "ipc_group_exists",
+            (not is_linux) or _group_exists(IPC_GROUP),
+            IPC_GROUP if is_linux else "not applicable to Windows local monitor",
+        )
+    )
+    results.append(
+        _result(
+            "admin_group_exists",
+            (not is_linux) or _group_exists(ADMIN_GROUP),
+            ADMIN_GROUP if is_linux else "not applicable to Windows local monitor",
+        )
+    )
 
-    current = inspect_path(current_link, expected_kind="symlink", reject_world_writable=False)
-    results.append(_result("current_release_link", current.safe, json.dumps(current.to_dict())))
-    if current.safe:
-        try:
-            release = current_link.resolve(strict=True)
-            results.append(
-                _result(
-                    "current_release_directory",
-                    release.is_dir(),
-                    str(release),
+    if is_linux:
+        current = inspect_path(current_link, expected_kind="symlink", reject_world_writable=False)
+        results.append(_result("current_release_link", current.safe, json.dumps(current.to_dict())))
+        if current.safe:
+            try:
+                release = current_link.resolve(strict=True)
+                results.append(
+                    _result(
+                        "current_release_directory",
+                        release.is_dir(),
+                        str(release),
+                    )
                 )
-            )
-            manifest = release / INSTALLATION_MANIFEST
-            manifest_check = inspect_path(manifest, expected_kind="regular")
-            results.append(
-                _result(
-                    "installation_manifest",
-                    manifest_check.safe,
-                    json.dumps(manifest_check.to_dict()),
+                manifest = release / INSTALLATION_MANIFEST
+                manifest_check = inspect_path(manifest, expected_kind="regular")
+                results.append(
+                    _result(
+                        "installation_manifest",
+                        manifest_check.safe,
+                        json.dumps(manifest_check.to_dict()),
+                    )
                 )
-            )
-        except OSError as exc:
-            results.append(_result("current_release_directory", False, str(exc)))
+            except OSError as exc:
+                results.append(_result("current_release_directory", False, str(exc)))
 
-    for name, directory, expected_mode in (
-        ("runtime_directory", runtime_directory, "0750"),
-        ("state_directory", state_directory, "0700"),
-        ("log_directory", log_directory, "0750"),
-    ):
-        inspection = inspect_path(directory, expected_kind="directory")
-        ok = inspection.safe and inspection.mode == expected_mode
-        results.append(_result(name, ok, json.dumps(inspection.to_dict())))
+        for name, directory, expected_mode in (
+            ("runtime_directory", runtime_directory, "0750"),
+            ("state_directory", state_directory, "0700"),
+            ("log_directory", log_directory, "0750"),
+        ):
+            inspection = inspect_path(directory, expected_kind="directory")
+            ok = inspection.safe and inspection.mode == expected_mode
+            results.append(_result(name, ok, json.dumps(inspection.to_dict())))
+    else:
+        # The Linux service installation is deliberately not treated as a
+        # Windows prerequisite.  The Windows GUI owns its local monitor in
+        # process and does not create /opt, /run, or Unix-socket state.
+        for name in (
+            "current_release_link",
+            "current_release_directory",
+            "installation_manifest",
+            "runtime_directory",
+            "state_directory",
+            "log_directory",
+        ):
+            results.append(
+                _result(name, True, "not applicable to Windows local monitor")
+            )
 
     probe_path = Path(__file__).parents[1] / "monitor" / "ebpf" / "probes.c"
-    results.append(_result("packaged_ebpf_source", probe_path.is_file(), str(probe_path)))
+    results.append(
+        _result(
+            "packaged_ebpf_source",
+            probe_path.is_file() if is_linux else True,
+            str(probe_path) if is_linux else "not applicable to Windows local monitor",
+        )
+    )
 
     bcc_available = importlib.util.find_spec("bcc") is not None
     results.append(
         _result(
             "bcc_python_bindings",
-            bcc_available,
-            "importable" if bcc_available else "not importable; daemon will report degraded eBPF",
+            bcc_available or not is_linux,
+            (
+                "importable"
+                if bcc_available
+                else ("not applicable to Windows ETW/local monitor" if not is_linux else "not importable; daemon will report degraded eBPF")
+            ),
             warning=True,
         )
     )
-    headers = Path("/lib/modules") / os.uname().release / "build"
+    header_assessment = assess_kernel_headers()
     results.append(
         _result(
             "running_kernel_headers",
-            headers.exists(),
-            str(headers),
+            header_assessment.ready or not is_linux,
+            (
+                json.dumps(header_assessment.to_dict())
+                if is_linux
+                else "not applicable to Windows ETW/local monitor"
+            ),
             warning=True,
         )
     )
@@ -127,11 +186,20 @@ def run_preflight(
     results.append(
         _result(
             "clang",
-            clang is not None,
-            clang or "not found; daemon will report degraded eBPF",
+            clang is not None or not is_linux,
+            clang or ("not applicable to Windows local monitor" if not is_linux else "not found; daemon will report degraded eBPF"),
             warning=True,
         )
     )
+    if not is_linux:
+        windows_module = importlib.util.find_spec("elliot.monitor.windows") is not None
+        results.append(
+            _result(
+                "windows_local_monitor",
+                windows_module,
+                "Windows monitor package importable; ETW/minifilter adapter remains local-only",
+            )
+        )
     return results
 
 

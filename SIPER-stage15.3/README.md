@@ -1,5 +1,19 @@
 # Siper
 
+## 🌐 Live Deployment & Download
+
+The public ELLIOT landing page is published from this repository at
+[https://mustafaoyan.github.io/Siper-Antivirus/](https://mustafaoyan.github.io/Siper-Antivirus/)
+after the GitHub Pages workflow completes. It detects Windows and Linux and
+selects the matching release asset. Before public release, build, sign and
+checksum the Windows installer and Linux package, then replace the versioned
+placeholder links in [`../landing/assets/js/download-config.js`](../landing/assets/js/download-config.js).
+
+The current scope is strictly local-first: no cloud management or remote event
+logging is enabled. Windows user-space monitoring is monitor-only until a
+separately signed minifilter is deployed; see the repository-root
+[`ELLIOT_AI_CONTEXT.md`](../ELLIOT_AI_CONTEXT.md) for the cross-platform model.
+
 **Siper — the Pardus security application developed within the ELLIOT project**
 
 Official TEKNOFEST project title: **ELLIOT: Pardus İçin Entropi Tabanlı Otonom Zafiyet Tespit ve Sıfırcı Gün Savunma Motoru**
@@ -123,11 +137,11 @@ PYTHONPATH=src python -m pytest -q
 PYTHONPATH=src python -m pytest --cov=src --cov-report=term-missing
 ```
 
-The final Stage 15.2 source package contains **254 automated tests**. The Stage
-14.1 installed-workflow baseline was **223 passed** with approximately **70%**
-source-line coverage; Stage 15 adds release, evidence and packaging-contract
-tests. Privileged kernel and GUI paths are additionally verified through real
-Pardus integration evidence rather than fabricated unit coverage.
+The test suite is platform-aware: native Windows runs the local monitor and
+portable-analysis contracts, while Linux CI additionally runs the POSIX IPC,
+fanotify, eBPF, audit and package-layout contracts. Privileged kernel and GUI
+paths are verified through real Pardus integration evidence rather than a
+fabricated coverage claim.
 
 ## Installation option A — verified installer
 

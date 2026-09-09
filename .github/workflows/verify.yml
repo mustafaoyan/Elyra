@@ -1,0 +1,36 @@
+name: Verify ELLIOT engine
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.12"]
+    defaults:
+      run:
+        working-directory: SIPER-stage15.3
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install runtime and test dependencies
+        run: python -m pip install --upgrade pip -r requirements.txt -r requirements-dev.txt
+      - name: Run platform-aware test suite
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q

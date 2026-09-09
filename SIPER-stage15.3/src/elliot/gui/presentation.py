@@ -29,6 +29,64 @@ def _number(value: Any, default: float = 0.0) -> float:
     return default
 
 
+def _event_score(event: Mapping[str, Any]) -> float | None:
+    """Read a real risk value from an event without manufacturing one.
+
+    Runtime events have evolved across ELLIOT releases.  The dashboard accepts
+    the documented top-level fields as well as a correlation-state score, but
+    returns ``None`` when an event has no score.  That distinction is important
+    for a security dashboard: an absent score must never be displayed as a
+    benign score of zero.
+    """
+
+    correlation = _mapping(event.get("correlation"))
+    state = _mapping(correlation.get("state"))
+    for candidate in (
+        event.get("risk_score"),
+        event.get("score"),
+        state.get("combined_score"),
+    ):
+        if isinstance(candidate, (int, float)) and not isinstance(candidate, bool):
+            return max(0.0, min(100.0, float(candidate)))
+    return None
+
+
+def _event_telemetry(events: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Produce display metrics from daemon events only.
+
+    Values in this projection are intentionally derived from the received
+    event list.  The GUI uses them for chart labels and never treats a lack of
+    events as proof that endpoint monitoring is active or healthy.
+    """
+
+    sources: dict[str, int] = {}
+    risk_bands = {"low": 0, "elevated": 0, "high": 0}
+    scored_events = 0
+    highest_score: float | None = None
+    for event in events:
+        source = str(event.get("source", "unknown"))[:48] or "unknown"
+        sources[source] = sources.get(source, 0) + 1
+        score = _event_score(event)
+        if score is None:
+            continue
+        scored_events += 1
+        highest_score = score if highest_score is None else max(highest_score, score)
+        if score >= 70:
+            risk_bands["high"] += 1
+        elif score >= 40:
+            risk_bands["elevated"] += 1
+        else:
+            risk_bands["low"] += 1
+    return {
+        "event_count": len(events),
+        "scored_event_count": scored_events,
+        "source_counts": sources,
+        "risk_bands": risk_bands,
+        "highest_score": highest_score,
+        "high_risk_count": risk_bands["high"],
+    }
+
+
 def dashboard_projection(snapshot: Mapping[str, Any]) -> dict[str, Any]:
     """Project a multi-call model snapshot into explicit GUI fields."""
 
@@ -40,10 +98,15 @@ def dashboard_projection(snapshot: Mapping[str, Any]) -> dict[str, Any]:
     errors = [_mapping(item) for item in _sequence(snapshot.get("errors"))]
 
     degraded = [str(item) for item in _sequence(status.get("degraded_components"))]
-    component_states = {
-        "fanotify": bool(status.get("fanotify_active")),
-        "ebpf": bool(status.get("ebpf_active")),
-    }
+    platform_name = str(status.get("platform", "LINUX")).upper()
+    component_states = (
+        {"windows_monitor": bool(status.get("windows_monitor_active"))}
+        if platform_name == "WINDOWS"
+        else {
+            "fanotify": bool(status.get("fanotify_active")),
+            "ebpf": bool(status.get("ebpf_active")),
+        }
+    )
     if not connected:
         service_state = "DISCONNECTED"
     elif degraded:
@@ -53,6 +116,8 @@ def dashboard_projection(snapshot: Mapping[str, Any]) -> dict[str, Any]:
 
     return {
         "connected": connected,
+        "platform": platform_name,
+        "monitor_kind": str(status.get("monitor_kind", "fanotify + eBPF")),
         "service_state": service_state,
         "api_version": status.get("api_version"),
         "component_states": component_states,
@@ -61,6 +126,7 @@ def dashboard_projection(snapshot: Mapping[str, Any]) -> dict[str, Any]:
         "events": events,
         "quarantine": quarantine,
         "errors": errors,
+        "telemetry": _event_telemetry(events),
     }
 
 

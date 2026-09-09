@@ -196,16 +196,23 @@ class StaticFileScanner:
     @staticmethod
     def analyze_permissions(path: Path, metadata: os.stat_result) -> tuple[dict[str, Any], list[str]]:
         mode = metadata.st_mode
+        posix_mode_semantics = os.name != "nt"
         details = {
             "mode_octal": f"{stat.S_IMODE(mode):04o}",
+            "posix_mode_semantics": posix_mode_semantics,
             "owner_uid": metadata.st_uid,
             "owner_gid": metadata.st_gid,
-            "suid": bool(mode & stat.S_ISUID),
-            "sgid": bool(mode & stat.S_ISGID),
+            "suid": bool(mode & stat.S_ISUID) if posix_mode_semantics else False,
+            "sgid": bool(mode & stat.S_ISGID) if posix_mode_semantics else False,
             "owner_executable": bool(mode & stat.S_IXUSR),
             "group_executable": bool(mode & stat.S_IXGRP),
             "world_executable": bool(mode & stat.S_IXOTH),
-            "world_writable": bool(mode & stat.S_IWOTH),
+            # NTFS ACLs are not faithfully represented by Python's POSIX-like
+            # stat mode bits.  Treating every writable local file as
+            # world-writable would create a false static-risk signal on
+            # Windows, so ACL evaluation is intentionally outside this
+            # cross-platform byte-analysis layer.
+            "world_writable": bool(mode & stat.S_IWOTH) if posix_mode_semantics else False,
         }
         indicators: list[str] = []
         if details["suid"]:

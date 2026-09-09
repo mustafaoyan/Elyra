@@ -6,6 +6,7 @@ import logging
 from typing import Any, Callable
 
 from ..service.ipc_client import IpcClient, IpcClientError, IpcRemoteError
+from ..service.windows_local import WindowsLocalService
 
 logger = logging.getLogger("elliot.gui.model")
 
@@ -96,3 +97,56 @@ class PardusModel:
                     }
                 )
         return snapshot
+
+
+class WindowsModel:
+    """GUI model for the local Windows monitor; no cloud or socket transport."""
+
+    def __init__(self, service: WindowsLocalService | None = None) -> None:
+        self.service = service or WindowsLocalService()
+        self.service.start()
+
+    @staticmethod
+    def _success(result: dict[str, Any]) -> dict[str, Any]:
+        return {"ok": True, "result": result}
+
+    def get_status(self) -> dict[str, Any]:
+        return self._success(self.service.get_status())
+
+    def get_events(self, limit: int = 50) -> dict[str, Any]:
+        return self._success(self.service.list_events(limit))
+
+    def get_quarantine_list(self) -> dict[str, Any]:
+        return self._success(self.service.list_quarantine())
+
+    def get_policy(self) -> dict[str, Any]:
+        return self._success(self.service.get_policy())
+
+    def scan_file(self, path: str) -> dict[str, Any]:
+        try:
+            return self._success(self.service.scan_file(path))
+        except (OSError, ValueError) as exc:
+            return {"ok": False, "error": {"code": "LOCAL_SCAN_FAILED", "message": str(exc)}}
+
+    def restore_file(self, quarantine_id: str, destination: str | None = None) -> dict[str, Any]:
+        del quarantine_id, destination
+        return {
+            "ok": False,
+            "error": {
+                "code": "WINDOWS_RESPONSE_UNAVAILABLE",
+                "message": "Windows local monitoring is monitor-only until a signed minifilter response component is installed.",
+            },
+        }
+
+    def fetch_dashboard(self, event_limit: int = 50) -> dict[str, Any]:
+        return {
+            "connected": True,
+            "status": self.service.get_status(),
+            "events": self.service.list_events(event_limit).get("events", []),
+            "quarantine": [],
+            "policy": self.service.get_policy(),
+            "errors": [],
+        }
+
+    def close(self) -> None:
+        self.service.stop()

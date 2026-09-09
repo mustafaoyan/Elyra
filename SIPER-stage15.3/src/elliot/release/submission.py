@@ -174,6 +174,7 @@ def _os_release() -> dict[str, str]:
 
 
 def environment_record(project_root: Path) -> dict[str, Any]:
+    effective_uid = os.geteuid() if hasattr(os, "geteuid") else None
     return {
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "project": "ELLIOT",
@@ -184,7 +185,8 @@ def environment_record(project_root: Path) -> dict[str, Any]:
         "platform": platform.platform(),
         "architecture": platform.machine(),
         "python": platform.python_version(),
-        "effective_uid": os.geteuid(),
+        "effective_uid": effective_uid,
+        "identity_model": "POSIX_UID" if effective_uid is not None else "WINDOWS_ACCESS_TOKEN",
         "safety_boundary": (
             "No malware was downloaded or executed by the finalization tool; "
             "the manifest inventories existing evidence only."

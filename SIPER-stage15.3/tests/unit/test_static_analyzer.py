@@ -43,6 +43,7 @@ def test_ordinary_text_and_compressed_file(tmp_path: Path) -> None:
     assert compressed_scan.mime_type in {"application/gzip", "application/x-gzip"}
 
 
+@pytest.mark.skipif(os.name == "nt", reason="ELF metadata is a Linux/POSIX parser contract")
 def test_harmless_elf_metadata_and_disguised_extension(tmp_path: Path) -> None:
     source = _harmless_elf()
     normal = tmp_path / "harmless.elf"
@@ -74,6 +75,7 @@ def test_malformed_elf_is_reported_without_crash(tmp_path: Path) -> None:
         assert any(error["code"] == "MALFORMED_ELF" for error in scan.errors)
 
 
+@pytest.mark.skipif(os.name == "nt", reason="NTFS ACLs are not POSIX mode bits")
 def test_permission_indicators(tmp_path: Path) -> None:
     target = tmp_path / "permissions.bin"
     target.write_bytes(b"safe")
@@ -139,6 +141,7 @@ def test_large_file_records_analysis_time(tmp_path: Path) -> None:
     assert scan.entropy_summary["bytes_analyzed"] == target.stat().st_size
 
 
+@pytest.mark.skipif(os.name == "nt", reason="symbolic-link creation requires a Windows privilege")
 def test_symlink_is_not_followed_by_default(tmp_path: Path) -> None:
     target = tmp_path / "target.bin"
     link = tmp_path / "link.bin"

@@ -164,4 +164,10 @@ class PardusController:
         self._closed = True
         if self._owns_executor:
             self.executor.shutdown(wait=False, cancel_futures=True)
+        model_close = getattr(self.model, "close", None)
+        if callable(model_close):
+            try:
+                model_close()
+            except (OSError, RuntimeError):
+                logger.warning("GUI model shutdown failed", exc_info=True)
         self.view.close()

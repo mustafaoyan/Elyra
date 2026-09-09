@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import logging
+import os
 
 from .controller import PardusController
-from .model import PardusModel
-from .view import PardusView
+from .model import PardusModel, WindowsModel
+from .view import ElliotView
 
 
 def main() -> None:
@@ -14,8 +15,8 @@ def main() -> None:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
-    model = PardusModel()
-    view = PardusView()
+    model = WindowsModel() if os.name == "nt" else PardusModel()
+    view = ElliotView()
     controller = PardusController(model, view)
     controller.run()
 
