@@ -1,6 +1,6 @@
 # ELLIOT AI Context Blueprint
 
-<!-- ELLIOT_AI_CONTEXT:v9 | local-first | repository-root | windows:PAUSED | linux:L5_READY_NATIVE_EVIDENCE_PENDING -->
+<!-- ELLIOT_AI_CONTEXT:v10 | local-first | repository-root | windows:PAUSED | linux:L6_READY_NATIVE_EVIDENCE_PENDING -->
 
 ```json
 {
@@ -22,7 +22,7 @@
     "phase_1": "COMPLETE. Shared static-analysis foundation; see ELLIOT_ROADMAP.md and SIPER-stage15.3/docs/phase1-verification.md for acceptance evidence.",
     "phase_2": "NOT_STARTED; Windows work paused at W1 and requires separate user approval.",
     "windows_status": "PAUSED_AT_W1_HANDOFF",
-    "linux_status": "L5_LOCAL_RESPONSE_READY_NATIVE_EVIDENCE_PENDING",
+    "linux_status": "L6_RESILIENCE_BENCHMARK_READY_NATIVE_EVIDENCE_PENDING",
     "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md; L0 baseline is prepared but not Linux-native verified",
     "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
@@ -179,6 +179,10 @@ not repeat these items unless a regression is found:
 14. **Linux L5 local response:** quarantine actions now expose audit health via
    `audit_status`; a committed quarantine with failed audit recording is marked
    `DEGRADED_AUDIT_WRITE_FAILED` instead of appearing fully protected.
+
+15. **Linux L6 resilience benchmark:** added a harmless deterministic benchmark
+   that reports scanner mean/p50/p95 latency, malformed-parser safety and bounded
+   eBPF queue drops. It does not attach probes, open fanotify or execute files.
 
 ## Planned work — do not start without the next milestone approval
 

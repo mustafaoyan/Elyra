@@ -48,6 +48,9 @@ L5 uygulaması hazır: karantina yöneticisi commit edilmiş işlem sonrası aud
 yazma hatasını `DEGRADED_AUDIT_WRITE_FAILED` olarak görünür taşır; geri alma ve
 restore çakışma güvenlikleri korunur. L6'ya geçilmedi.
 
+L6 uygulaması hazır: `scripts/benchmark_linux_resilience.py` sentetik veriyle
+p50/p95 gecikme, parser dayanıklılığı ve bounded event drop ölçer. L7'ye geçilmedi.
+
 `ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
 ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test
