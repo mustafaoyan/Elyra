@@ -21,7 +21,7 @@ jobs:
           python3 -m venv .release-venv
           . .release-venv/bin/activate
           set -euxo pipefail
-          python -m pip install --upgrade pip build
+          python -m pip install --upgrade pip setuptools wheel build
           test -f requirements.txt
           test -f LICENSE
           bash scripts/build_pardus_deb.sh dist/debian
