@@ -1,6 +1,6 @@
 # ELLIOT AI Context Blueprint
 
-<!-- ELLIOT_AI_CONTEXT:v3 | local-first | repository-root | windows:PAUSED | linux:PLANNED -->
+<!-- ELLIOT_AI_CONTEXT:v4 | local-first | repository-root | windows:PAUSED | linux:L0_READY -->
 
 ```json
 {
@@ -22,8 +22,8 @@
     "phase_1": "COMPLETE. Shared static-analysis foundation; see ELLIOT_ROADMAP.md and SIPER-stage15.3/docs/phase1-verification.md for acceptance evidence.",
     "phase_2": "NOT_STARTED; Windows work paused at W1 and requires separate user approval.",
     "windows_status": "PAUSED_AT_W1_HANDOFF",
-    "linux_status": "PLANNED_NOT_STARTED; requires the user keyword 'başla'",
-    "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md",
+    "linux_status": "L0_BASELINE_READY_NATIVE_EVIDENCE_PENDING; requires the user keyword 'başla' for implementation",
+    "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md; L0 baseline is prepared but not Linux-native verified",
     "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
     "release_assets": "Do not represent placeholder URLs as published installers. Build, sign, checksum, upload, then configure landing/assets/js/download-config.js."
@@ -74,6 +74,7 @@ Siper-Antivirus/
     │   │   └── windows_local.py       # Windows in-process, local-only GUI service facade
     │   └── gui/                       # CustomTkinter local desktop dashboard
     ├── scripts/
+    │   ├── linux_baseline.py          # L0 read-only host capability snapshot
     │   ├── resolve_kernel_headers.py  # Dry-run by default; --apply requires root
     │   ├── test_linux_capacity.py     # Portable + optional harmless live-capacity assertions
     │   └── build_windows_release.py   # PyInstaller + Inno Setup local release builder
@@ -148,6 +149,12 @@ not repeat these items unless a regression is found:
    integration passed; the complete result is recorded in
    `SIPER-stage15.3/docs/phase1-verification.md`. The public README and this
    context file link to the roadmap and acceptance evidence.
+
+9. **Linux L0 baseline tool:** added `scripts/linux_baseline.py`, a read-only
+   JSON capability snapshot for kernel headers, virtualization, fanotify,
+   tracefs, BCC, Clang and package-manager availability. It performs no package
+   installation, link repair, probe attach or fanotify group operation. Its
+   non-Linux result is intentionally `UNAVAILABLE_NON_LINUX_HOST`.
 
 ## Planned work — do not start without the next milestone approval
 
@@ -270,6 +277,11 @@ recommended decisions, and enforcement. Scoring remains uncalibrated.
   "portable_linux_capacity": {
     "command": "PYTHONPATH=src python scripts/test_linux_capacity.py --output evidence/capacity/linux_capacity.json",
     "success_status": "PORTABLE_CONTRACT_READY"
+  },
+  "linux_l0_baseline": {
+    "command": "PYTHONPATH=src python scripts/linux_baseline.py --json-out evidence/linux/baseline.json",
+    "status_on_windows": "UNAVAILABLE_NON_LINUX_HOST",
+    "safety": "READ_ONLY_NO_PACKAGE_INSTALL_NO_KERNEL_ATTACH"
   },
   "live_linux_capacity": {
     "command": "sudo PYTHONPATH=src python scripts/test_linux_capacity.py --live --output evidence/capacity/linux_capacity.json",

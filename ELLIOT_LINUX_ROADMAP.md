@@ -1,6 +1,6 @@
 # ELLIOT Linux geliştirme yol haritası
 
-<!-- ELLIOT_LINUX_ROADMAP:v1 | status:PLANNED | updated:2026-09-11 -->
+<!-- ELLIOT_LINUX_ROADMAP:v1 | status:L0_BASELINE_TOOL_READY | updated:2026-09-11 -->
 
 Bu belge yalnızca Linux/Pardus geliştirmesinin sıradaki işlerini tanımlar.
 Kullanıcı açıkça **“başla”** demeden hiçbir Linux kodu, kernel ayarı veya canlı
@@ -21,15 +21,19 @@ kanıt ve dokümantasyon tamamlanır; commit/push yapılır; sonra beklenir.
 
 ## L0 — Hazırlık ve mevcut Linux durumunun fotoğrafı
 
-**Durum: PLANLANDI.**
+**Durum: UYGULAMASI HAZIR — LINUX NATIVE KANITI BEKLENİYOR.**
 
 - Linux/Pardus sürümü, çalışan kernel, header yolu, BCC/tracefs/fanotify
   yetkileri ve sanallaştırma bilgilerini yalnız yerel kanıt dosyasına yaz.
 - Mevcut unit testleri, portable capacity testini ve kurulum/preflight
   kontrollerini Linux native ortamında çalıştır; Windows sonuçlarını karıştırma.
 - Destek matrisi ve beklenen `READY/DEGRADED/UNAVAILABLE` durumlarını dondur.
+- `scripts/linux_baseline.py` ile paket kurmadan, probe bağlamadan ve fanotify
+  grubu açmadan makine-okunabilir ortam fotoğrafı üret.
 
-Kabul: ortam fotoğrafı + tekrar üretilebilir komutlar + bilinen eksik yetkiler.
+Kabul: Linux native ortam fotoğrafı + tekrar üretilebilir komutlar + bilinen
+eksik yetkiler. Bu Windows çalışma makinesinde yalnız script ve sözleşme testi
+doğrulanabilir; L0, Linux çıktısı alınana kadar **tamamlanmış sayılmaz**.
 
 ## L1 — Kernel header ve VM uyumluluğu
 
@@ -139,13 +143,13 @@ Kabul: sürümlü dataset/manifest, tekrar üretilebilir benchmark ve hata rapor
 {
   "schema": "elliot.linux-roadmap.v1",
   "platform": "LINUX",
-  "status": "PLANNED_NOT_STARTED",
+  "status": "L0_IMPLEMENTATION_READY_NATIVE_EVIDENCE_PENDING",
   "current_milestone": "L0_LINUX_BASELINE",
   "windows_work": "PAUSED_AT_W1_HANDOFF",
   "start_keyword_required": true,
   "cloud_allowed": false,
   "live_malware_execution": false,
-  "next_natural_stop": "L0 baseline evidence",
+  "next_natural_stop": "L0 native baseline evidence",
   "completed": [],
   "todo": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7"]
 }

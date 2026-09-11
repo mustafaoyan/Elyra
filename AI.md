@@ -9,8 +9,9 @@ Bu dosya, GitHub ana sayfasında görülebilen kısa devam noktasıdır. Yeni bi
   analiz temeli tamamlandı; Windows `ReadDirectoryChangesW` bildirimleri manuel
   taramayla aynı statik taramayı kullanıyor. Windows `MONITOR_ONLY` ve
   `enforced_action=NONE` olarak kalır.
-- Linux geliştirmesi **HAZIR, BAŞLATILMADI**. Kullanıcı “başla” demeden Linux
-  kodu, kernel ayarı veya canlı kapasite testi değiştirilmez.
+- Linux geliştirmesi **L0 HAZIR, NATIVE KANIT BEKLENİYOR**. L0 baseline scripti
+  eklendi; kullanıcı “başla” demeden Linux kernel ayarı veya canlı kapasite
+  testi değiştirilmez. L1'e geçiş için önce L0 Linux çıktısı gerekir.
 - Ortak kodlar `src/elliot/analyzer`, `scoring`, `gui` ve uygun servis katmanında
   kalır. OS’ye özgü kodlar `src/elliot/monitor/fanotify`, `ebpf` ve `windows`
   altındadır; yapay klasör ayrımı yapılmaz.
@@ -37,7 +38,8 @@ Bunlar şu anda yapılmayacak ve Linux çalışmasını bekletmeyecek.
 
 ## Linux başlangıç noktası
 
-`ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: native Linux ortamı,
+`ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
+ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test
 sonuçları. L0 kapanmadan L1–L7’ye geçilmez. Her L aşaması doğal durakta test,
 kanıt, doküman, commit ve push ile kapatılır.
