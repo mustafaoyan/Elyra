@@ -1,6 +1,6 @@
 # ELLIOT AI Context Blueprint
 
-<!-- ELLIOT_AI_CONTEXT:v4 | local-first | repository-root | windows:PAUSED | linux:L0_READY -->
+<!-- ELLIOT_AI_CONTEXT:v5 | local-first | repository-root | windows:PAUSED | linux:L1_READY_NATIVE_EVIDENCE_PENDING -->
 
 ```json
 {
@@ -22,7 +22,7 @@
     "phase_1": "COMPLETE. Shared static-analysis foundation; see ELLIOT_ROADMAP.md and SIPER-stage15.3/docs/phase1-verification.md for acceptance evidence.",
     "phase_2": "NOT_STARTED; Windows work paused at W1 and requires separate user approval.",
     "windows_status": "PAUSED_AT_W1_HANDOFF",
-    "linux_status": "L0_BASELINE_READY_NATIVE_EVIDENCE_PENDING; requires the user keyword 'başla' for implementation",
+    "linux_status": "L1_HEADER_RESOLVER_READY_NATIVE_APPLY_EVIDENCE_PENDING",
     "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md; L0 baseline is prepared but not Linux-native verified",
     "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
@@ -155,6 +155,12 @@ not repeat these items unless a regression is found:
    tracefs, BCC, Clang and package-manager availability. It performs no package
    installation, link repair, probe attach or fanotify group operation. Its
    non-Linux result is intentionally `UNAVAILABLE_NON_LINUX_HOST`.
+
+10. **Linux L1 header compatibility:** the existing resolver now labels a
+    virtual-machine header mismatch as `VIRTUALIZED_HEADER_CONFLICT` and rejects
+    unsafe kernel-release values before constructing package commands. Exact
+    headers are still repaired only through explicit root `--apply`; dry-run is
+    the default and real build directories are never overwritten.
 
 ## Planned work — do not start without the next milestone approval
 

@@ -9,9 +9,9 @@ Bu dosya, GitHub ana sayfasında görülebilen kısa devam noktasıdır. Yeni bi
   analiz temeli tamamlandı; Windows `ReadDirectoryChangesW` bildirimleri manuel
   taramayla aynı statik taramayı kullanıyor. Windows `MONITOR_ONLY` ve
   `enforced_action=NONE` olarak kalır.
-- Linux geliştirmesi **L0 HAZIR, NATIVE KANIT BEKLENİYOR**. L0 baseline scripti
-  eklendi; kullanıcı “başla” demeden Linux kernel ayarı veya canlı kapasite
-  testi değiştirilmez. L1'e geçiş için önce L0 Linux çıktısı gerekir.
+- Linux geliştirmesi **L1 UYGULAMASI HAZIR, NATIVE KANIT BEKLENİYOR**. L0 baseline
+  scripti ve L1 header/VM resolver güvenlik kontrolleri eklendi; native Linux
+  `--apply` kanıtı bu Windows oturumunda alınmadı. L2'ye geçilmez.
 - Ortak kodlar `src/elliot/analyzer`, `scoring`, `gui` ve uygun servis katmanında
   kalır. OS’ye özgü kodlar `src/elliot/monitor/fanotify`, `ebpf` ve `windows`
   altındadır; yapay klasör ayrımı yapılmaz.

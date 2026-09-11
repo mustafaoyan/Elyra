@@ -60,6 +60,7 @@ def test_stale_virtual_machine_build_link_is_reported_as_mismatch(tmp_path: Path
     )
     assert result.status == "MISMATCH"
     assert "BUILD_HEADERS_DO_NOT_MATCH_RUNNING_KERNEL" in result.issues
+    assert "VIRTUALIZED_HEADER_CONFLICT" in result.issues
 
 
 def test_missing_build_link_with_exact_local_headers_has_safe_link_plan(tmp_path: Path) -> None:
@@ -115,3 +116,19 @@ def test_non_linux_assessment_never_proposes_header_installation(tmp_path: Path)
     )
     assert assessment.status == "UNSUPPORTED_PLATFORM"
     assert plan_kernel_header_resolution(assessment).actions == ()
+
+
+def test_install_plan_rejects_untrusted_kernel_release(tmp_path: Path) -> None:
+    assessment = assess_kernel_headers(
+        kernel_release="6.12.0;touch /tmp/pwned",
+        module_root=tmp_path / "modules",
+        source_root=tmp_path / "headers",
+        system_name="Linux",
+    )
+    plan = plan_kernel_header_resolution(
+        assessment,
+        source_root=tmp_path / "headers",
+        package_manager="apt-get",
+    )
+    assert plan.actions[0].kind == "MANUAL_REPAIR_REQUIRED"
+    assert plan.actions[0].command == ()

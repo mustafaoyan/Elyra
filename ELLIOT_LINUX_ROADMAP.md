@@ -37,12 +37,19 @@ doğrulanabilir; L0, Linux çıktısı alınana kadar **tamamlanmış sayılmaz*
 
 ## L1 — Kernel header ve VM uyumluluğu
 
-**Durum: PLANLANDI. Bağımlılık: L0.**
+**Durum: UYGULAMASI HAZIR — NATIVE LINUX KANITI BEKLENİYOR. Bağımlılık: L0 sözleşmesi.**
 
 - Çalışan kernel sürümü ile header/build ağacını karşılaştır; VirtualBox veya
   başka VM'de eski/mis-yönlendirilmiş bağları teşhis et.
 - Çözüm planını varsayılan olarak dry-run üret; `--apply` yalnız root, tam yol
   doğrulaması ve açık kullanıcı çalıştırmasıyla paket kurup yapılandırabilsin.
+- `VIRTUALIZED_HEADER_CONFLICT` durumunu açıkça raporla; gerçek dosya/klasörleri
+  otomatik ezme ve kernel release değerini paket komutuna güvenli biçimde geçir.
+- Exact-version yerel header bulunursa build symlink'ini atomik olarak düzelt;
+  bulunamazsa dağıtımın uygun paket komutunu yalnız plan olarak göster.
+
+Kabul: mismatch/VM fixture testleri, güvenli paket-komut testi ve dry-run çıktısı.
+Native Linux'ta `--apply` çalıştırılması bu Windows oturumunda yapılmamıştır.
 - Başarısız paket yöneticisi, internet yokluğu, header yokluğu ve sürüm
   uyuşmazlığını simüle eden testler ekle. Sistem build dizinini sessizce silme.
 
@@ -144,14 +151,14 @@ Kabul: sürümlü dataset/manifest, tekrar üretilebilir benchmark ve hata rapor
   "schema": "elliot.linux-roadmap.v1",
   "platform": "LINUX",
   "status": "L0_IMPLEMENTATION_READY_NATIVE_EVIDENCE_PENDING",
-  "current_milestone": "L0_LINUX_BASELINE",
+  "current_milestone": "L1_KERNEL_HEADER_COMPATIBILITY",
   "windows_work": "PAUSED_AT_W1_HANDOFF",
   "start_keyword_required": true,
   "cloud_allowed": false,
   "live_malware_execution": false,
   "next_natural_stop": "L0 native baseline evidence",
   "completed": [],
-  "todo": ["L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7"]
+  "todo": ["L0_NATIVE_EVIDENCE", "L1_NATIVE_APPLY_VERIFY", "L2", "L3", "L4", "L5", "L6", "L7"]
 }
 ```
 

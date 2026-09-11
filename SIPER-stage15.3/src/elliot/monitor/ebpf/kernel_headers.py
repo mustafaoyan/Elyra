@@ -365,6 +365,8 @@ def assess_kernel_headers(
     detected_release = _header_release(target, release)
     if detected_release is not None and detected_release != release:
         issues.append("BUILD_HEADERS_DO_NOT_MATCH_RUNNING_KERNEL")
+        if vm.detected:
+            issues.append("VIRTUALIZED_HEADER_CONFLICT")
         return KernelHeaderAssessment(
             status="MISMATCH",
             system=system,
@@ -407,6 +409,12 @@ def detect_package_manager() -> str | None:
 
 def _install_command(package_manager: str, kernel_release: str) -> tuple[str, ...] | None:
     """Build an exact-version install command appropriate for the manager."""
+
+    # Package names are passed as an argument vector, but validate the release
+    # anyway so a caller cannot smuggle path separators or option characters
+    # into a distro package command.
+    if not re.fullmatch(r"[A-Za-z0-9._+~-]+", kernel_release):
+        return None
 
     if package_manager == "apt-get":
         return ("apt-get", "install", "--yes", f"linux-headers-{kernel_release}")
