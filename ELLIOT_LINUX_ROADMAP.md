@@ -1,6 +1,6 @@
 # ELLIOT Linux geliştirme yol haritası
 
-<!-- ELLIOT_LINUX_ROADMAP:v1 | status:L0_BASELINE_TOOL_READY | updated:2026-09-11 -->
+<!-- ELLIOT_LINUX_ROADMAP:v1 | status:L2_FANOTIFY_CAPABILITY_READY | updated:2026-09-11 -->
 
 Bu belge yalnızca Linux/Pardus geliştirmesinin sıradaki işlerini tanımlar.
 Kullanıcı açıkça **“başla”** demeden hiçbir Linux kodu, kernel ayarı veya canlı
@@ -71,6 +71,11 @@ Kabul: gerçek çalışan kernel için doğru plan; dry-run değişiklik yapmaz;
 
 Kabul: benign dosya erişimi ve sentetik event akışı; overflow/restart/timeout
 testleri; gerçek enforcement iddiası yalnız native root testinde.
+
+L2 uygulaması: `assess_fanotify_capability()` descriptor açmadan Linux,
+fanotify kernel girdisi, permission API'si ve root/CAP_SYS_ADMIN gereksinimlerini
+`READY/DEGRADED/UNAVAILABLE` olarak raporlar. Native root enforcement testi bu
+Windows oturumunda çalıştırılmadı.
 
 ## L3 — eBPF/tracefs gözlem hattı
 
@@ -151,14 +156,14 @@ Kabul: sürümlü dataset/manifest, tekrar üretilebilir benchmark ve hata rapor
   "schema": "elliot.linux-roadmap.v1",
   "platform": "LINUX",
   "status": "L0_IMPLEMENTATION_READY_NATIVE_EVIDENCE_PENDING",
-  "current_milestone": "L1_KERNEL_HEADER_COMPATIBILITY",
+  "current_milestone": "L2_FANOTIFY_RELIABILITY",
   "windows_work": "PAUSED_AT_W1_HANDOFF",
   "start_keyword_required": true,
   "cloud_allowed": false,
   "live_malware_execution": false,
   "next_natural_stop": "L0 native baseline evidence",
   "completed": [],
-  "todo": ["L0_NATIVE_EVIDENCE", "L1_NATIVE_APPLY_VERIFY", "L2", "L3", "L4", "L5", "L6", "L7"]
+  "todo": ["L0_NATIVE_EVIDENCE", "L1_NATIVE_APPLY_VERIFY", "L2_NATIVE_VERIFY", "L3", "L4", "L5", "L6", "L7"]
 }
 ```
 

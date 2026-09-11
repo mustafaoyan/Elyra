@@ -10,6 +10,7 @@ from __future__ import annotations
 import ctypes
 import errno
 import os
+import platform
 import select
 import struct
 import time
@@ -17,17 +18,21 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-libc = ctypes.CDLL("libc.so.6", use_errno=True)
-libc.fanotify_init.argtypes = [ctypes.c_uint, ctypes.c_uint]
-libc.fanotify_init.restype = ctypes.c_int
-libc.fanotify_mark.argtypes = [
-    ctypes.c_int,
-    ctypes.c_uint,
-    ctypes.c_uint64,
-    ctypes.c_int,
-    ctypes.c_char_p,
-]
-libc.fanotify_mark.restype = ctypes.c_int
+try:
+    libc = ctypes.CDLL("libc.so.6", use_errno=True)
+except OSError:  # Import-safe on Windows; capability report remains available.
+    libc = None
+if libc is not None:
+    libc.fanotify_init.argtypes = [ctypes.c_uint, ctypes.c_uint]
+    libc.fanotify_init.restype = ctypes.c_int
+    libc.fanotify_mark.argtypes = [
+        ctypes.c_int,
+        ctypes.c_uint,
+        ctypes.c_uint64,
+        ctypes.c_int,
+        ctypes.c_char_p,
+    ]
+    libc.fanotify_mark.restype = ctypes.c_int
 
 FAN_CLOEXEC = 0x00000001
 FAN_NONBLOCK = 0x00000002
@@ -54,6 +59,67 @@ _RESPONSE = struct.Struct("@i I")
 
 class FanotifySystemError(OSError):
     """Raised when a fanotify syscall fails with a concrete errno."""
+
+
+@dataclass(frozen=True, slots=True)
+class FanotifyCapability:
+    """Read-only host capability result used before starting the monitor."""
+
+    status: str
+    system: str
+    kernel_filesystem_entry: bool
+    permission_api_present: bool
+    privileged: bool
+    issues: tuple[str, ...] = ()
+
+    @property
+    def ready(self) -> bool:
+        return self.status == "READY"
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "status": self.status,
+            "system": self.system,
+            "kernel_filesystem_entry": self.kernel_filesystem_entry,
+            "permission_api_present": self.permission_api_present,
+            "privileged": self.privileged,
+            "issues": list(self.issues),
+            "ready": self.ready,
+        }
+
+
+def assess_fanotify_capability(
+    *,
+    system_name: str | None = None,
+    proc_filesystems: Path = Path("/proc/filesystems"),
+    permission_api: Path = Path("/proc/sys/fs/fanotify"),
+    effective_uid: int | None = None,
+) -> FanotifyCapability:
+    """Inspect fanotify prerequisites without opening a fanotify descriptor."""
+
+    system = system_name or platform.system()
+    if system != "Linux":
+        return FanotifyCapability(
+            "UNAVAILABLE", system, False, False, False,
+            ("LINUX_FANOTIFY_REQUIRES_LINUX_HOST",),
+        )
+    try:
+        filesystems = proc_filesystems.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        filesystems = ""
+    has_filesystem = any(line.strip().endswith("fanotify") for line in filesystems.splitlines())
+    permission_present = permission_api.is_dir()
+    uid = os.geteuid() if effective_uid is None and hasattr(os, "geteuid") else effective_uid
+    privileged = uid == 0
+    issues: list[str] = []
+    if not has_filesystem:
+        issues.append("FANOTIFY_KERNEL_FILESYSTEM_UNAVAILABLE")
+    if not permission_present:
+        issues.append("FANOTIFY_PERMISSION_API_UNAVAILABLE")
+    if not privileged:
+        issues.append("CAP_SYS_ADMIN_OR_ROOT_REQUIRED_FOR_PERMISSION_EVENTS")
+    status = "READY" if not issues else "DEGRADED"
+    return FanotifyCapability(status, system, has_filesystem, permission_present, privileged, tuple(issues))
 
 
 @dataclass(slots=True)
@@ -101,6 +167,8 @@ class FanotifyInterface:
     def initialize(self) -> bool:
         if self.fd >= 0:
             return True
+        if libc is None:
+            raise FanotifySystemError("fanotify requires a Linux libc host")
         flags = FAN_CLASS_PRE_CONTENT | FAN_CLOEXEC | FAN_NONBLOCK
         event_flags = os.O_RDONLY | getattr(os, "O_LARGEFILE", 0) | os.O_CLOEXEC
         descriptor = libc.fanotify_init(flags, event_flags)
@@ -113,6 +181,8 @@ class FanotifyInterface:
     def add_mark(self, path: str | os.PathLike[str]) -> bool:
         if self.fd < 0:
             raise RuntimeError("fanotify interface is not initialized")
+        if libc is None:
+            raise FanotifySystemError("fanotify requires a Linux libc host")
         resolved = os.path.abspath(os.fspath(path))
         metadata = os.stat(resolved)
 

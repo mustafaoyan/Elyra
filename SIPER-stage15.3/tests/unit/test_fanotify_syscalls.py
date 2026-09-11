@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import struct
+from pathlib import Path
 
 from elliot.monitor.fanotify.syscalls import (
     FAN_EVENT_METADATA_LEN,
@@ -9,7 +10,30 @@ from elliot.monitor.fanotify.syscalls import (
     FAN_Q_OVERFLOW,
     FANOTIFY_METADATA_VERSION,
     FanotifyInterface,
+    assess_fanotify_capability,
 )
+
+
+def test_fanotify_capability_is_explicit_on_non_linux() -> None:
+    capability = assess_fanotify_capability(system_name="Windows")
+    assert capability.status == "UNAVAILABLE"
+    assert capability.ready is False
+    assert "LINUX_FANOTIFY_REQUIRES_LINUX_HOST" in capability.issues
+
+
+def test_fanotify_capability_reports_fixture_prerequisites(tmp_path: Path) -> None:
+    filesystems = tmp_path / "filesystems"
+    filesystems.write_text("nodev\tfanotify\n", encoding="utf-8")
+    permission_api = tmp_path / "fanotify"
+    permission_api.mkdir()
+    capability = assess_fanotify_capability(
+        system_name="Linux",
+        proc_filesystems=filesystems,
+        permission_api=permission_api,
+        effective_uid=0,
+    )
+    assert capability.ready is True
+    assert capability.to_dict()["ready"] is True
 
 
 def _metadata(mask: int, fd: int, pid: int, version: int = FANOTIFY_METADATA_VERSION) -> bytes:
