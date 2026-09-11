@@ -2,6 +2,9 @@
 
 ## 🌐 Live Deployment & Download
 
+**AI devam noktası:** [AI.md](AI.md) — başka bir AI’ın projeyi aynı yerden
+devam ettirmesi için güncel durum, Windows handoff ve Linux başlangıç noktası.
+
 **Landing page:** [https://mustafaoyan.github.io/Siper-Antivirus/](https://mustafaoyan.github.io/Siper-Antivirus/)
 
 The landing page detects Windows or Linux and selects the matching installer
@@ -30,16 +33,19 @@ signal, never proof of malware by itself.
 
 ## Repository layout
 
-The development plan is tracked in [ELLIOT_ROADMAP.md](ELLIOT_ROADMAP.md).
-Only Phase 1 is in the current implementation scope; Phase 2 requires a
-separate go-ahead.
+The general development plan is tracked in [ELLIOT_ROADMAP.md](ELLIOT_ROADMAP.md).
+Windows work is paused and Linux has its own gated plan in
+[ELLIOT_LINUX_ROADMAP.md](ELLIOT_LINUX_ROADMAP.md). Linux implementation starts
+only after the user says “başla”.
 
 ```text
 SIPER-stage15.3/     Core Python engine, desktop GUI, tests, packaging and docs
 landing/              Static deployment site with OS-aware download routing
 kurulum/              Existing Debian package and installation material
 ELLIOT_AI_CONTEXT.md  Architecture blueprint for future AI contributors
+AI.md                 Visible AI handoff index and continuation instructions
 ELLIOT_ROADMAP.md     Milestones, acceptance gates and scope boundaries
+ELLIOT_LINUX_ROADMAP.md Linux-only gated development plan
 ```
 
 ## Phase 1: shared local static analysis

@@ -1,6 +1,6 @@
 # ELLIOT AI Context Blueprint
 
-<!-- ELLIOT_AI_CONTEXT:v2 | local-first | repository-root | milestone:M1_COMPLETE -->
+<!-- ELLIOT_AI_CONTEXT:v3 | local-first | repository-root | windows:PAUSED | linux:PLANNED -->
 
 ```json
 {
@@ -20,7 +20,11 @@
     "linux_live_capacity": "Run scripts/test_linux_capacity.py --live as root on a compatible Linux host.",
     "windows_runtime": "Default ReadDirectoryChangesW notifications feed shared static analysis. ETW is an explicitly injected adapter only. No signed minifilter is shipped; MONITOR_ONLY.",
     "phase_1": "COMPLETE. Shared static-analysis foundation; see ELLIOT_ROADMAP.md and SIPER-stage15.3/docs/phase1-verification.md for acceptance evidence.",
-    "phase_2": "NOT_STARTED; requires separate user approval.",
+    "phase_2": "NOT_STARTED; Windows work paused at W1 and requires separate user approval.",
+    "windows_status": "PAUSED_AT_W1_HANDOFF",
+    "linux_status": "PLANNED_NOT_STARTED; requires the user keyword 'başla'",
+    "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md",
+    "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
     "release_assets": "Do not represent placeholder URLs as published installers. Build, sign, checksum, upload, then configure landing/assets/js/download-config.js."
   }
@@ -33,7 +37,9 @@
 Siper-Antivirus/
 ├── README.md                         # Public project and deployment entry point
 ├── ELLIOT_AI_CONTEXT.md              # This machine-readable/human-readable blueprint
+├── AI.md                              # GitHub-visible continuation index
 ├── ELLIOT_ROADMAP.md                 # Eight milestones; only M1 authorized for implementation
+├── ELLIOT_LINUX_ROADMAP.md            # Linux-only plan; gated by “başla”
 ├── landing/                          # Dependency-free static download site
 │   ├── index.html
 │   ├── assets/css/styles.css
