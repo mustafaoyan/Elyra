@@ -19,6 +19,24 @@ def test_high_entropy_alone_does_not_produce_deny(tmp_path: Path) -> None:
     assert result["score"] <= 41
     assert result["category_scores"]["static"] == 0
     assert result["policy_status"] == "PROVISIONAL_NOT_CALIBRATED"
+    assert result["identity_source"] == "PATH_LSTAT"
+    assert result["file_identity"]["size"] == target.stat().st_size
+
+
+def test_partial_scan_is_explicitly_inconclusive(monkeypatch, tmp_path: Path) -> None:
+    from elliot.analyzer.static_analyzer import StaticScanResult
+
+    analyzer = PreExecutionAnalyzer(timeout=1.0)
+    partial = StaticScanResult(str(tmp_path / "partial.bin"), status="PARTIAL")
+    monkeypatch.setattr(analyzer.scanner, "scan", lambda _path: partial)
+    try:
+        result = analyzer.analyze_file("partial.bin")
+    finally:
+        analyzer.close()
+
+    assert result["decision"] == "ALLOW_MONITOR"
+    assert result["scoring_status"] == "INCONCLUSIVE"
+    assert "STATIC_SCAN_INCONCLUSIVE" in result["notes"]
 
 
 def test_missing_file_uses_controlled_fail_open_output(tmp_path: Path) -> None:

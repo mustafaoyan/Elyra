@@ -72,6 +72,8 @@ class StaticScanResult:
     pe_summary: dict[str, Any] = field(default_factory=dict)
     pe_sections: list[dict[str, Any]] = field(default_factory=list)
     pe_anomalies: list[str] = field(default_factory=list)
+    file_identity: dict[str, int | str] = field(default_factory=dict)
+    identity_source: str = "UNVERIFIED_PATH"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -461,6 +463,13 @@ class StaticFileScanner:
             return result
 
         result.file_size = metadata.st_size
+        result.file_identity = {
+            "device": int(metadata.st_dev),
+            "inode": int(metadata.st_ino),
+            "size": int(metadata.st_size),
+            "mtime_ns": int(metadata.st_mtime_ns),
+        }
+        result.identity_source = "OPEN_DESCRIPTOR" if trusted_open_fd else "PATH_LSTAT"
         result.permission_details, result.permission_anomalies = self.analyze_permissions(
             context_path, metadata
         )

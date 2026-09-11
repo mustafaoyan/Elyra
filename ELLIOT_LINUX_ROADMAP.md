@@ -1,6 +1,6 @@
 # ELLIOT Linux geliştirme yol haritası
 
-<!-- ELLIOT_LINUX_ROADMAP:v1 | status:L3_EBPF_CAPABILITY_READY | updated:2026-09-11 -->
+<!-- ELLIOT_LINUX_ROADMAP:v1 | status:L4_PREEXEC_ANALYSIS_READY | updated:2026-09-11 -->
 
 Bu belge yalnızca Linux/Pardus geliştirmesinin sıradaki işlerini tanımlar.
 Kullanıcı açıkça **“başla”** demeden hiçbir Linux kodu, kernel ayarı veya canlı
@@ -161,14 +161,14 @@ Kabul: sürümlü dataset/manifest, tekrar üretilebilir benchmark ve hata rapor
   "schema": "elliot.linux-roadmap.v1",
   "platform": "LINUX",
   "status": "L0_IMPLEMENTATION_READY_NATIVE_EVIDENCE_PENDING",
-  "current_milestone": "L3_EBPF_TRACEFS_OBSERVATION",
+  "current_milestone": "L4_PREEXEC_ANALYSIS",
   "windows_work": "PAUSED_AT_W1_HANDOFF",
   "start_keyword_required": true,
   "cloud_allowed": false,
   "live_malware_execution": false,
   "next_natural_stop": "L0 native baseline evidence",
   "completed": [],
-  "todo": ["L0_NATIVE_EVIDENCE", "L1_NATIVE_APPLY_VERIFY", "L2_NATIVE_VERIFY", "L3_NATIVE_VERIFY", "L4", "L5", "L6", "L7"]
+  "todo": ["L0_NATIVE_EVIDENCE", "L1_NATIVE_APPLY_VERIFY", "L2_NATIVE_VERIFY", "L3_NATIVE_VERIFY", "L4_NATIVE_VERIFY", "L5", "L6", "L7"]
 }
 ```
 

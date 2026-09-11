@@ -1,6 +1,6 @@
 # ELLIOT AI Context Blueprint
 
-<!-- ELLIOT_AI_CONTEXT:v7 | local-first | repository-root | windows:PAUSED | linux:L3_READY_NATIVE_EVIDENCE_PENDING -->
+<!-- ELLIOT_AI_CONTEXT:v8 | local-first | repository-root | windows:PAUSED | linux:L4_READY_NATIVE_EVIDENCE_PENDING -->
 
 ```json
 {
@@ -22,7 +22,7 @@
     "phase_1": "COMPLETE. Shared static-analysis foundation; see ELLIOT_ROADMAP.md and SIPER-stage15.3/docs/phase1-verification.md for acceptance evidence.",
     "phase_2": "NOT_STARTED; Windows work paused at W1 and requires separate user approval.",
     "windows_status": "PAUSED_AT_W1_HANDOFF",
-    "linux_status": "L3_EBPF_CAPABILITY_READY_NATIVE_EVIDENCE_PENDING",
+    "linux_status": "L4_PREEXEC_ANALYSIS_READY_NATIVE_EVIDENCE_PENDING",
     "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md; L0 baseline is prepared but not Linux-native verified",
     "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
@@ -171,6 +171,10 @@ not repeat these items unless a regression is found:
    it through `EBPFLoader.capability()`. BCC, tracefs, matching headers and
    privilege state are reported before any probe attach; missing capability is
    explicit and local-only.
+
+13. **Linux L4 shared pre-execution analysis:** static scan results now carry
+   descriptor/path identity metadata, and partial scans are explicitly marked
+   `INCONCLUSIVE` with `ALLOW_MONITOR` rather than being treated as malware proof.
 
 ## Planned work — do not start without the next milestone approval
 

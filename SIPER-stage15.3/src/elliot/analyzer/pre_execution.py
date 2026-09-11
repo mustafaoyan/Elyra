@@ -105,8 +105,17 @@ class PreExecutionAnalyzer:
         result["whole_file_entropy"] = scan.entropy_summary.get(
             "whole_file_entropy"
         )
+        result["file_identity"] = dict(scan.file_identity)
+        result["identity_source"] = scan.identity_source
         if scan.status == "ERROR":
             result["error"] = "scan_error"
+        if scan.status == "PARTIAL":
+            # An incomplete scan is evidence of uncertainty, never a deny
+            # proof. Keep it visible and let the fanotify policy decide the
+            # configured fail-open/fail-closed behavior.
+            result["decision"] = "ALLOW_MONITOR"
+            result["scoring_status"] = "INCONCLUSIVE"
+            result.setdefault("notes", []).append("STATIC_SCAN_INCONCLUSIVE")
         return result
 
     def analyze_file(self, filepath: str) -> dict[str, object]:

@@ -41,6 +41,9 @@ Bunlar şu anda yapılmayacak ve Linux çalışmasını bekletmeyecek.
 Son durum: L3 eBPF/tracefs capability uygulaması hazır; native Linux kernel
 telemetry kanıtı bekleniyor. L4'e geçiş için ayrıca izin gerekir.
 
+L4 uygulaması da hazır: ortak pre-execution sonucu artık file identity ve
+`INCONCLUSIVE` statüsünü görünür taşıyor. L5'e geçilmedi.
+
 `ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
 ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test
