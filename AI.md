@@ -38,6 +38,9 @@ Bunlar şu anda yapılmayacak ve Linux çalışmasını bekletmeyecek.
 
 ## Linux başlangıç noktası
 
+Son durum: L3 eBPF/tracefs capability uygulaması hazır; native Linux kernel
+telemetry kanıtı bekleniyor. L4'e geçiş için ayrıca izin gerekir.
+
 `ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
 ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test

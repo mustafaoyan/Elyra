@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 
 from .collector import EBPFCollector, EbpfFilterConfig
+from .capability import assess_ebpf_capability
 
 
 class EBPFLoader:
@@ -32,6 +33,10 @@ class EBPFLoader:
 
     def status(self):
         return self.collector.status()
+
+    def capability(self) -> dict[str, object]:
+        """Return a descriptor-free host capability snapshot."""
+        return assess_ebpf_capability().to_dict()
 
     def self_test(self) -> bool:
         ok = self.collector.load() and self.collector.attach_probes()
