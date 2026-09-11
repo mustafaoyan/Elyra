@@ -3,7 +3,7 @@
 The Windows monitor deliberately keeps its event schema independent from a
 specific capture mechanism.  A local ETW adapter, a signed minifilter bridge,
 or the built-in ReadDirectoryChangesW fallback can therefore feed the same
-entropy-analysis pipeline without changing policy or reporting semantics.
+static-analysis pipeline without changing policy or reporting semantics.
 """
 
 from __future__ import annotations
@@ -83,6 +83,7 @@ class WindowsMonitorRecord:
     processing_latency_ms: float | None = None
 
     def to_dict(self) -> dict[str, Any]:
+        analysis = dict(self.analysis) if self.analysis is not None else {}
         result: dict[str, Any] = {
             "source": "windows-monitor",
             "event": self.event.to_dict(),
@@ -91,5 +92,13 @@ class WindowsMonitorRecord:
             "analysis": dict(self.analysis) if self.analysis is not None else None,
             "reason": self.reason,
             "processing_latency_ms": self.processing_latency_ms,
+            "assessment": analysis.get("assessment", "INCONCLUSIVE"),
+            "risk_score": analysis.get("risk_score"),
+            "recommended_decision": analysis.get("recommended_decision", "INCONCLUSIVE"),
+            "decision": analysis.get("recommended_decision", "INCONCLUSIVE"),
+            "reasons": analysis.get("reasons", [self.reason] if self.reason else []),
+            "enforced_action": "NONE",
+            "monitor_mode": "MONITOR_ONLY",
+            "score_is_probability": False,
         }
         return result

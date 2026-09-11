@@ -81,6 +81,7 @@ def test_output_schema_exposes_every_contribution() -> None:
         "context": 8,
     }
     assert result["risk_score"] == "38/100"
+    assert result["score_is_probability"] is False
     assert {item["rule"] for item in result["indicators"]} == {
         "MIME_EXTENSION_INCONSISTENT",
         "SUID_BIT_SET",

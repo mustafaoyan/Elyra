@@ -575,15 +575,24 @@ class ElliotView(_BaseView):
 
     def render_scan_result(self, result: dict[str, Any]) -> None:
         view = scan_projection(result)
-        score = max(0, min(100, int(view["pre_execution_score"])))
-        self._animate_risk_to(score)
+        score = view["pre_execution_score"]
+        if score is None:
+            if self._risk_animation_job is not None:
+                self.after_cancel(self._risk_animation_job)
+                self._risk_animation_job = None
+            self._risk_value = self._risk_target = 0.0
+            self.risk_number_label.configure(text="N/A", text_color=self.COLORS["muted"])
+            self.risk_progress.configure(progress_color=self.COLORS["muted"])
+            self.risk_progress.set(0)
+        else:
+            self._animate_risk_to(score)
         runtime = view["runtime_score"]
         runtime_text = "not reported" if runtime is None else f"{runtime}/100"
         whole_entropy = view["whole_file_entropy"]
         entropy_text = "not reported" if whole_entropy is None else f"{whole_entropy} bits/byte"
         self.risk_context_label.configure(
             text=(
-                f"{Path(view['filepath']).name or 'Selected file'}  ·  {view['decision']}  ·  "
+                f"{Path(view['filepath']).name or 'Selected file'}  ·  {view['assessment']}  ·  "
                 f"Runtime score: {runtime_text}  ·  Whole-file entropy: {entropy_text}"
             )
         )
@@ -594,12 +603,30 @@ class ElliotView(_BaseView):
             "═" * 48,
             f"Path: {view['filepath']}",
             f"Status: {view['status']}",
-            f"Decision: {view['decision']}",
+            f"Assessment: {view['assessment']}",
+            f"Policy recommendation: {view['decision']}",
+            f"Enforced action: {view['enforced_action']}",
+            f"Score type: {view['score_kind']} (not a malware probability)",
             f"MIME: {view['mime_type']} ({view['mime_extension_consistency']})",
             f"ELF: {view['is_elf']}  |  Duration: {view['duration_ms']:.3f} ms",
-            "",
-            "EXPLAINABLE INDICATORS",
         ]
+        pe = view["pe_summary"]
+        if pe and pe.get("status") != "NOT_PE":
+            lines.extend([
+                "",
+                "PE STRUCTURAL EVIDENCE — headers and sections only",
+                f"Status: {pe.get('status', 'UNKNOWN')} | Format: {pe.get('format', 'unknown')} | Architecture: {pe.get('architecture', 'unknown')}",
+                f"Sections: {pe.get('section_count', 'unknown')} | DLL: {pe.get('is_dll', 'unknown')}",
+                f"Certificate table present: {pe.get('certificate_table_present', 'unknown')}",
+                f"Signature verification: {pe.get('signature_verification', 'NOT_PERFORMED')}",
+                "PE anomalies are advisory evidence, not proof of malware or added score weights.",
+            ])
+            lines.extend(view["pe_anomalies"])
+        if view["reasons"]:
+            lines.extend(["", "ASSESSMENT REASONS", *view["reasons"]])
+        if view["limitations"]:
+            lines.extend(["", "ANALYSIS LIMITATIONS", *view["limitations"]])
+        lines.extend(["", "EXPLAINABLE INDICATORS"])
         indicators = view["indicators"]
         lines.extend(format_indicator(item) for item in indicators)
         if not indicators:

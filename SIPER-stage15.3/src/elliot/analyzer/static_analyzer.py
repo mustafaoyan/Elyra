@@ -22,6 +22,7 @@ from .entropy import (
     FileAccessError,
     UnsupportedFileTypeError,
 )
+from .pe import analyze_pe
 
 try:
     import magic  # type: ignore[import-untyped]
@@ -66,6 +67,11 @@ class StaticScanResult:
     warnings: list[dict[str, str]] = field(default_factory=list)
     errors: list[dict[str, str]] = field(default_factory=list)
     duration_ms: float = 0.0
+    is_pe: bool = False
+    pe_valid: bool | None = None
+    pe_summary: dict[str, Any] = field(default_factory=dict)
+    pe_sections: list[dict[str, Any]] = field(default_factory=list)
+    pe_anomalies: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -73,6 +79,12 @@ class StaticScanResult:
 
 class StaticFileScanner:
     ELF_MAGIC = b"\x7fELF"
+    _PE_MIME_TYPES = (
+        "application/vnd.microsoft.portable-executable",
+        "application/x-dosexec",
+        "application/x-msdownload",
+        "application/x-ms-dos-executable",
+    )
 
     _EXTENSION_MIME_RULES: dict[str, tuple[str, ...]] = {
         ".txt": ("text/plain",),
@@ -89,6 +101,8 @@ class StaticFileScanner:
         ".py": ("text/x-python", "text/plain"),
         ".sh": ("text/x-shellscript", "text/plain", "application/x-shellscript"),
         ".so": ("application/x-sharedlib", "application/x-pie-executable"),
+        ".exe": _PE_MIME_TYPES,
+        ".dll": _PE_MIME_TYPES,
         ".elf": (
             "application/x-executable",
             "application/x-pie-executable",
@@ -98,6 +112,10 @@ class StaticFileScanner:
     _OBVIOUS_CONTENT_EXTENSIONS = {
         ".txt", ".csv", ".json", ".xml", ".pdf", ".png", ".jpg", ".jpeg",
         ".gif", ".zip", ".gz", ".py", ".sh",
+    }
+    _PE_DISGUISE_EXTENSIONS = _OBVIOUS_CONTENT_EXTENSIONS | {
+        ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rtf",
+        ".mp3", ".mp4", ".wav", ".html", ".htm",
     }
 
     def __init__(self, config: StaticAnalyzerConfig | None = None) -> None:
@@ -150,7 +168,9 @@ class StaticFileScanner:
                 pass
         return "application/octet-stream", "generic-fallback"
 
-    def detect_mime(self, path: Path, head: bytes) -> tuple[str, str, list[dict[str, str]]]:
+    def detect_mime(
+        self, path: Path, head: bytes, context_path: Path | None = None
+    ) -> tuple[str, str, list[dict[str, str]]]:
         warnings: list[dict[str, str]] = []
         if self._magic is not None:
             try:
@@ -168,16 +188,19 @@ class StaticFileScanner:
                     "python-magic/libmagic unavailable; signature fallback used",
                 )
             )
-        detected, source = self._fallback_mime(path, head)
+        detected, source = self._fallback_mime(context_path or path, head)
         return detected, source, warnings
 
     @classmethod
     def evaluate_mime_extension(
-        cls, path: Path, mime_type: str, is_elf: bool
+        cls, path: Path, mime_type: str, is_elf: bool, is_pe: bool = False
     ) -> tuple[str, list[str]]:
         extension = path.suffix.lower()
         if not extension:
             return "NO_EXTENSION", []
+
+        if is_pe and extension in cls._PE_DISGUISE_EXTENSIONS:
+            return "INCONSISTENT", list(cls._PE_MIME_TYPES)
 
         if is_elf and extension in cls._OBVIOUS_CONTENT_EXTENSIONS:
             return "INCONSISTENT", [
@@ -453,7 +476,7 @@ class StaticFileScanner:
             return result
 
         result.mime_type, result.mime_source, mime_warnings = self.detect_mime(
-            read_path, head
+            read_path, head, context_path
         )
         result.warnings.extend(mime_warnings)
 
@@ -467,11 +490,19 @@ class StaticFileScanner:
         result.warnings.extend(elf_warnings)
         result.errors.extend(elf_errors)
 
+        pe_data = analyze_pe(read_path, head)
+        result.is_pe = pe_data.is_pe
+        result.pe_valid = pe_data.valid
+        result.pe_summary = pe_data.summary
+        result.pe_sections = pe_data.sections
+        result.pe_anomalies = pe_data.anomalies
+        result.warnings.extend(pe_data.warnings)
+
         (
             result.mime_extension_consistency,
             result.expected_mime_types,
         ) = self.evaluate_mime_extension(
-            context_path, result.mime_type, result.is_elf
+            context_path, result.mime_type, result.is_elf, result.is_pe
         )
         if result.mime_extension_consistency == "INCONSISTENT":
             result.path_indicators.append("MIME_EXTENSION_INCONSISTENT")
@@ -490,5 +521,7 @@ class StaticFileScanner:
             result.errors.append(self._error("ENTROPY_ANALYSIS_FAILED", str(exc)))
 
         result.status = "OK" if not result.errors else "PARTIAL"
+        if result.pe_summary.get("status") in {"INCOMPLETE", "UNSUPPORTED", "ERROR"}:
+            result.status = "PARTIAL"
         result.duration_ms = round((time.perf_counter() - started) * 1000, 3)
         return result

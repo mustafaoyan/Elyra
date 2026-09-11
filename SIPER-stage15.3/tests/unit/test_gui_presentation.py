@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from elliot.gui.presentation import (
     dashboard_projection,
     format_event,
@@ -117,3 +119,76 @@ def test_format_indicator_preserves_evidence() -> None:
     assert "HIGH_ENTROPY" in line
     assert "+10" in line
     assert "0.9" in line
+
+
+@pytest.mark.parametrize("result", [
+    {},
+    {"pre_execution_scoring": {"score": None}},
+    {"pre_execution_scoring": {"score": True}},
+    {"pre_execution_scoring": {"score": float("nan")}},
+    {"pre_execution_scoring": {"score": float("inf")}},
+    {"status": "ERROR", "pre_execution_scoring": {"score": 0}},
+    {"status": "PARTIAL", "pre_execution_scoring": {"score": 26}},
+    {"pre_execution_scoring": {"score": 0, "scoring_status": "DEGRADED"}},
+    {"pre_execution_scoring": {"score": 0, "scoring_status": "INCOMPLETE"}},
+    {"assessment": "INCONCLUSIVE", "pre_execution_scoring": {"score": 0}},
+    {"pe_summary": {"status": "INCOMPLETE"}, "pre_execution_scoring": {"score": 0}},
+    {"pe_summary": {"status": "UNSUPPORTED"}, "pre_execution_scoring": {"score": 0}},
+])
+def test_unavailable_scan_score_is_not_shown_as_measured_zero(result) -> None:
+    assert scan_projection(result)["pre_execution_score"] is None
+
+
+def test_complete_pe_evidence_keeps_trust_and_enforcement_distinct() -> None:
+    pe = {"status": "COMPLETE", "scope": "headers_and_sections", "format": "PE32+",
+          "architecture": "x64", "certificate_table_present": True,
+          "signature_verification": "NOT_PERFORMED"}
+    projected = scan_projection({
+        "status": "OK", "is_pe": True, "pe_summary": pe,
+        "pe_anomalies": ["PE_WRITABLE_EXECUTABLE_SECTION:0"],
+        "assessment": "SUSPICIOUS", "recommended_decision": "WARN",
+        "enforced_action": "NONE", "pre_execution_scoring": {"score": 50},
+        "limitations": ["AUTHENTICODE_NOT_VERIFIED"],
+    })
+    assert projected["pre_execution_score"] == 50
+    assert projected["pe_summary"] == pe
+    assert projected["pe_anomalies"] == ["PE_WRITABLE_EXECUTABLE_SECTION:0"]
+    assert projected["decision"] == "WARN"
+    assert projected["enforced_action"] == "NONE"
+    assert projected["score_kind"] == "PROVISIONAL_HEURISTIC_NOT_PROBABILITY"
+    assert projected["limitations"] == ["AUTHENTICODE_NOT_VERIFIED"]
+
+
+def test_incomplete_pe_overrides_legacy_low_risk_assessment() -> None:
+    projected = scan_projection({"status": "OK", "assessment": "NO_HIGH_RISK_INDICATORS",
+                                 "pe_summary": {"status": "INCOMPLETE"},
+                                 "pre_execution_scoring": {"score": 0}})
+    assert projected["assessment"] == "INCONCLUSIVE"
+    assert projected["pre_execution_score"] is None
+
+
+def test_dashboard_does_not_count_inconclusive_or_nonfinite_scores_as_low_risk() -> None:
+    projected = dashboard_projection({"events": [
+        {"source": "windows-monitor", "assessment": "INCONCLUSIVE", "score": 0},
+        {"source": "windows-monitor", "risk_score": None},
+        {"source": "windows-monitor", "risk_score": float("nan")},
+        {"source": "windows-monitor", "risk_score": 0},
+    ]})
+    assert projected["telemetry"]["event_count"] == 4
+    assert projected["telemetry"]["scored_event_count"] == 1
+    assert projected["telemetry"]["risk_bands"] == {"low": 1, "elevated": 0, "high": 0}
+
+
+def test_windows_event_displays_observed_time_recommendation_and_no_enforcement() -> None:
+    line = format_event({"source": "windows-monitor", "timestamp_ns": 1_500_000_000,
+                         "assessment": "INCONCLUSIVE", "risk_score": None,
+                         "recommended_decision": "INCONCLUSIVE", "enforced_action": "NONE"})
+    assert "1970-01-01T00:00:01.500000Z" in line
+    assert "score=N/A" in line
+    assert "recommendation=INCONCLUSIVE" in line
+    assert "enforced_action=NONE" in line
+
+
+@pytest.mark.parametrize("timestamp", [-1, 10 ** 100, None, True])
+def test_invalid_event_time_is_unknown_not_current_time(timestamp) -> None:
+    assert "[unknown-time]" in format_event({"timestamp_ns": timestamp})

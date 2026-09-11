@@ -8,7 +8,9 @@ is therefore monitor-only analysis with no network transport.
 
 from __future__ import annotations
 
+import ctypes
 import os
+import stat
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
@@ -30,12 +32,59 @@ def _contains(parent: str, child: str) -> bool:
         return False
 
 
+def _volume_is_local(path: str) -> bool:
+    if os.name != "nt":
+        return True
+    drive, _ = os.path.splitdrive(path)
+    if not drive:
+        return False
+    try:
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        get_drive_type = kernel32.GetDriveTypeW
+        get_drive_type.argtypes = [ctypes.c_wchar_p]
+        get_drive_type.restype = ctypes.c_uint32
+        # Reject DRIVE_REMOTE and unverified/invalid drive types before stat.
+        return get_drive_type(drive + "\\") in {2, 3, 5, 6}
+    except (AttributeError, OSError):
+        return False
+
+
+def local_path_rejection(path: str | os.PathLike[str], *, inspect_components: bool = True) -> str | None:
+    """Check local enrollment without following UNC, devices, links or junctions.
+
+    The cheap lexical/volume part also applies to queued scan paths. Full
+    component validation is performed before enrolling a directory watcher;
+    the analyzer separately guards components throughout each bounded read.
+    """
+    supplied = os.fspath(path)
+    if supplied.replace("/", "\\").startswith("\\\\"):
+        return "UNC_OR_DEVICE_PATH_NOT_SCANNED"
+    absolute = os.path.abspath(supplied)
+    if os.name == "nt" and ":" in os.path.splitdrive(absolute)[1]:
+        return "ALTERNATE_DATA_STREAM_NOT_SCANNED"
+    if not _volume_is_local(absolute):
+        return "LOCAL_VOLUME_NOT_VERIFIED"
+    if inspect_components:
+        target = Path(absolute)
+        try:
+            for component in (*reversed(target.parents), target):
+                metadata = component.lstat()
+                if stat.S_ISLNK(metadata.st_mode):
+                    return "SYMLINK_NOT_SCANNED"
+                if getattr(metadata, "st_file_attributes", 0) & 0x400:
+                    return "REPARSE_POINT_NOT_SCANNED"
+        except (OSError, ValueError):
+            return "LOCAL_PATH_NOT_ACCESSIBLE"
+    return None
+
+
 def default_monitored_paths() -> list[str]:
     """Return conservative local user-data roots for a fresh installation."""
 
     home = Path.home()
     candidates = (home / "Downloads", home / "Desktop", home / "Documents")
-    existing = [str(path) for path in candidates if path.is_dir()]
+    existing = [str(path) for path in candidates
+                if local_path_rejection(path) is None and path.is_dir()]
     # Do not silently widen monitoring to a whole drive when profile folders do
     # not exist (for example under a service account).
     return [_normalise(path) for path in existing]
@@ -96,6 +145,8 @@ class WindowsMonitorPolicy:
     def should_monitor(self, path: str | os.PathLike[str] | None) -> bool:
         if not path:
             return False
+        if local_path_rejection(path, inspect_components=False) is not None:
+            return False
         candidate = _normalise(path)
         if any(_contains(excluded, candidate) for excluded in self.excluded_paths):
             return False
@@ -110,4 +161,5 @@ class WindowsMonitorPolicy:
     def backend_roots(self) -> list[str]:
         """Return valid roots only; invalid configuration becomes explicit status."""
 
-        return [root for root in self.monitored_paths if os.path.isdir(root)]
+        return [root for root in self.monitored_paths
+                if local_path_rejection(root) is None and os.path.isdir(root)]

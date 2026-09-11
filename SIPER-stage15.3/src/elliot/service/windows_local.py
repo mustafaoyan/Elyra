@@ -13,6 +13,7 @@ import os
 from typing import Any
 
 from ..analyzer.static_analyzer import StaticFileScanner
+from ..monitor.windows.analysis import WindowsStaticAnalyzer
 from ..monitor.windows.controller import WindowsMonitorController
 from ..monitor.windows.policy import WindowsMonitorPolicy
 from ..scoring.engine import PreExecutionScoringEngine
@@ -38,8 +39,24 @@ class WindowsLocalService:
         scoring_engine: PreExecutionScoringEngine | None = None,
     ) -> None:
         self.monitor = monitor or WindowsMonitorController(WindowsMonitorPolicy())
-        self.scanner = scanner or StaticFileScanner()
-        self.scoring_engine = scoring_engine or PreExecutionScoringEngine()
+        existing = getattr(self.monitor, "analyzer", None)
+        if isinstance(existing, WindowsStaticAnalyzer) and scanner is None and scoring_engine is None:
+            self.analyzer = existing
+        else:
+            policy = self.monitor.policy_snapshot()
+            self.analyzer = WindowsStaticAnalyzer(
+                scanner=scanner,
+                scoring_engine=scoring_engine,
+                max_file_bytes=int(policy.get("max_file_bytes", 128 * 1024 * 1024)),
+                retry_attempts=int(policy.get("retry_attempts", 2)),
+                retry_delay_seconds=float(policy.get("retry_delay_seconds", 0.15)),
+            )
+            if isinstance(self.monitor, WindowsMonitorController) and (
+                isinstance(existing, WindowsStaticAnalyzer) or scanner is not None or scoring_engine is not None
+            ):
+                self.monitor.analyzer = self.analyzer
+        self.scanner = self.analyzer.scanner
+        self.scoring_engine = self.analyzer.scoring_engine
         self._started = False
 
     def start(self) -> bool:
@@ -102,8 +119,21 @@ class WindowsLocalService:
                 "status": record.get("status"),
                 "reason": record.get("reason"),
                 "local_only": True,
+                "assessment": record.get("assessment", "INCONCLUSIVE"),
+                "risk_score": record.get("risk_score"),
+                "recommended_decision": record.get("recommended_decision", "INCONCLUSIVE"),
+                "decision": record.get("recommended_decision", "INCONCLUSIVE"),
+                "reasons": record.get("reasons", []),
+                "score_is_probability": False,
+                "score_kind": "PROVISIONAL_HEURISTIC_NOT_PROBABILITY",
+                "enforced_action": "NONE",
+                "monitor_mode": "MONITOR_ONLY",
             }
             if isinstance(analysis, dict):
+                for key in ("assessment", "risk_score", "recommended_decision", "decision",
+                            "reasons", "limitations", "static_scan", "pre_execution_scoring"):
+                    if key in analysis:
+                        event[key] = analysis[key]
                 entropy = analysis.get("entropy")
                 if isinstance(entropy, dict):
                     summary = entropy.get("whole_file_entropy")
@@ -130,10 +160,16 @@ class WindowsLocalService:
         return {"items": []}
 
     def scan_file(self, path: str) -> dict[str, Any]:
-        target = os.path.abspath(path)
-        scan = self.scanner.scan(target)
-        result = scan.to_dict()
-        result["pre_execution_scoring"] = self.scoring_engine.score(scan).to_dict()
+        analysis = self.analyzer.analyze(path).to_dict()
+        static = analysis.get("static_scan")
+        result = dict(static) if isinstance(static, dict) else {
+            "filepath": analysis["path"], "status": "ERROR", "warnings": [],
+            "errors": [{"code": analysis["status"], "message": analysis["reason"]}],
+        }
+        # Preserve the manual scan's flattened static result and status while
+        # exposing the same full assessment used by automatic notifications.
+        result.update({key: value for key, value in analysis.items() if key != "status"})
+        result["analysis_status"] = analysis["status"]
         result["local_only"] = True
         result["platform"] = "WINDOWS"
         return result

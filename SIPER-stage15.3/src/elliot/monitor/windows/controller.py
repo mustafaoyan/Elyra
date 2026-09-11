@@ -1,7 +1,7 @@
 """Bounded, local-only Windows monitoring orchestration.
 
 This controller turns local ETW/minifilter-adapter or ReadDirectoryChangesW
-notifications into bounded entropy-analysis jobs.  It intentionally has no
+notifications into bounded static-analysis and scoring jobs. It intentionally has no
 network client, cloud queue, or remote logging path.  User-space Windows
 observation is monitor-only; execution blocking belongs in a separately
 signed and reviewed minifilter implementation.
@@ -18,6 +18,7 @@ from dataclasses import asdict
 from typing import Callable, Deque
 
 from .backends import AutoWindowsBackend, WindowsMonitorBackend
+from .analysis import WindowsStaticAnalyzer
 from .entropy import WindowsEntropyAnalyzer
 from .events import OVERFLOW, WindowsMonitorEvent, WindowsMonitorRecord
 from .policy import WindowsMonitorPolicy
@@ -28,7 +29,7 @@ RecordSink = Callable[[WindowsMonitorRecord], None]
 
 
 class WindowsMonitorController:
-    """Coordinate a local Windows event backend and canonical entropy analysis.
+    """Coordinate a local Windows event backend and canonical static analysis.
 
     The pending-job semaphore is acquired *before* an executor job is created;
     event bursts therefore have a visible bounded-loss result instead of
@@ -42,7 +43,7 @@ class WindowsMonitorController:
         policy: WindowsMonitorPolicy | None = None,
         *,
         backend: WindowsMonitorBackend | None = None,
-        analyzer: WindowsEntropyAnalyzer | None = None,
+        analyzer: WindowsStaticAnalyzer | WindowsEntropyAnalyzer | None = None,
         event_sink: RecordSink | None = None,
         executor: Executor | None = None,
         clock_ns: Callable[[], int] = time.monotonic_ns,
@@ -51,7 +52,7 @@ class WindowsMonitorController:
         self.backend = backend or AutoWindowsBackend(
             self.policy.backend_roots(), recursive=self.policy.recursive
         )
-        self.analyzer = analyzer or WindowsEntropyAnalyzer(
+        self.analyzer = analyzer or WindowsStaticAnalyzer(
             max_file_bytes=self.policy.max_file_bytes,
             retry_attempts=self.policy.retry_attempts,
             retry_delay_seconds=self.policy.retry_delay_seconds,
@@ -119,7 +120,7 @@ class WindowsMonitorController:
                 WindowsMonitorRecord(
                     event=event,
                     status="OBSERVED",
-                    reason="EVENT_TYPE_DOES_NOT_REQUIRE_ENTROPY_ANALYSIS",
+                    reason="EVENT_TYPE_DOES_NOT_REQUIRE_STATIC_ANALYSIS",
                 )
             )
             return
@@ -162,7 +163,7 @@ class WindowsMonitorController:
                 processing_latency_ms=round((self._clock_ns() - started) / 1_000_000, 3),
             )
         except Exception as exc:  # Boundary protection for capture threads.
-            logger.exception("local Windows entropy analysis failed")
+            logger.exception("local Windows static analysis failed")
             with self._lock:
                 self._analysis_errors += 1
             record = WindowsMonitorRecord(

@@ -7,6 +7,8 @@ never invent telemetry, entropy values, scores, decisions, or actions.
 from __future__ import annotations
 
 import json
+import math
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -24,7 +26,7 @@ def _sequence(value: Any) -> list[Any]:
 def _number(value: Any, default: float = 0.0) -> float:
     if isinstance(value, bool):
         return default
-    if isinstance(value, (int, float)):
+    if isinstance(value, (int, float)) and math.isfinite(value):
         return float(value)
     return default
 
@@ -39,6 +41,8 @@ def _event_score(event: Mapping[str, Any]) -> float | None:
     benign score of zero.
     """
 
+    if event.get("assessment") == "INCONCLUSIVE":
+        return None
     correlation = _mapping(event.get("correlation"))
     state = _mapping(correlation.get("state"))
     for candidate in (
@@ -46,7 +50,11 @@ def _event_score(event: Mapping[str, Any]) -> float | None:
         event.get("score"),
         state.get("combined_score"),
     ):
-        if isinstance(candidate, (int, float)) and not isinstance(candidate, bool):
+        if (
+            isinstance(candidate, (int, float))
+            and not isinstance(candidate, bool)
+            and math.isfinite(candidate)
+        ):
             return max(0.0, min(100.0, float(candidate)))
     return None
 
@@ -138,18 +146,37 @@ def scan_projection(result: Mapping[str, Any]) -> dict[str, Any]:
     entropy_summary = _mapping(scan.get("entropy_summary"))
     block_rows = [_mapping(item) for item in _sequence(scan.get("block_entropies"))]
     indicators = [_mapping(item) for item in _sequence(scoring.get("indicators"))]
+    pe_summary = _mapping(scan.get("pe_summary"))
+    assessment = str(scan.get("assessment", "NOT_REPORTED"))
+    incomplete = (
+        assessment == "INCONCLUSIVE"
+        or scan.get("status") in {"ERROR", "PARTIAL"}
+        or scoring.get("scoring_status") in {"DEGRADED", "INCOMPLETE", "ERROR", "UNAVAILABLE"}
+        or pe_summary.get("status") in {"INCOMPLETE", "UNSUPPORTED", "ERROR"}
+    )
+    score = None if incomplete else _event_score({"score": scoring.get("score")})
+    if incomplete:
+        assessment = "INCONCLUSIVE"
 
     block_entropies: list[float] = []
     block_indices: list[int] = []
     for position, row in enumerate(block_rows):
         entropy = row.get("entropy")
-        if isinstance(entropy, (int, float)) and not isinstance(entropy, bool):
+        if (
+            isinstance(entropy, (int, float))
+            and not isinstance(entropy, bool)
+            and math.isfinite(entropy)
+        ):
             block_entropies.append(float(entropy))
             index = row.get("index", position)
             block_indices.append(int(index) if isinstance(index, int) else position)
 
     runtime_score = scan.get("runtime_score")
-    if not isinstance(runtime_score, (int, float)) or isinstance(runtime_score, bool):
+    if (
+        not isinstance(runtime_score, (int, float))
+        or isinstance(runtime_score, bool)
+        or not math.isfinite(runtime_score)
+    ):
         runtime_score = None
 
     return {
@@ -160,13 +187,21 @@ def scan_projection(result: Mapping[str, Any]) -> dict[str, Any]:
             scan.get("mime_extension_consistency", "UNKNOWN")
         ),
         "is_elf": bool(scan.get("is_elf")),
+        "is_pe": bool(scan.get("is_pe")),
+        "pe_summary": pe_summary,
+        "pe_anomalies": [str(item) for item in _sequence(scan.get("pe_anomalies"))],
+        "assessment": assessment,
+        "enforced_action": str(scan.get("enforced_action", "NOT_REPORTED")),
+        "score_kind": str(scan.get("score_kind", "PROVISIONAL_HEURISTIC_NOT_PROBABILITY")),
+        "limitations": [str(item) for item in _sequence(scan.get("limitations"))],
+        "reasons": [str(item) for item in _sequence(scan.get("reasons"))],
         "whole_file_entropy": entropy_summary.get("whole_file_entropy"),
         "block_indices": block_indices,
         "block_entropies": block_entropies,
         "blocks_truncated": bool(entropy_summary.get("blocks_truncated")),
-        "pre_execution_score": int(_number(scoring.get("score"), 0.0)),
+        "pre_execution_score": None if score is None else int(score),
         "runtime_score": runtime_score,
-        "decision": str(scoring.get("decision", "UNKNOWN")),
+        "decision": str(scan.get("recommended_decision", scoring.get("decision", "UNKNOWN"))),
         "indicators": indicators,
         "warnings": [_mapping(item) for item in _sequence(scan.get("warnings"))],
         "errors": [_mapping(item) for item in _sequence(scan.get("errors"))],
@@ -174,23 +209,47 @@ def scan_projection(result: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _event_timestamp(event: Mapping[str, Any]) -> str:
+    for key in ("timestamp_utc", "timestamp"):
+        value = event.get(key)
+        if value is not None and value != "":
+            return str(value)
+    nanoseconds = event.get("timestamp_ns")
+    if isinstance(nanoseconds, int) and not isinstance(nanoseconds, bool) and nanoseconds >= 0:
+        try:
+            seconds, remainder = divmod(nanoseconds, 1_000_000_000)
+            return datetime.fromtimestamp(seconds, timezone.utc).replace(
+                microsecond=remainder // 1000
+            ).isoformat().replace("+00:00", "Z")
+        except (ValueError, OverflowError, OSError):
+            pass
+    return "unknown-time"
+
+
 def format_event(event: Mapping[str, Any]) -> str:
     """Return a stable, bounded text representation of a daemon event."""
 
     source = str(event.get("source", "unknown"))
-    timestamp = str(event.get("timestamp_utc", event.get("timestamp", "unknown-time")))
+    timestamp = _event_timestamp(event)
     path = event.get("filepath", event.get("path", event.get("target_file", "")))
     correlation = _mapping(event.get("correlation"))
     correlation_state = _mapping(correlation.get("state"))
-    decision = event.get("decision", correlation_state.get("recommended_action", ""))
-    score = event.get("risk_score", event.get("score", correlation_state.get("combined_score", "")))
+    decision = event.get("recommended_decision", event.get("decision", correlation_state.get("recommended_action", "")))
+    score = _event_score(event)
     parts = [f"[{timestamp}] source={source}"]
     if path:
         parts.append(f"path={path}")
-    if score != "":
-        parts.append(f"score={score}")
+    if score is not None:
+        parts.append(f"score={score:g}")
+    elif "risk_score" in event or "score" in event:
+        parts.append("score=N/A")
     if decision:
-        parts.append(f"decision={decision}")
+        label = "recommendation" if "recommended_decision" in event else "decision"
+        parts.append(f"{label}={decision}")
+    if event.get("assessment"):
+        parts.append(f"assessment={event['assessment']}")
+    if event.get("enforced_action"):
+        parts.append(f"enforced_action={event['enforced_action']}")
     if len(parts) == 1:
         compact = json.dumps(dict(event), ensure_ascii=False, sort_keys=True)
         parts.append(compact[:1000])

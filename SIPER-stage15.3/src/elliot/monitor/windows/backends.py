@@ -29,6 +29,7 @@ from .events import (
     OVERFLOW,
     WindowsMonitorEvent,
 )
+from .policy import local_path_rejection
 
 logger = logging.getLogger("elliot.monitor.windows.backends")
 
@@ -138,7 +139,7 @@ class ReadDirectoryChangesBackend:
 
     This is a detection backend, not a pre-execution enforcement mechanism.
     It observes NTFS changes through Windows kernel notifications and provides
-    file paths to the entropy pipeline.  A signed minifilter remains necessary
+    file paths to the static-analysis pipeline. A signed minifilter remains necessary
     for reliable execution blocking.
     """
 
@@ -148,6 +149,10 @@ class ReadDirectoryChangesBackend:
     FILE_SHARE_DELETE = 0x00000004
     OPEN_EXISTING = 3
     FILE_FLAG_BACKUP_SEMANTICS = 0x02000000
+    # Open the root itself as a reparse point instead of following a junction
+    # substituted between policy validation and CreateFileW. This narrows the
+    # enrollment race; the analyzer still performs its own guarded scan.
+    FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000
 
     FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001
     FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002
@@ -211,7 +216,8 @@ class ReadDirectoryChangesBackend:
         if not self._is_windows():
             self._degraded_reason = "WINDOWS_ONLY"
             return False
-        roots = [root for root in self.roots if os.path.isdir(root)]
+        roots = [root for root in self.roots
+                 if local_path_rejection(root) is None and os.path.isdir(root)]
         if not roots:
             self._degraded_reason = "NO_VALID_MONITOR_ROOTS"
             return False
@@ -325,7 +331,7 @@ class ReadDirectoryChangesBackend:
                 self.FILE_SHARE_READ | self.FILE_SHARE_WRITE | self.FILE_SHARE_DELETE,
                 None,
                 self.OPEN_EXISTING,
-                self.FILE_FLAG_BACKUP_SEMANTICS,
+                self.FILE_FLAG_BACKUP_SEMANTICS | self.FILE_FLAG_OPEN_REPARSE_POINT,
                 None,
             )
         assert self._kernel32 is not None
@@ -335,7 +341,7 @@ class ReadDirectoryChangesBackend:
             self.FILE_SHARE_READ | self.FILE_SHARE_WRITE | self.FILE_SHARE_DELETE,
             None,
             self.OPEN_EXISTING,
-            self.FILE_FLAG_BACKUP_SEMANTICS,
+            self.FILE_FLAG_BACKUP_SEMANTICS | self.FILE_FLAG_OPEN_REPARSE_POINT,
             None,
         )
         invalid_handle_value = ctypes.c_void_p(-1).value

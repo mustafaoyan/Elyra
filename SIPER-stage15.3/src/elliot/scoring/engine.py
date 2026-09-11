@@ -196,6 +196,7 @@ class ScoringResult:
             "scoring_status": self.scoring_status,
             "score": self.score,
             "risk_score": f"{self.score}/100",
+            "score_is_probability": False,
             "decision": self.decision,
             "category_scores": dict(self.category_scores),
             "raw_category_scores": dict(self.raw_category_scores),

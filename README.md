@@ -30,12 +30,35 @@ signal, never proof of malware by itself.
 
 ## Repository layout
 
+The development plan is tracked in [ELLIOT_ROADMAP.md](ELLIOT_ROADMAP.md).
+Only Phase 1 is in the current implementation scope; Phase 2 requires a
+separate go-ahead.
+
 ```text
 SIPER-stage15.3/     Core Python engine, desktop GUI, tests, packaging and docs
 landing/              Static deployment site with OS-aware download routing
 kurulum/              Existing Debian package and installation material
 ELLIOT_AI_CONTEXT.md  Architecture blueprint for future AI contributors
+ELLIOT_ROADMAP.md     Milestones, acceptance gates and scope boundaries
 ```
+
+## Phase 1: shared local static analysis
+
+Windows automatic monitoring and manual scans now use the same static scanner
+and provisional scoring engine. EXE/DLL analysis includes bounded PE32/PE32+
+headers and section metadata, alongside MIME, path and canonical entropy
+evidence. PE anomalies are advisory; they do not add uncalibrated scoring weights.
+
+Incomplete, unreadable, unsupported, changing or skipped files are reported as
+`INCONCLUSIVE`, with no numeric risk score. The GUI displays `N/A` for missing
+scores and distinguishes a policy recommendation from an applied action.
+`NO_HIGH_RISK_INDICATORS` is **not** proof that a file is clean, and a 0–100
+heuristic score is **not** a malware probability.
+
+This milestone does not include Authenticode verification, malware signatures,
+a trained AI model, sandbox execution or Windows execution blocking. Windows
+remains `MONITOR_ONLY`, with `enforced_action=NONE`; nothing is uploaded.
+See [Phase 1 verification and limitations](SIPER-stage15.3/docs/phase1-verification.md).
 
 ## Quick start
 
