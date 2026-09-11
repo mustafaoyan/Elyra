@@ -17,7 +17,7 @@
   global.ELLIOT_DOWNLOAD_CONFIG = Object.freeze({
     version,
     releaseTag,
-    published: false,
+    published: true,
     releasePageUrl: `https://github.com/${repository}/releases`,
     downloads: Object.freeze({
       linux: Object.freeze({
