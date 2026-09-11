@@ -96,8 +96,15 @@ class QuarantineManager:
         self.quarantine_dir = Path(quarantine_dir)
         self.metadata_dir = Path(metadata_dir)
         self.audit_log = audit_log
+        self._audit_status = "HEALTHY" if audit_log is not None else "NOT_CONFIGURED"
+        self._audit_error: str | None = None
         self._prepare_private_directory(self.quarantine_dir)
         self._prepare_private_directory(self.metadata_dir)
+
+    @property
+    def audit_status(self) -> dict[str, str | None]:
+        """Expose audit health so callers cannot mistake an unaudited action."""
+        return {"status": self._audit_status, "error": self._audit_error}
 
     def quarantine_file(
         self,
@@ -920,5 +927,9 @@ class QuarantineManager:
             return
         try:
             self.audit_log.record(event_type, target, details)
-        except (OSError, ValueError, TypeError, AttributeError) as exc:
+            self._audit_status = "HEALTHY"
+            self._audit_error = None
+        except Exception as exc:
+            self._audit_status = "DEGRADED_AUDIT_WRITE_FAILED"
+            self._audit_error = f"{type(exc).__name__}: {exc}"
             logger.error("Audit recording failed after committed action: %s", exc)

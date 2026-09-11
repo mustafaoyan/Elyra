@@ -77,6 +77,23 @@ def test_basic_quarantine_and_restore(tmp_path: Path) -> None:
     assert manager.get_record(record.quarantine_id).restoration_status == "restored"
 
 
+def test_audit_write_failure_is_visible_after_committed_quarantine(tmp_path: Path) -> None:
+    class BrokenAudit:
+        def record(self, *_args, **_kwargs):
+            raise OSError("synthetic full disk")
+
+    manager = QuarantineManager(
+        quarantine_dir=tmp_path / "q",
+        metadata_dir=tmp_path / "m",
+        audit_log=BrokenAudit(),
+    )
+    source = tmp_path / "work" / "sample.bin"
+    record = quarantine_sample(manager, source, b"audit failure fixture")
+    assert record.restoration_status == "quarantined"
+    assert manager.audit_status["status"] == "DEGRADED_AUDIT_WRITE_FAILED"
+    assert "full disk" in str(manager.audit_status["error"])
+
+
 def test_identical_files_from_different_paths_get_distinct_records(tmp_path: Path) -> None:
     manager = make_manager(tmp_path)
     content = b"identical safe bytes"

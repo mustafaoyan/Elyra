@@ -44,6 +44,10 @@ telemetry kanıtı bekleniyor. L4'e geçiş için ayrıca izin gerekir.
 L4 uygulaması da hazır: ortak pre-execution sonucu artık file identity ve
 `INCONCLUSIVE` statüsünü görünür taşıyor. L5'e geçilmedi.
 
+L5 uygulaması hazır: karantina yöneticisi commit edilmiş işlem sonrası audit
+yazma hatasını `DEGRADED_AUDIT_WRITE_FAILED` olarak görünür taşır; geri alma ve
+restore çakışma güvenlikleri korunur. L6'ya geçilmedi.
+
 `ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
 ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test
