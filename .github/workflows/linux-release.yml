@@ -17,10 +17,13 @@ jobs:
         working-directory: SIPER-stage15.3
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev python3-venv
+          sudo apt-get install -y dpkg-dev python3-venv python3-tk libmagic1 build-essential
           python3 -m venv .release-venv
           . .release-venv/bin/activate
+          set -euxo pipefail
           python -m pip install --upgrade pip build
+          test -f requirements.txt
+          test -f LICENSE
           bash scripts/build_pardus_deb.sh dist/debian
       - name: Generate release checksums
         working-directory: SIPER-stage15.3
