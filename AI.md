@@ -55,6 +55,11 @@ L7 uygulaması hazır: `scripts/release_gate.py` Debian/Pardus artifact ve SHA-2
 checksum kontrolü yapıyor; artifact yoksa yayın ve landing download bağlantısını
 blokluyor. İmzalı gerçek paket olmadan link yayınlanmayacak.
 
+Site durumu: Windows seçeneği geçici olarak gizlendi; landing metinleri Türkçe,
+Linux/Pardus indirme yapılandırması ve renkli E faviconu eklendi. Uygulama açılış
+güncelleme bildirimi için `ELLIOT_UPDATE_MANIFEST_URL` ve ertelenebilirlik politikası
+eklendi; zorunlu güncelleme `can_defer:false` döndürür.
+
 `ELLIOT_LINUX_ROADMAP.md` içindeki L0’dan başlanır: `scripts/linux_baseline.py`
 ile native Linux ortamı,
 çalışan kernel/header/BCC/tracefs/fanotify yetenek fotoğrafı ve mevcut test

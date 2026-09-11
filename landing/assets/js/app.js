@@ -2,7 +2,7 @@
   "use strict";
 
   const config = window.ELLIOT_DOWNLOAD_CONFIG;
-  const supportedPlatforms = new Set(["windows", "linux"]);
+  const supportedPlatforms = new Set(["linux"]);
   const platformSelect = document.querySelector("#platform-select");
   const downloadSection = document.querySelector("#download");
   const downloadLinks = document.querySelectorAll("[data-download-link]");
@@ -38,10 +38,7 @@
     if (/android|iphone|ipad|ipod|mac os|macintosh/.test(hints)) {
       return "unsupported";
     }
-    if (/win/.test(hints)) {
-      return "windows";
-    }
-    if (/linux|x11|unix/.test(hints)) {
+    if (/linux|x11|unix|win/.test(hints)) {
       return "linux";
     }
     return "unknown";
@@ -69,20 +66,15 @@
   }
 
   function messageFor(platform, source) {
-    if (platform === "windows") {
-      return source === "detected"
-        ? "Windows detected. Your download is ready."
-        : "Windows selected. Your download is ready.";
-    }
     if (platform === "linux") {
       return source === "detected"
-        ? "Linux detected. Your Debian/Pardus package is ready."
-        : "Linux / Pardus selected. Your package is ready.";
+        ? "Linux algılandı. Debian/Pardus paketin hazır."
+        : "Linux / Pardus seçildi. Paketin hazır.";
     }
     if (platform === "unsupported") {
-      return "This browser appears to be on an unsupported platform. Choose a Windows or Linux package below.";
+      return "Bu tarayıcı desteklenmeyen bir platformda görünüyor. Linux/Pardus paketini seçin.";
     }
-    return "We could not identify your operating system. Choose a Windows or Linux package below.";
+    return "İşletim sistemi algılanamadı. Linux/Pardus paketini seçin.";
   }
 
   function updatePlatformCards(platform) {
@@ -99,17 +91,19 @@
 
   function updateDownloadTarget(platform, source) {
     const packageInfo = config.downloads[platform];
-    const available = Boolean(packageInfo && isSafeHttpsUrl(packageInfo.url));
+    const available = Boolean(config.published && packageInfo && isSafeHttpsUrl(packageInfo.url));
     const fallbackUrl = isSafeHttpsUrl(config.releasePageUrl)
       ? config.releasePageUrl
       : "https://github.com/mustafaoyan/Siper-Antivirus/releases";
-    const label = available ? `Download for ${packageInfo.label}` : "Choose your download";
-    const href = available ? packageInfo.url : "#download";
+    const label = available ? "Linux paketini indir" : "Linux paketi henüz yayınlanmadı";
+    const href = available ? packageInfo.url : fallbackUrl;
 
     document.documentElement.dataset.selectedPlatform = available ? platform : "unknown";
     platformSelect.value = available ? platform : "unknown";
     downloadLabels.forEach((element) => { element.textContent = label; });
-    summaries.forEach((element) => { element.textContent = messageFor(platform, source); });
+    summaries.forEach((element) => {
+      element.textContent = available ? messageFor(platform, source) : "Linux paketi release sayfasında yayınlandığında burada indirilebilir olacak.";
+    });
     updatePlatformCards(available ? platform : "unknown");
 
     downloadLinks.forEach((link) => {

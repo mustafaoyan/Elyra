@@ -269,3 +269,5 @@ button { cursor: pointer; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+/* Windows download is intentionally paused while Linux release work is active. */
+.platform-card[data-platform-card="windows"] { display: none; }

@@ -26,7 +26,9 @@
     "linux_roadmap": "ELLIOT_LINUX_ROADMAP.md; L0 baseline is prepared but not Linux-native verified",
     "ai_handoff_index": "AI.md",
     "landing": "Static site in landing/; GitHub Pages workflow publishes it after a successful main-branch run.",
-    "release_assets": "Do not represent placeholder URLs as published installers. Build, sign, checksum, upload, then configure landing/assets/js/download-config.js."
+    "release_assets": "Do not represent placeholder URLs as published installers. Build, sign, checksum, upload, then configure landing/assets/js/download-config.js.",
+    "linux_download": "landing/assets/js/download-config.js; Linux-only .deb asset path; Windows option paused",
+    "update_policy": "src/elliot/update/checker.py; mandatory update cannot be deferred; offline check is non-blocking"
   }
 }
 ```

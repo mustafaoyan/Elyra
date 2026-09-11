@@ -14,6 +14,7 @@ Group=root
 WorkingDirectory=/opt/elliot/current
 Environment=PYTHONUNBUFFERED=1
 Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ELLIOT_UPDATE_MANIFEST_URL=https://raw.githubusercontent.com/mustafaoyan/Siper-Antivirus/main/landing/update-manifest.json
 ExecStartPre=/opt/elliot/current/.venv/bin/siper-preflight --service
 ExecStart=/opt/elliot/current/.venv/bin/siper-daemon
 Restart=on-failure

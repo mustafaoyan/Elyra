@@ -24,6 +24,7 @@ from ..monitor.fanotify.controller import FanotifyController
 from ..response.engine import ResponseEngine, ResponsePolicy, ResponseSafetyError
 from ..response.quarantine_manager import QuarantineManager
 from ..scoring.engine import PreExecutionScoringEngine
+from ..update.checker import UpdateDecision, check_latest
 from .authorization import Requester, authorize_manual_scan_path
 from .ipc_protocol import PROTOCOL_VERSION
 from .ipc_server import IpcServer
@@ -37,6 +38,7 @@ class ElliotDaemonState:
         self.ebpf_active = False
         self.degraded_components: list[str] = []
         self.recent_events: list[dict[str, Any]] = []
+        self.update_status: dict[str, Any] = {"status": "CHECK_DISABLED", "can_defer": True}
         self._lock = threading.Lock()
 
     def set_component(self, name: str, active: bool) -> None:
@@ -70,6 +72,7 @@ class ElliotDaemonState:
                 "recent_event_count": len(self.recent_events),
                 "recent_events": list(self.recent_events[-20:]),
                 "correlation": dict(correlation_summary or {}),
+                "update": dict(self.update_status),
             }
 
 
@@ -98,6 +101,9 @@ class ElliotDaemon:
         self.ebpf_loader = EBPFLoader()
         self.runtime_telemetry = RuntimeTelemetryAggregator()
         self.execution_correlation = ExecutionCorrelationEngine()
+        manifest_url = os.environ.get("ELLIOT_UPDATE_MANIFEST_URL", "").strip()
+        if manifest_url:
+            self.state.update_status = check_latest(manifest_url).to_dict()
         response_policy = ResponsePolicy.load().with_runtime_actions(execute_responses)
         self.response_engine = ResponseEngine(
             self.quarantine,
@@ -115,6 +121,12 @@ class ElliotDaemon:
             raise PermissionError("Siper daemon must run as root or with documented Linux capabilities")
 
         logger.info("Starting Siper daemon")
+        if self.state.update_status.get("status") in {"UPDATE_AVAILABLE", "UPDATE_REQUIRED"}:
+            logger.warning(
+                "ELLIOT update notification: %s (defer=%s)",
+                self.state.update_status.get("status"),
+                self.state.update_status.get("can_defer"),
+            )
         self.audit_log.record(
             "audit",
             "daemon_startup_integrity",
