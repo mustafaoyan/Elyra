@@ -33,18 +33,15 @@ signal, never proof of malware by itself.
 
 ## Repository layout
 
-The general development plan is tracked in [ELLIOT_ROADMAP.md](ELLIOT_ROADMAP.md).
-Windows work is paused and Linux has its own gated plan in
-[ELLIOT_LINUX_ROADMAP.md](ELLIOT_LINUX_ROADMAP.md). Linux implementation starts
-only after the user says “başla”.
+The complete development plan and current gates are tracked in [AI.md](AI.md).
+Windows work is paused; Linux implementation starts only after the user says
+“başla”.
 
 ```text
 SIPER-stage15.3/     Core Python engine, desktop GUI, tests, packaging and docs
 landing/              Static deployment site with OS-aware download routing
 kurulum/              Existing Debian package and installation material
 AI.md                 Complete AI handoff, standards, history and continuation instructions
-ELLIOT_ROADMAP.md     Milestones, acceptance gates and scope boundaries
-ELLIOT_LINUX_ROADMAP.md Linux-only gated development plan
 ```
 
 ## Phase 1: shared local static analysis

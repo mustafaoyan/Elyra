@@ -99,6 +99,36 @@ Sıra: M3 ölçüm/kalibrasyon → M4 yerel ML → M5 kısıtlı AI kanıt yorum
 5. Bu dosyada durum, tamamlananlar, plan, tarih ve son commit'i güncelle.
 6. Anlamlı commit oluşturup `git push origin main` yap; doğal durakta bekle ve kullanıcıya sonucu bildir.
 
+## Ayrintili birlesik yol haritasi ve kabul kapilari
+
+Bu bölüm, önceki genel ve Linux roadmap dosyalarındaki ayrıntıların tek kaynak halidir.
+
+### Linux alt asamalari (L0-L7)
+
+| Asama | Durum | Kapsam | Kapanis kaniti |
+|---|---|---|---|
+| L0 Baseline | Kod hazır, native kanıt bekliyor | Kernel/header, VM, BCC, tracefs, fanotify fotoğrafı | Gerçek Linux JSON snapshot |
+| L1 Headers | Kod hazır, native apply bekliyor | Kernel-header eşleşmesi, VM conflict, dry-run/apply | Fixture ve rollback kanıtı |
+| L2 fanotify | Kod hazır, native verify bekliyor | Permission event, mount, overflow/restart/timeout | Benign event ve root kanıtı |
+| L3 eBPF | Kod hazır, native verify bekliyor | BCC/tracefs/header, filtreli olay, cleanup | Harmless event ve detach kanıtı |
+| L4 pre-exec | Kod hazır, native verify bekliyor | FD/file identity, ortak scanner/scorer | Parity, TOCTOU ve bütçe testleri |
+| L5 response | Kod hazır, native verify bekliyor | Hash-zincirli audit, karantina/restore | Audit, disk, izin testleri |
+| L6 resilience | Kod hazır, native verify bekliyor | p50/p95, kaynak, event drop, fuzz/stres | Sürümlü benchmark |
+| L7 release | Kod hazır, native verify bekliyor | Debian/Pardus paket, imza, SBOM, checksum | Native kapasite ve indirme kanıtı |
+
+L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz. Windows portable testleri native Linux kanıtı değildir.
+
+### Genel ürün asamalari (M1-M8)
+
+- **M1 tamamlandı:** Ortak entropy/scanner/scorer, sınırlı PE kanıtı, INCONCLUSIVE sözleşmesi ve Windows monitor-only hattı.
+- **M2 sıradaki:** Provenance'lı hash/signature, YARA-X değerlendirmesi, PE import/export ve section/packer kanıtı, Authenticode trust-chain, imzalı offline kural paketi, downgrade/rollback, parser bütçeleri ve fuzz.
+- **M3:** Etiketli veri, leakage-resistant ayrım, precision/recall/false-positive/INCONCLUSIVE, gecikme ve kaynak ölçümü.
+- **M4:** Cihaz içi küçük ML modeli, sürümlü feature schema, imzalı model ve deterministik fallback.
+- **M5:** Ham dosyayı çalıştırmayan yerel AI kanıt yorumlayıcısı; şema, injection testleri ve bütçeler. AI tek başına müdahale kararı veremez.
+- **M6:** Atılabilir VM, kontrollü ağ, host paylaşımı yok, davranış kanıtı ve snapshot temizleme.
+- **M7:** Hızlı karar/derin analiz ayrımı, Linux fail-open/closed politikası, kimlik bağlı cache ve rollback testleri; Windows MONITOR_ONLY.
+- **M8:** Fuzz/stres, SBOM/lisans, destek matrisi, kurulum-yükseltme-rollback, imzalı paket, checksum ve gerçek landing doğrulaması.
+
 ## Makine-okunur son durum
 
 ```json
