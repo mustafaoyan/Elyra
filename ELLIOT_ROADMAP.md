@@ -223,7 +223,7 @@ kernel kanıtları; bilinen kısıtlar; gerçek canlı indirme denemesi.
 ```
 
 Her aşama; kod, otomatik test, gerçek çalışma kanıtı ve güncel
-`ELLIOT_AI_CONTEXT.md` ile kapanır. M1'in bu makinedeki doğrulaması diğer
+`AI.md` ile kapanır. M1'in bu makinedeki doğrulaması diğer
 platformlar için canlı çalışma kanıtı sayılmaz. Tahmini takvim; veri seti,
 donanım ve sürücü kapsamı netleşmeden kesin gün olarak verilmez.
 

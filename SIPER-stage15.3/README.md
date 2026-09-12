@@ -12,7 +12,7 @@ placeholder links in [`../landing/assets/js/download-config.js`](../landing/asse
 The current scope is strictly local-first: no cloud management or remote event
 logging is enabled. Windows user-space monitoring is monitor-only until a
 separately signed minifilter is deployed; see the repository-root
-[`ELLIOT_AI_CONTEXT.md`](../ELLIOT_AI_CONTEXT.md) for the cross-platform model.
+[`AI.md`](../AI.md) for the cross-platform model.
 
 **Siper — the Pardus security application developed within the ELLIOT project**
 

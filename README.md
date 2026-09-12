@@ -42,8 +42,7 @@ only after the user says “başla”.
 SIPER-stage15.3/     Core Python engine, desktop GUI, tests, packaging and docs
 landing/              Static deployment site with OS-aware download routing
 kurulum/              Existing Debian package and installation material
-ELLIOT_AI_CONTEXT.md  Architecture blueprint for future AI contributors
-AI.md                 Visible AI handoff index and continuation instructions
+AI.md                 Complete AI handoff, standards, history and continuation instructions
 ELLIOT_ROADMAP.md     Milestones, acceptance gates and scope boundaries
 ELLIOT_LINUX_ROADMAP.md Linux-only gated development plan
 ```
@@ -141,7 +140,7 @@ disabled unless a local policy and authorization explicitly permit them.
 
 ## Documentation
 
-- [AI architecture context](ELLIOT_AI_CONTEXT.md)
+- [AI architecture context](AI.md)
 - [Core architecture](SIPER-stage15.3/docs/architecture.md)
 - [Linux operations](SIPER-stage15.3/docs/operations.md)
 - [Landing-page deployment](landing/README.md)
