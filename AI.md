@@ -76,6 +76,7 @@ Ortak statik scanner/scorer, sınırlı PE kanıtı, `ReadDirectoryChangesW` fal
 5. Yerel update manifesti; zorunlu güncelleme `can_defer:false`.
 6. Linux `.deb` Release v1.0.2 + SHA256 sidecar doğrulaması.
 7. GitHub deposu `mustafaoyan/Elyra` olarak yeniden adlandırıldı ve bağlantılar güncellendi.
+8. Elyra isimlendirme refaktörü sonrası Windows doğrulaması tamamlandı: `255 passed`, `11 skipped`, `0 failed`; entropy-only fixture OS temp bağlamından izole edildi.
 
 ## Gelecek planı (başlatma izni olmadan uygulama yok)
 
@@ -132,5 +133,5 @@ L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz
 ## Makine-okunur son durum
 
 ```json
-{"schema":"elyra.ai-context.v2","updated":"2026-09-12","current_milestone":"M1_COMPLETE_LINUX_L7_READY","next_milestone":"M2_LOCAL_SIGNATURES_AND_STATIC_EVIDENCE","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"f8140d9"}
+{"schema":"elyra.ai-context.v2","updated":"2026-09-12","current_milestone":"M1_COMPLETE_LINUX_L7_READY","next_milestone":"M2_LOCAL_SIGNATURES_AND_STATIC_EVIDENCE","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"dc3a1a0","last_validation":"255 passed, 11 skipped, 0 failed"}
 ```
