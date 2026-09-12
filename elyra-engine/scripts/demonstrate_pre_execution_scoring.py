@@ -77,10 +77,13 @@ def main() -> int:
     scorer = PreExecutionScoringEngine()
     scenarios: list[dict[str, Any]] = []
 
-    # Use the platform temporary directory.  It works in restricted desktop
-    # sessions and CI containers where a user profile may be readable but not
-    # writable, while keeping all fixtures local and automatically removed.
-    with tempfile.TemporaryDirectory(prefix="elyra_stage4_") as temporary_directory:
+    # Keep fixtures under the repository rather than the OS temp directory.
+    # The scanner intentionally reports temporary-directory context as evidence;
+    # placing this fixture in %TEMP% would invalidate the entropy-only scenario.
+    with tempfile.TemporaryDirectory(
+        prefix="elyra_stage4_",
+        dir=Path.cwd(),
+    ) as temporary_directory:
         temp = Path(temporary_directory)
         ordinary = temp / "ordinary.txt"
         ordinary.write_text("ELYRA harmless Pardus test\n" * 100, encoding="utf-8")
