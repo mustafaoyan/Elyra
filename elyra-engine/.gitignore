@@ -4,6 +4,7 @@ build/
 *.spec
 .venv/
 .pytest_cache/
+.pytest-temp/
 .coverage
 coverage.xml
 htmlcov/
