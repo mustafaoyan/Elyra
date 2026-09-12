@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">ELYRA E</title>
+  <desc id="desc">Renkli E harfi ve kalkan simgesi</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2de1b2"/><stop offset="1" stop-color="#1687ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#07101f"/>
+  <path d="M32 7 52 17v14c0 13-8 22-20 27C20 53 12 44 12 31V17L32 7Z" fill="url(#bg)"/>
+  <path d="M42 21H23v7h16v7H23v8h19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

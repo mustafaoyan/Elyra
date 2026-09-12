@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "policy_name": "ELYRA_STAGE10_RUNTIME_CORRELATION",
+  "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+  "score_minimum": 0,
+  "score_maximum": 100,
+  "state_ttl_seconds": 300.0,
+  "exited_state_ttl_seconds": 60.0,
+  "late_binding_window_seconds": 5.0,
+  "inheritance_window_seconds": 30.0,
+  "max_states": 4096,
+  "decision_thresholds": {
+    "alert_min": 40,
+    "terminate_min": 70,
+    "quarantine_min": 90
+  },
+  "runtime_rules": {
+    "DISTINCT_FILE_WRITE": {
+      "weight": 8,
+      "max_occurrences": 4,
+      "description": "The process modified a previously unseen file identifier."
+    },
+    "FILE_RENAME": {
+      "weight": 15,
+      "max_occurrences": 2,
+      "description": "The process attempted a file rename operation."
+    },
+    "OUTBOUND_CONNECTION": {
+      "weight": 20,
+      "max_occurrences": 2,
+      "description": "The process attempted an outbound IPv4 connection."
+    },
+    "CHILD_PROCESS_EXEC": {
+      "weight": 10,
+      "max_occurrences": 1,
+      "description": "A runtime-only child process was linked to a monitored parent."
+    },
+    "EXECUTABLE_IDENTIFIER_MISMATCH": {
+      "weight": 20,
+      "max_occurrences": 1,
+      "description": "The fanotify path and eBPF executable identifier did not match lexically."
+    }
+  }
+}

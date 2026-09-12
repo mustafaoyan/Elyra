@@ -1,0 +1,40 @@
+[Unit]
+Description=Elyra Pardus security daemon (ELYRA project)
+Documentation=file:/opt/elyra/current/README.md
+After=local-fs.target systemd-udevd.service
+Wants=local-fs.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+ConditionPathExists=/opt/elyra/current/.venv/bin/elyra-daemon
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/elyra/current
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ELYRA_UPDATE_MANIFEST_URL=https://raw.githubusercontent.com/mustafaoyan/Elyra/main/landing/update-manifest.json
+ExecStartPre=/opt/elyra/current/.venv/bin/elyra-preflight --service
+ExecStart=/opt/elyra/current/.venv/bin/elyra-daemon
+Restart=on-failure
+RestartSec=3s
+TimeoutStartSec=30s
+TimeoutStopSec=20s
+KillSignal=SIGTERM
+UMask=0077
+RuntimeDirectory=elyra
+RuntimeDirectoryMode=0750
+RuntimeDirectoryPreserve=no
+StateDirectory=elyra
+StateDirectoryMode=0700
+LogsDirectory=elyra
+LogsDirectoryMode=0750
+LimitNOFILE=65536
+TasksMax=512
+LockPersonality=yes
+RestrictSUIDSGID=yes
+
+[Install]
+WantedBy=multi-user.target
+Alias=elyra.service

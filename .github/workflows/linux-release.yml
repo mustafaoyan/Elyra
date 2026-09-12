@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Debian/Pardus package
-        working-directory: SIPER-stage15.3
+        working-directory: elyra-engine
         run: |
           sudo apt-get update
           sudo apt-get install -y dpkg-dev python3-venv python3-tk libmagic1 build-essential
@@ -26,12 +26,12 @@ jobs:
           test -f LICENSE
           bash scripts/build_pardus_deb.sh dist/debian
       - name: Generate release checksums
-        working-directory: SIPER-stage15.3
+        working-directory: elyra-engine
         run: sha256sum dist/debian/*.deb > dist/debian/SHA256SUMS
       - name: Upload GitHub release asset
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            SIPER-stage15.3/dist/debian/*.deb
-            SIPER-stage15.3/dist/debian/SHA256SUMS
+            elyra-engine/dist/debian/*.deb
+            elyra-engine/dist/debian/SHA256SUMS

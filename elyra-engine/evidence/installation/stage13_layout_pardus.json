@@ -1,0 +1,79 @@
+{
+  "method": "temporary manifest and source-contract checks only; no root, apt, systemd changes, or daemon start",
+  "overall_status": "OK",
+  "results": [
+    {
+      "scenario": "systemd_entry_points_match_install_layout",
+      "status": "OK"
+    },
+    {
+      "scenario": "systemd_safe_default_policy",
+      "status": "OK"
+    },
+    {
+      "scenario": "systemd_runtime_state_log_directories",
+      "status": "OK"
+    },
+    {
+      "scenario": "installer_uses_versioned_release_and_system_bcc_visibility",
+      "status": "OK"
+    },
+    {
+      "scenario": "dedicated_ipc_and_admin_groups",
+      "status": "OK"
+    },
+    {
+      "scenario": "gui_launcher_targets_installed_console_script",
+      "status": "OK"
+    },
+    {
+      "scenario": "package_exposes_real_entry_points_and_ebpf_source",
+      "status": "OK"
+    },
+    {
+      "scenario": "production_paths_are_consistent",
+      "status": "OK"
+    },
+    {
+      "manifest": {
+        "automatic_runtime_actions": false,
+        "current_link": "/opt/elyra/current",
+        "daemon_entry_point": "/opt/elyra/current/.venv/bin/elyra-daemon",
+        "fanotify_policy": "MONITOR_ONLY",
+        "gui_entry_point": "/opt/elyra/current/.venv/bin/elyra-gui",
+        "install_root": "/opt/elyra",
+        "installed_at_utc": "2026-07-29T14:23:32.148101+00:00",
+        "installer_revision": "STAGE_13_SYSTEMD_INSTALLATION",
+        "ipc_socket": "/run/elyra/elyra.sock",
+        "project": "ELYRA",
+        "release_name": "0.1.0.dev13-demo",
+        "schema_version": "1.0",
+        "service_unit": "/etc/systemd/system/elyra.service",
+        "source_directory": "/home/wafa/Masaüstü/ELYRA-stage13",
+        "version": "0.1.0.dev13"
+      },
+      "scenario": "installation_manifest_records_safe_defaults",
+      "status": "OK"
+    },
+    {
+      "checks": {
+        "scripts/install.sh": {
+          "returncode": 0,
+          "stderr": ""
+        },
+        "scripts/launch_gui.sh": {
+          "returncode": 0,
+          "stderr": ""
+        },
+        "scripts/uninstall.sh": {
+          "returncode": 0,
+          "stderr": ""
+        }
+      },
+      "scenario": "installer_launcher_shell_syntax",
+      "status": "OK"
+    }
+  ],
+  "timestamp_utc": "2026-07-29T14:23:32.155753+00:00",
+  "version": "0.1.0.dev13"
+}

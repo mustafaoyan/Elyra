@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+VERSION='@PROJECT_VERSION@'
+if [ "$1" = remove ] || [ "$1" = purge ]; then
+    if [ -L /opt/elyra/current ] && [ "$(readlink /opt/elyra/current)" = "releases/${VERSION}" ]; then
+        rm -f /opt/elyra/current
+    fi
+    rm -rf "/opt/elyra/releases/${VERSION}"
+    systemctl daemon-reload >/dev/null 2>&1 || true
+fi
+if [ "$1" = purge ]; then
+    rm -rf /var/lib/elyra /var/log/elyra
+fi

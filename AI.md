@@ -6,7 +6,7 @@ Bu dosya, projeye katılan herhangi bir AI agent'ın önce okuyacağı tek ve ot
 
 ## Proje kimliği
 
-- Ürün adı: **Elyra** (eski kod/servis adları ELLIOT/Siper geriye dönük uyumluluk için korunur).
+- Ürün adı: **Elyra** (eski kod/servis adları ELYRA/Elyra geriye dönük uyumluluk için korunur).
 - Depo: `https://github.com/mustafaoyan/Elyra`
 - Amaç: entropy, dosya yapısı, MIME, izin ve platform telemetrisiyle açıklanabilir, cihaz-içi savunma.
 - Linux geliştirmesi aktif; Windows W1'de duraklatıldı. Bulut yönetimi, uzaktan günlükleme ve dosya yükleme yok.
@@ -23,7 +23,7 @@ Eksik, okunamayan, değişen veya desteklenmeyen dosya `INCONCLUSIVE` olur ve GU
 ## Mimari ağaç
 
 ```text
-SIPER-stage15.3/src/elliot/
+elyra-engine/src/elyra/
 ├─ analyzer/{entropy.py,static_analyzer.py,pe.py,pre_execution.py}
 ├─ scoring/engine.py             # Deterministik açıklanabilir skor
 ├─ monitor/{fanotify,ebpf,windows}
@@ -32,7 +32,7 @@ SIPER-stage15.3/src/elliot/
 ├─ audit/                        # Yerel tamper-evident JSONL
 ├─ service/{daemon.py,windows_local.py}
 └─ gui/                          # CustomTkinter + Matplotlib
-SIPER-stage15.3/{scripts,tests,packaging,docs}
+elyra-engine/{scripts,tests,packaging,docs}
 landing/{index.html,assets/css,assets/js,update-manifest.json}
 ```
 
@@ -54,7 +54,7 @@ landing/{index.html,assets/css,assets/js,update-manifest.json}
 L0 baseline, L1 kernel-header resolver, L2 fanotify capability, L3 eBPF/tracefs capability, L4 pre-execution kimliği, L5 audit sağlık durumu, L6 resilience benchmark ve L7 release gate tamamlandı. Native kanıt gerçek, uyumlu Linux hostunda root ile alınabilir; Windows makinesindeki test bunun yerine geçmez.
 
 ```bash
-cd SIPER-stage15.3
+cd elyra-engine
 PYTHONPATH=src python scripts/linux_baseline.py
 PYTHONPATH=src python scripts/test_linux_capacity.py
 sudo PYTHONPATH=src python scripts/test_linux_capacity.py --live --output evidence/capacity/linux_capacity.json

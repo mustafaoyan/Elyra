@@ -1,0 +1,440 @@
+{
+  "fixture_label": "SYNTHETIC_RUNTIME_EVIDENCE_SAFE_FIXTURE_NOT_LIVE_KERNEL_TELEMETRY",
+  "method": "harmless temporary /bin/sleep copy; real analysis/IPC/GUI/audit/pidfd/quarantine/restore; synthetic fanotify/eBPF risk records; no malware; no root",
+  "overall_status": "OK",
+  "results": [
+    {
+      "scan": {
+        "block_entropies": [
+          3.239265,
+          0.786456,
+          5.828033,
+          6.062005,
+          6.214146,
+          5.924814,
+          5.651685,
+          5.559356,
+          4.843405,
+          0.80079,
+          2.550481
+        ],
+        "block_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "blocks_truncated": false,
+        "decision": "ALLOW",
+        "duration_ms": 4.817,
+        "errors": [],
+        "filepath": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+        "indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "is_elf": true,
+        "mime_extension_consistency": "NO_EXTENSION",
+        "mime_type": "application/x-pie-executable",
+        "pre_execution_score": 15,
+        "runtime_score": null,
+        "status": "OK",
+        "warnings": [],
+        "whole_file_entropy": 5.138668
+      },
+      "scenario": "real_static_analysis_and_explainable_score",
+      "status": "OK"
+    },
+    {
+      "scenario": "fanotify_runtime_correlation_reaches_quarantine",
+      "state": {
+        "action_execution_status": "NOT_EXECUTED_STAGE11",
+        "combined_score": 95,
+        "correlation_id": "14d92376fbfa4253b72cd1756646708c",
+        "exec_timestamp_ns": 1785341770350100497,
+        "executable_identifier": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+        "executable_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+        "exit_timestamp_ns": null,
+        "generation": 1,
+        "last_action_result": null,
+        "parent_correlation_id": null,
+        "pid": 7252,
+        "ppid": 7249,
+        "pre_execution_decision": "WARN",
+        "pre_execution_indicators": [
+          {
+            "category": "test",
+            "evidence": "harmless copied /bin/sleep",
+            "rule": "SAFE_SYNTHETIC_PREEXEC_INTEGRATION_FIXTURE",
+            "weight": 60
+          }
+        ],
+        "pre_execution_score": 60,
+        "recommended_action": "QUARANTINE",
+        "runtime_counters": {
+          "distinct_files": 0,
+          "outbound_connections": 1,
+          "rename_identifiers": 1,
+          "rule_occurrences": {
+            "FILE_RENAME": 1,
+            "OUTBOUND_CONNECTION": 1
+          }
+        },
+        "runtime_indicators": [
+          {
+            "description": "The process attempted a file rename operation.",
+            "evidence": {
+              "identifier": "safe-test-rename-identifier",
+              "path_capability": "IDENTIFIER_ONLY"
+            },
+            "maximum_occurrences": 2,
+            "occurrence": 1,
+            "rule": "FILE_RENAME",
+            "weight": 15
+          },
+          {
+            "description": "The process attempted an outbound IPv4 connection.",
+            "evidence": {
+              "endpoint": "127.0.0.1:9"
+            },
+            "maximum_occurrences": 2,
+            "occurrence": 1,
+            "rule": "OUTBOUND_CONNECTION",
+            "weight": 20
+          }
+        ],
+        "runtime_score": 35,
+        "schema_version": "1.0",
+        "source": "FANOTIFY",
+        "status": "ACTIVE",
+        "terminal_reason": null,
+        "tgid": 7252,
+        "transitions": [
+          {
+            "combined_score": 60,
+            "from": "CONTINUE_MONITORING",
+            "reason": "STATE_CREATED",
+            "timestamp_monotonic": 22631.183056,
+            "to": "ALERT"
+          },
+          {
+            "combined_score": 75,
+            "from": "ALERT",
+            "reason": "FILE_RENAME",
+            "timestamp_monotonic": 22631.18363,
+            "to": "TERMINATE"
+          },
+          {
+            "combined_score": 95,
+            "from": "TERMINATE",
+            "reason": "OUTBOUND_CONNECTION",
+            "timestamp_monotonic": 22631.183668,
+            "to": "QUARANTINE"
+          }
+        ],
+        "uid": 1000
+      },
+      "status": "OK"
+    },
+    {
+      "action": {
+        "action_id": "0643fcce504a4a009accd727f62b033d",
+        "correlation_id": "14d92376fbfa4253b72cd1756646708c",
+        "details": {
+          "quarantine_record": {
+            "deleted_at": null,
+            "deleted_at_utc": null,
+            "file_type": "application/x-elf",
+            "original_gid": 1000,
+            "original_mode": 493,
+            "original_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+            "original_uid": 1000,
+            "ownership_restored": false,
+            "process_info": {
+              "correlation_id": "14d92376fbfa4253b72cd1756646708c",
+              "process_identity": {
+                "executable_device": 35,
+                "executable_inode": 6425,
+                "executable_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+                "pid": 7252,
+                "start_time_ticks": 2263117,
+                "uid": 1000
+              }
+            },
+            "quarantine_id": "c4a2f2cd-e1da-41ee-b090-167db987c06b",
+            "reason": "Stage 11 correlated response: score=95",
+            "related_pid": 7252,
+            "restoration_status": "quarantined",
+            "restored_at": null,
+            "restored_at_utc": null,
+            "restored_mode": null,
+            "restored_path": null,
+            "schema_version": 1,
+            "sha256": "0637e6d47579929cb72efa46f361861b319d62c62fe8a9d10731fd7655eb5936",
+            "size_bytes": 43432,
+            "source_device": 35,
+            "source_inode": 6425,
+            "source_link_count": 1,
+            "timestamp": 1785341770.3513882,
+            "timestamp_utc": "2026-07-29T16:16:10.351388+00:00",
+            "triggered_rules": [
+              {
+                "category": "test",
+                "evidence": "harmless copied /bin/sleep",
+                "rule": "SAFE_SYNTHETIC_PREEXEC_INTEGRATION_FIXTURE",
+                "weight": 60
+              },
+              {
+                "description": "The process attempted a file rename operation.",
+                "evidence": {
+                  "identifier": "safe-test-rename-identifier",
+                  "path_capability": "IDENTIFIER_ONLY"
+                },
+                "maximum_occurrences": 2,
+                "occurrence": 1,
+                "rule": "FILE_RENAME",
+                "weight": 15
+              },
+              {
+                "description": "The process attempted an outbound IPv4 connection.",
+                "evidence": {
+                  "endpoint": "127.0.0.1:9"
+                },
+                "maximum_occurrences": 2,
+                "occurrence": 1,
+                "rule": "OUTBOUND_CONNECTION",
+                "weight": 20
+              }
+            ]
+          },
+          "termination": {
+            "escalated": false,
+            "process_already_exited": false,
+            "signal": "SIGTERM"
+          }
+        },
+        "executed_action": "QUARANTINE",
+        "failure_explanation": null,
+        "path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+        "pid": 7252,
+        "reason": "The correlation-bound file was placed in protected quarantine",
+        "requested_action": "QUARANTINE",
+        "schema_version": "1.0",
+        "score": 95,
+        "status": "SUCCEEDED",
+        "timestamp": 1785341770.3523703,
+        "timestamp_utc": "2026-07-29T16:16:10.352370+00:00",
+        "triggered_rules": [
+          {
+            "category": "test",
+            "evidence": "harmless copied /bin/sleep",
+            "rule": "SAFE_SYNTHETIC_PREEXEC_INTEGRATION_FIXTURE",
+            "weight": 60
+          },
+          {
+            "description": "The process attempted a file rename operation.",
+            "evidence": {
+              "identifier": "safe-test-rename-identifier",
+              "path_capability": "IDENTIFIER_ONLY"
+            },
+            "maximum_occurrences": 2,
+            "occurrence": 1,
+            "rule": "FILE_RENAME",
+            "weight": 15
+          },
+          {
+            "description": "The process attempted an outbound IPv4 connection.",
+            "evidence": {
+              "endpoint": "127.0.0.1:9"
+            },
+            "maximum_occurrences": 2,
+            "occurrence": 1,
+            "rule": "OUTBOUND_CONNECTION",
+            "weight": 20
+          }
+        ]
+      },
+      "scenario": "authorised_terminate_and_quarantine",
+      "status": "OK"
+    },
+    {
+      "restore": {
+        "action_id": "890a7d494cdb4fc7983a9cccb32c6940",
+        "correlation_id": null,
+        "details": {
+          "actor": "stage14-safe-demonstration",
+          "quarantine_record": {
+            "deleted_at": null,
+            "deleted_at_utc": null,
+            "file_type": "application/x-elf",
+            "original_gid": 1000,
+            "original_mode": 493,
+            "original_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+            "original_uid": 1000,
+            "ownership_restored": false,
+            "process_info": {
+              "correlation_id": "14d92376fbfa4253b72cd1756646708c",
+              "process_identity": {
+                "executable_device": 35,
+                "executable_inode": 6425,
+                "executable_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+                "pid": 7252,
+                "start_time_ticks": 2263117,
+                "uid": 1000
+              }
+            },
+            "quarantine_id": "c4a2f2cd-e1da-41ee-b090-167db987c06b",
+            "reason": "Stage 11 correlated response: score=95",
+            "related_pid": 7252,
+            "restoration_status": "restored",
+            "restored_at": 1785341770.353717,
+            "restored_at_utc": "2026-07-29T16:16:10.353717+00:00",
+            "restored_mode": 493,
+            "restored_path": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+            "schema_version": 1,
+            "sha256": "0637e6d47579929cb72efa46f361861b319d62c62fe8a9d10731fd7655eb5936",
+            "size_bytes": 43432,
+            "source_device": 35,
+            "source_inode": 6425,
+            "source_link_count": 1,
+            "timestamp": 1785341770.3513882,
+            "timestamp_utc": "2026-07-29T16:16:10.351388+00:00",
+            "triggered_rules": [
+              {
+                "category": "test",
+                "evidence": "harmless copied /bin/sleep",
+                "rule": "SAFE_SYNTHETIC_PREEXEC_INTEGRATION_FIXTURE",
+                "weight": 60
+              },
+              {
+                "description": "The process attempted a file rename operation.",
+                "evidence": {
+                  "identifier": "safe-test-rename-identifier",
+                  "path_capability": "IDENTIFIER_ONLY"
+                },
+                "maximum_occurrences": 2,
+                "occurrence": 1,
+                "rule": "FILE_RENAME",
+                "weight": 15
+              },
+              {
+                "description": "The process attempted an outbound IPv4 connection.",
+                "evidence": {
+                  "endpoint": "127.0.0.1:9"
+                },
+                "maximum_occurrences": 2,
+                "occurrence": 1,
+                "rule": "OUTBOUND_CONNECTION",
+                "weight": 20
+              }
+            ]
+          }
+        },
+        "executed_action": "RESTORE",
+        "failure_explanation": null,
+        "path": null,
+        "pid": 7249,
+        "reason": "An authorised quarantine restoration completed",
+        "requested_action": "RESTORE",
+        "schema_version": "1.0",
+        "score": 0,
+        "status": "SUCCEEDED",
+        "timestamp": 1785341770.3547108,
+        "timestamp_utc": "2026-07-29T16:16:10.354711+00:00",
+        "triggered_rules": []
+      },
+      "scenario": "authorised_safe_restore",
+      "status": "OK"
+    },
+    {
+      "dashboard": {
+        "event_count": 6,
+        "policy_mode": "MONITOR_ONLY",
+        "service_state": "CONNECTED"
+      },
+      "scan": {
+        "block_entropies": [
+          3.239265,
+          0.786456,
+          5.828033,
+          6.062005,
+          6.214146,
+          5.924814,
+          5.651685,
+          5.559356,
+          4.843405,
+          0.80079,
+          2.550481
+        ],
+        "block_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "blocks_truncated": false,
+        "decision": "ALLOW",
+        "duration_ms": 4.417,
+        "errors": [],
+        "filepath": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+        "indicators": [
+          {
+            "category": "context",
+            "description": "The file is located under /tmp or /var/tmp.",
+            "evidence": "/tmp/elyra-stage14-integrated-v59u4_cr/work/elyra-stage14-safe-sleep",
+            "rule": "TEMPORARY_DIRECTORY",
+            "weight": 15
+          }
+        ],
+        "is_elf": true,
+        "mime_extension_consistency": "NO_EXTENSION",
+        "mime_type": "application/x-pie-executable",
+        "pre_execution_score": 15,
+        "runtime_score": null,
+        "status": "OK",
+        "warnings": [],
+        "whole_file_entropy": 5.138668
+      },
+      "scenario": "official_ipc_gui_projection",
+      "status": "OK"
+    },
+    {
+      "integrity": {
+        "coverage": "FULL_FROM_GENESIS",
+        "error": null,
+        "error_line": null,
+        "error_segment": null,
+        "first_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "last_hash": "b129271435a5b6a88514dba07567e21a7eecf1bd712842ca9d5c79240198613e",
+        "last_sequence": 4,
+        "record_count": 4,
+        "recovery_artifact": null,
+        "repaired_trailing_partial": false,
+        "segment_count": 1,
+        "valid": true
+      },
+      "scenario": "structured_tamper_evident_audit_chain",
+      "status": "OK"
+    }
+  ],
+  "timestamp_utc": "2026-07-29T16:16:10.862001+00:00"
+}

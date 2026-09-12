@@ -1,0 +1,180 @@
+{
+  "timestamp_utc": "2026-07-29T12:08:51.400169+00:00",
+  "method": "real BCC/eBPF telemetry with Pardus 25 kernel compatibility; harmless temporary files and loopback TCP only",
+  "verifier_revision": "STAGE_9_2_RENAME_COMPAT",
+  "environment": {
+    "platform": "Linux-6.12.96+deb13-amd64-x86_64-with-glibc2.41",
+    "kernel": "6.12.96+deb13-amd64",
+    "python": "3.13.5",
+    "euid": 0
+  },
+  "results": [
+    {
+      "scenario": "process_execution_observed",
+      "status": "OK"
+    },
+    {
+      "scenario": "process_exit_observed",
+      "status": "OK"
+    },
+    {
+      "scenario": "selected_file_write_observed",
+      "status": "OK"
+    },
+    {
+      "scenario": "selected_rename_observed",
+      "status": "OK"
+    },
+    {
+      "scenario": "loopback_outbound_connect_observed",
+      "status": "OK"
+    },
+    {
+      "scenario": "child_completed_without_hang",
+      "status": "OK"
+    },
+    {
+      "scenario": "file_events_use_identifier_not_unverified_full_path",
+      "status": "OK"
+    }
+  ],
+  "overall_status": "OK",
+  "observed_event_types": [
+    "FILE_RENAME",
+    "FILE_WRITE",
+    "NETWORK_CONNECT",
+    "PROCESS_EXEC",
+    "PROCESS_EXIT"
+  ],
+  "sample_records": [
+    {
+      "event_type": "PROCESS_EXEC",
+      "timestamp_ns": 7796794356104,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": "/home/wafa/Masa\u00fcst\u00fc/ELYRA-stage9.2.1/.venv/bin/python",
+      "exit_code": null,
+      "device": null,
+      "inode": null,
+      "destination_address": null,
+      "destination_port": null,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": null
+    },
+    {
+      "event_type": "FILE_WRITE",
+      "timestamp_ns": 7796826889655,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": null,
+      "exit_code": null,
+      "device": 51539607587,
+      "inode": 1803,
+      "destination_address": null,
+      "destination_port": null,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": "51539607587:1803"
+    },
+    {
+      "event_type": "FILE_RENAME",
+      "timestamp_ns": 7796826961443,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": "/tmp/elyra-stage9-rpf6olfz/write_source.txt",
+      "exit_code": null,
+      "device": 0,
+      "inode": 0,
+      "destination_address": null,
+      "destination_port": null,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": "0:0"
+    },
+    {
+      "event_type": "FILE_RENAME",
+      "timestamp_ns": 7796826987509,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": "/tmp/elyra-stage9-rpf6olfz/write_renamed.txt",
+      "exit_code": null,
+      "device": 0,
+      "inode": 0,
+      "destination_address": null,
+      "destination_port": null,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": "0:0"
+    },
+    {
+      "event_type": "NETWORK_CONNECT",
+      "timestamp_ns": 7796827035152,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": null,
+      "exit_code": null,
+      "device": null,
+      "inode": null,
+      "destination_address": "0.0.0.0",
+      "destination_port": 0,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": null
+    },
+    {
+      "event_type": "PROCESS_EXIT",
+      "timestamp_ns": 7796831209104,
+      "pid": 3323,
+      "tgid": 3323,
+      "ppid": 3319,
+      "uid": 0,
+      "comm": "python",
+      "executable_identifier": null,
+      "exit_code": 0,
+      "device": null,
+      "inode": null,
+      "destination_address": null,
+      "destination_port": null,
+      "probe_path_capability": "IDENTIFIER_ONLY",
+      "distinct_file_key": null
+    }
+  ],
+  "collector_status": {
+    "available": true,
+    "degraded_reason": null,
+    "attached_probes": [
+      "sched:sched_process_exec",
+      "sched:sched_process_exit",
+      "syscalls:sys_enter_rename",
+      "syscalls:sys_enter_renameat",
+      "syscalls:sys_enter_renameat2",
+      "vfs_write",
+      "tcp_v4_connect"
+    ],
+    "dropped_events": 0,
+    "queued_events": 0,
+    "path_capability": "IDENTIFIER_ONLY_FOR_FILE_EVENTS",
+    "tracepoint_compatibility": {
+      "sched_process_exec.filename_field": "data_loc_filename",
+      "rename.tracepoints": "rename,renameat,renameat2"
+    },
+    "rename_tracepoints": [
+      "rename",
+      "renameat",
+      "renameat2"
+    ],
+    "rename_dedup_window_ns": 10000000,
+    "exit_code_capability": "NOT_EXPOSED_BY_PORTABLE_SCHED_PROCESS_EXIT"
+  }
+}

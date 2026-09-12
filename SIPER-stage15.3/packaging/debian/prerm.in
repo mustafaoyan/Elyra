@@ -1,6 +1,0 @@
-#!/bin/sh
-set -eu
-if [ "$1" = remove ] || [ "$1" = deconfigure ]; then
-    systemctl stop elliot.service >/dev/null 2>&1 || true
-    systemctl disable elliot.service >/dev/null 2>&1 || true
-fi

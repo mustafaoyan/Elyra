@@ -1,4 +1,4 @@
-name: Verify ELLIOT engine
+name: Verify ELYRA engine
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         python: ["3.12"]
     defaults:
       run:
-        working-directory: SIPER-stage15.3
+        working-directory: elyra-engine
     steps:
       - name: Check out source
         uses: actions/checkout@v4

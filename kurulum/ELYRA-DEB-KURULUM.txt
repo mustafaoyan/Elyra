@@ -1,0 +1,40 @@
+ELYRA PARDUS KURULUMU
+Paket: elyra-pardus_1.0.1-2_amd64.deb
+
+Gereksinimler:
+- Pardus 25.1 / amd64
+- İlk kurulum sırasında internet bağlantısı
+- Yönetici yetkisi
+
+Önerilen ilk test kurulumu:
+
+1. .deb dosyasının bulunduğu klasörde terminal açın.
+2. Bütünlüğü doğrulayın:
+   sha256sum -c elyra-pardus_1.0.1-2_amd64.deb.sha256
+
+3. Paketi kurun:
+   sudo apt install ./elyra-pardus_1.0.1-2_amd64.deb
+
+4. Kurulum tamamlanınca Pardus oturumunu kapatıp tekrar açın.
+5. Uygulama menüsünde “Elyra” aratın ve simgeye tıklayın.
+
+Normal kullanımda terminal gerekmez.
+Beklenen durum:
+- Service: CONNECTED
+- Policy: MONITOR_ONLY
+- fanotify: available
+- eBPF: available
+
+Güvenli varsayılanlar:
+- Otomatik engelleme kapalıdır.
+- Otomatik sonlandırma kapalıdır.
+- Otomatik karantina kapalıdır.
+
+Servis kontrolü:
+   systemctl is-active elyra.service
+
+Kaldırma:
+   sudo apt remove elyra-pardus
+
+Tam temizleme (karantina ve günlükleri de siler):
+   sudo apt purge elyra-pardus

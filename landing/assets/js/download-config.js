@@ -6,7 +6,7 @@
  * versioned release-asset URL templates, not a claim that the assets already
  * exist at the time this source is committed.
  */
-(function configureElliotDownloads(global) {
+(function configureElyraDownloads(global) {
   "use strict";
 
   const repository = "mustafaoyan/Elyra";
@@ -14,7 +14,7 @@
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
 
-  global.ELLIOT_DOWNLOAD_CONFIG = Object.freeze({
+  global.ELYRA_DOWNLOAD_CONFIG = Object.freeze({
     version,
     releaseTag,
     published: true,
@@ -22,8 +22,8 @@
     downloads: Object.freeze({
       linux: Object.freeze({
         label: "Linux / Pardus (64-bit .deb)",
-        filename: `siper-pardus_${version}-1_amd64.deb`,
-        url: `${releaseBaseUrl}/siper-pardus_${version}-1_amd64.deb`,
+        filename: `elyra-pardus_${version}-1_amd64.deb`,
+        url: `${releaseBaseUrl}/elyra-pardus_${version}-1_amd64.deb`,
       }),
     }),
   });

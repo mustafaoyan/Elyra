@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Elyra Security Monitor
+Name[tr]=Elyra Güvenlik İzleyicisi
+Comment=Unprivileged monitor for the Elyra security daemon
+Comment[tr]=Elyra güvenlik servisi için kullanıcı arayüzü
+Exec=/usr/local/bin/elyra-gui
+Icon=security-high
+Terminal=false
+Categories=System;Security;
+StartupNotify=true

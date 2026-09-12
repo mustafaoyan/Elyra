@@ -1,0 +1,40 @@
+#!/bin/sh
+set -eu
+
+VERSION='@PROJECT_VERSION@'
+RELEASE="/opt/elyra/releases/${VERSION}"
+PAYLOAD=/usr/share/elyra
+CURRENT=/opt/elyra/current
+
+if command -v systemd-sysusers >/dev/null 2>&1; then
+    systemd-sysusers /usr/lib/sysusers.d/elyra.conf
+else
+    getent group elyra >/dev/null 2>&1 || groupadd --system elyra
+    getent group elyra-admin >/dev/null 2>&1 || groupadd --system elyra-admin
+fi
+
+install -d -o root -g root -m 0755 /opt/elyra /opt/elyra/releases "$RELEASE"
+install -d -o root -g root -m 0700 /var/lib/elyra /var/lib/elyra/quarantine /var/lib/elyra/metadata
+install -d -o root -g root -m 0750 /var/log/elyra
+install -d -o root -g elyra -m 0750 /run/elyra
+
+rm -rf "$RELEASE/.venv"
+python3 -m venv --system-site-packages "$RELEASE/.venv"
+"$RELEASE/.venv/bin/python" -m pip install --no-index --find-links "$PAYLOAD/wheelhouse" --upgrade pip setuptools wheel
+"$RELEASE/.venv/bin/pip" install --no-index --find-links "$PAYLOAD/wheelhouse" -r "$PAYLOAD/requirements.txt"
+"$RELEASE/.venv/bin/pip" install --no-index --find-links "$PAYLOAD/wheelhouse" "$PAYLOAD/wheelhouse"/elyra_pardus-*.whl
+
+cp -a "$PAYLOAD/release/." "$RELEASE/"
+ln -sfn "releases/${VERSION}" "$CURRENT"
+
+systemctl daemon-reload
+systemctl enable elyra.service >/dev/null 2>&1 || true
+systemctl restart elyra.service
+
+cat <<'NOTICE'
+Elyra was installed in MONITOR_ONLY mode.
+Add a desktop user to the IPC group with:
+  sudo usermod -aG elyra <username>
+Then log out and back in before launching elyra-gui.
+No user was added to elyra-admin automatically.
+NOTICE

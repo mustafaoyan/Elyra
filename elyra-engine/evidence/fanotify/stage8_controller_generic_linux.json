@@ -1,0 +1,27 @@
+{
+  "timestamp_utc": "2026-07-28T18:25:38.813928+00:00",
+  "method": "safe fake syscall boundary; harmless temporary files; no root, kernel hook, network listener or malware",
+  "results": [
+    {
+      "scenario": "monitor_only_never_denies",
+      "status": "OK"
+    },
+    {
+      "scenario": "enforcement_deny_path",
+      "status": "OK"
+    },
+    {
+      "scenario": "deadline_failure_fail_open",
+      "status": "OK"
+    },
+    {
+      "scenario": "elyra_self_exclusion",
+      "status": "OK"
+    },
+    {
+      "scenario": "concurrent_events_all_responded_and_audited",
+      "status": "OK"
+    }
+  ],
+  "overall_status": "OK"
+}

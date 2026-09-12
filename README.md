@@ -1,4 +1,4 @@
-# ELLIOT – Siper Antivirus
+# ELYRA – Elyra Antivirus
 
 ## 🌐 Live Deployment & Download
 
@@ -18,9 +18,9 @@ versioned placeholders until those assets exist.
 > The engine and its telemetry remain local to the endpoint in this release.
 > There is no central cloud console or remote event logging.
 
-## What ELLIOT does
+## What ELYRA does
 
-ELLIOT – Siper Antivirus is an explainable, entropy-based security engine for
+ELYRA – Elyra Antivirus is an explainable, entropy-based security engine for
 unknown-file analysis and host-native monitoring. It combines byte-level
 Shannon entropy, file structure, MIME/extension consistency, permission/path
 evidence, and deterministic scoring. A high entropy value is an investigative
@@ -38,7 +38,7 @@ Windows work is paused; Linux implementation starts only after the user says
 “başla”.
 
 ```text
-SIPER-stage15.3/     Core Python engine, desktop GUI, tests, packaging and docs
+elyra-engine/     Core Python engine, desktop GUI, tests, packaging and docs
 landing/              Static deployment site with OS-aware download routing
 kurulum/              Existing Debian package and installation material
 AI.md                 Complete AI handoff, standards, history and continuation instructions
@@ -60,14 +60,14 @@ heuristic score is **not** a malware probability.
 This milestone does not include Authenticode verification, malware signatures,
 a trained AI model, sandbox execution or Windows execution blocking. Windows
 remains `MONITOR_ONLY`, with `enforced_action=NONE`; nothing is uploaded.
-See [Phase 1 verification and limitations](SIPER-stage15.3/docs/phase1-verification.md).
+See [Phase 1 verification and limitations](elyra-engine/docs/phase1-verification.md).
 
 ## Quick start
 
 ### Linux / Pardus
 
 ```bash
-cd SIPER-stage15.3
+cd elyra-engine
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
 pip install -r requirements.txt -r requirements-dev.txt
@@ -90,11 +90,11 @@ root and refuses to overwrite a real kernel build directory.
 ### Windows
 
 ```powershell
-cd SIPER-stage15.3
+cd elyra-engine
 py -m pip install -r requirements.txt -r requirements-dev.txt
 $env:PYTHONPATH = "src"
 py -m pytest -q
-py -m elliot.gui.main
+py -m elyra.gui.main
 ```
 
 The desktop dashboard uses the Windows local service facade instead of the
@@ -138,10 +138,10 @@ disabled unless a local policy and authorization explicitly permit them.
 ## Documentation
 
 - [AI architecture context](AI.md)
-- [Core architecture](SIPER-stage15.3/docs/architecture.md)
-- [Linux operations](SIPER-stage15.3/docs/operations.md)
+- [Core architecture](elyra-engine/docs/architecture.md)
+- [Linux operations](elyra-engine/docs/operations.md)
 - [Landing-page deployment](landing/README.md)
 
 ## License
 
-Apache License 2.0. See [`SIPER-stage15.3/LICENSE`](SIPER-stage15.3/LICENSE).
+Apache License 2.0. See [`elyra-engine/LICENSE`](elyra-engine/LICENSE).

@@ -1,6 +1,6 @@
-# ELLIOT Landing Page
+# ELYRA Landing Page
 
-This directory is a dependency-free static landing page for ELLIOT / Siper Antivirus. It is ready to deploy from its own directory to Netlify or Vercel; no build step, framework runtime, analytics, form endpoint, or cloud service is used.
+This directory is a dependency-free static landing page for ELYRA / Elyra Antivirus. It is ready to deploy from its own directory to Netlify or Vercel; no build step, framework runtime, analytics, form endpoint, or cloud service is used.
 
 The page detects Windows and Linux from the browser, preselects the matching release asset, and always keeps a visible package selector as a fallback. It does not collect or transmit endpoint telemetry.
 

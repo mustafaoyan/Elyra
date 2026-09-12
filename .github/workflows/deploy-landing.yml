@@ -1,4 +1,4 @@
-name: Deploy ELLIOT landing page
+name: Deploy ELYRA landing page
 
 on:
   push:

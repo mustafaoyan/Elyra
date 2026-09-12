@@ -1,0 +1,73 @@
+{
+  "timestamp_utc": "2026-07-29T12:50:08.406108+00:00",
+  "method": "synthetic fanotify and eBPF records only; no kernel hooks, termination, quarantine, network listener, or malware",
+  "platform": "Linux-6.12.96+deb13-amd64-x86_64-with-glibc2.41",
+  "policy": {
+    "policy_name": "ELYRA_STAGE10_RUNTIME_CORRELATION",
+    "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+    "active_state_count": 6,
+    "archived_state_count": 0,
+    "status_counts": {
+      "ACTIVE": 6
+    },
+    "recommended_action_counts": {
+      "CONTINUE_MONITORING": 3,
+      "ALERT": 1,
+      "TERMINATE": 1,
+      "QUARANTINE": 1
+    },
+    "decision_thresholds": {
+      "alert_min": 40,
+      "terminate_min": 70,
+      "quarantine_min": 90
+    },
+    "combination_formula": "combined_score=min(100, pre_execution_score+runtime_score)",
+    "actions_executed": false
+  },
+  "results": [
+    {
+      "scenario": "continue_monitoring",
+      "status": "OK",
+      "pre_execution_score": 10,
+      "runtime_score": 0,
+      "combined_score": 10,
+      "recommended_action": "CONTINUE_MONITORING",
+      "action_execution_status": "NOT_EXECUTED_STAGE10"
+    },
+    {
+      "scenario": "alert",
+      "status": "OK",
+      "pre_execution_score": 26,
+      "runtime_score": 20,
+      "combined_score": 46,
+      "recommended_action": "ALERT",
+      "action_execution_status": "NOT_EXECUTED_STAGE10"
+    },
+    {
+      "scenario": "terminate",
+      "status": "OK",
+      "pre_execution_score": 38,
+      "runtime_score": 35,
+      "combined_score": 73,
+      "recommended_action": "TERMINATE",
+      "action_execution_status": "NOT_EXECUTED_STAGE10"
+    },
+    {
+      "scenario": "quarantine",
+      "status": "OK",
+      "pre_execution_score": 60,
+      "runtime_score": 35,
+      "combined_score": 95,
+      "recommended_action": "QUARANTINE",
+      "action_execution_status": "NOT_EXECUTED_STAGE10"
+    },
+    {
+      "scenario": "parent_child_mapping",
+      "status": "OK",
+      "parent_correlation_id": "demo-correlation-5",
+      "child_parent_correlation_id": "demo-correlation-5",
+      "child_source": "RUNTIME_ONLY"
+    }
+  ],
+  "overall_status": "OK"
+}

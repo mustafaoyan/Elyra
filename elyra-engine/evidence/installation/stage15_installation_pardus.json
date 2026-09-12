@@ -1,0 +1,1880 @@
+{
+  "euid": 0,
+  "hostname": "pardus",
+  "manifest": {
+    "automatic_runtime_actions": false,
+    "current_link": "/opt/elyra/current",
+    "daemon_entry_point": "/opt/elyra/current/.venv/bin/elyra-daemon",
+    "fanotify_policy": "MONITOR_ONLY",
+    "gui_entry_point": "/opt/elyra/current/.venv/bin/elyra-gui",
+    "install_root": "/opt/elyra",
+    "installed_at_utc": "2026-07-29T18:32:30.710543+00:00",
+    "installer_revision": "STAGE_13_SYSTEMD_INSTALLATION",
+    "ipc_socket": "/run/elyra/elyra.sock",
+    "project": "ELYRA",
+    "release_name": "1.0.0-20260729T183219Z",
+    "schema_version": "1.0",
+    "service_unit": "/etc/systemd/system/elyra.service",
+    "source_directory": "/home/wafa/Masaüstü/ELYRA-stage15",
+    "version": "1.0.0"
+  },
+  "method": "read-only installed systemd, filesystem, group, IPC and journal verification",
+  "overall_status": "OK",
+  "results": [
+    {
+      "check": "current_release_link",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "symlink",
+        "mode": "0777",
+        "path": "/opt/elyra/current",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "current_release_directory",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 1000,
+        "kind": "directory",
+        "mode": "0755",
+        "path": "/opt/elyra/releases/1.0.0-20260729T183219Z",
+        "reason": null,
+        "safe": true,
+        "uid": 1000
+      },
+      "status": "OK"
+    },
+    {
+      "check": "installation_manifest_file",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0644",
+        "path": "/opt/elyra/releases/1.0.0-20260729T183219Z/INSTALLATION.json",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "installation_manifest_policy",
+      "critical": true,
+      "detail": {
+        "automatic_runtime_actions": false,
+        "current_link": "/opt/elyra/current",
+        "daemon_entry_point": "/opt/elyra/current/.venv/bin/elyra-daemon",
+        "fanotify_policy": "MONITOR_ONLY",
+        "gui_entry_point": "/opt/elyra/current/.venv/bin/elyra-gui",
+        "install_root": "/opt/elyra",
+        "installed_at_utc": "2026-07-29T18:32:30.710543+00:00",
+        "installer_revision": "STAGE_13_SYSTEMD_INSTALLATION",
+        "ipc_socket": "/run/elyra/elyra.sock",
+        "project": "ELYRA",
+        "release_name": "1.0.0-20260729T183219Z",
+        "schema_version": "1.0",
+        "service_unit": "/etc/systemd/system/elyra.service",
+        "source_directory": "/home/wafa/Masaüstü/ELYRA-stage15",
+        "version": "1.0.0"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "daemon_entry_point",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0755",
+        "path": "/opt/elyra/current/.venv/bin/elyra-daemon",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "gui_entry_point",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0755",
+        "path": "/opt/elyra/current/.venv/bin/elyra-gui",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "preflight_entry_point",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0755",
+        "path": "/opt/elyra/current/.venv/bin/elyra-preflight",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "runtime_directory",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 988,
+        "kind": "directory",
+        "mode": "0750",
+        "path": "/run/elyra",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "state_directory",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "directory",
+        "mode": "0700",
+        "path": "/var/lib/elyra",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "log_directory",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "directory",
+        "mode": "0750",
+        "path": "/var/log/elyra",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "ipc_group",
+      "critical": true,
+      "detail": {
+        "gid": 988,
+        "name": "elyra"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "admin_group",
+      "critical": true,
+      "detail": {
+        "name": "elyra-admin"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "ipc_socket",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 988,
+        "kind": "socket",
+        "mode": "0660",
+        "path": "/run/elyra/elyra.sock",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "systemd_unit_file",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0644",
+        "path": "/etc/systemd/system/elyra.service",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "gui_launcher",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0755",
+        "path": "/usr/local/bin/elyra-gui",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "desktop_entry",
+      "critical": true,
+      "detail": {
+        "exists": true,
+        "gid": 0,
+        "kind": "regular",
+        "mode": "0644",
+        "path": "/usr/share/applications/elyra.desktop",
+        "reason": null,
+        "safe": true,
+        "uid": 0
+      },
+      "status": "OK"
+    },
+    {
+      "check": "systemd_enabled",
+      "critical": true,
+      "detail": "enabled",
+      "status": "OK"
+    },
+    {
+      "check": "systemd_active",
+      "critical": true,
+      "detail": "active",
+      "status": "OK"
+    },
+    {
+      "check": "safe_systemd_execstart",
+      "critical": true,
+      "detail": "{ path=/opt/elyra/current/.venv/bin/elyra-daemon ; argv[]=/opt/elyra/current/.venv/bin/elyra-daemon ; ignore_errors=no ; start_time=[Wed 2026-07-29 21:32:31 +03] ; stop_time=[n/a] ; pid=9799 ; code=(null) ; status=0/0 }",
+      "status": "OK"
+    },
+    {
+      "check": "daemon_ipc_status",
+      "critical": true,
+      "detail": {
+        "api_version": 1,
+        "audit": {
+          "backup_count": 10,
+          "directory_mode": "0o0750",
+          "file_mode": "0o0640",
+          "log_path": "/var/log/elyra/audit.jsonl",
+          "max_bytes": 10485760,
+          "startup_integrity": {
+            "coverage": "RETAINED_WINDOW",
+            "error": null,
+            "error_line": null,
+            "error_segment": null,
+            "first_prev_hash": "f79687b8cb6d1ad21ff17765b5722fff6ed1b1c9d9d30ccf1081485c9a8ffa4b",
+            "last_hash": "aae9f9d816e8df1d15f717e05e3d297d20607748aa630ea3c8871ff2871a7843",
+            "last_sequence": 695783,
+            "record_count": 95158,
+            "recovery_artifact": null,
+            "repaired_trailing_partial": false,
+            "segment_count": 11,
+            "valid": true
+          },
+          "threat_model": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+        },
+        "correlation": {
+          "actions_executed": true,
+          "active_state_count": 66,
+          "archived_state_count": 38,
+          "combination_formula": "combined_score=min(100, pre_execution_score+runtime_score)",
+          "decision_thresholds": {
+            "alert_min": 40,
+            "quarantine_min": 90,
+            "terminate_min": 70
+          },
+          "policy_name": "ELYRA_STAGE10_RUNTIME_CORRELATION",
+          "policy_status": "PROVISIONAL_NOT_CALIBRATED",
+          "recommended_action_counts": {
+            "ALERT": 5,
+            "CONTINUE_MONITORING": 61
+          },
+          "status_counts": {
+            "ACTIVE": 55,
+            "EXITED": 7,
+            "PENDING_EXEC": 4
+          }
+        },
+        "degraded_components": [],
+        "ebpf_active": true,
+        "fanotify_active": true,
+        "recent_event_count": 200,
+        "recent_events": [
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 28,
+                "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                "exec_timestamp_ns": 30994567542841,
+                "executable_identifier": "/usr/bin/thunar-volman",
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": {
+                  "action_id": "10ca9d43db134b99b167cd858f636859",
+                  "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                  "pid": 9888,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 28,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.461213,
+                  "timestamp_utc": "2026-07-29T18:35:59.461213+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                      "evidence": {
+                        "ebpf_identifier": "/usr/bin/thunar-volman",
+                        "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                      },
+                      "maximum_occurrences": 1,
+                      "occurrence": 1,
+                      "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                      "weight": 20
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 9888,
+                "ppid": 1278,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1,
+                    "EXECUTABLE_IDENTIFIER_MISMATCH": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                    "evidence": {
+                      "ebpf_identifier": "/usr/bin/thunar-volman",
+                      "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                    },
+                    "maximum_occurrences": 1,
+                    "occurrence": 1,
+                    "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                    "weight": 20
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 28,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 9888,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30994.626423,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 9894,
+            "ppid": 1278,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 142,
+              "executable_identifier": "/usr/bin/thunar-volman",
+              "outbound_connection_attempts": 0,
+              "tgid": 9888
+            },
+            "source": "ebpf",
+            "tgid": 9888,
+            "timestamp_ns": 30994601404315,
+            "uid": 1000
+          },
+          {
+            "action_id": "735da6cb3a05470dac648b77efb31be8",
+            "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9888,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 28,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.4733062,
+            "timestamp_utc": "2026-07-29T18:35:59.473306+00:00",
+            "triggered_rules": [
+              {
+                "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                "evidence": {
+                  "ebpf_identifier": "/usr/bin/thunar-volman",
+                  "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                "weight": 20
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 28,
+                "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                "exec_timestamp_ns": 30994567542841,
+                "executable_identifier": "/usr/bin/thunar-volman",
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": {
+                  "action_id": "735da6cb3a05470dac648b77efb31be8",
+                  "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                  "pid": 9888,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 28,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.4733062,
+                  "timestamp_utc": "2026-07-29T18:35:59.473306+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                      "evidence": {
+                        "ebpf_identifier": "/usr/bin/thunar-volman",
+                        "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                      },
+                      "maximum_occurrences": 1,
+                      "occurrence": 1,
+                      "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                      "weight": 20
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 9888,
+                "ppid": 1278,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1,
+                    "EXECUTABLE_IDENTIFIER_MISMATCH": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                    "evidence": {
+                      "ebpf_identifier": "/usr/bin/thunar-volman",
+                      "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                    },
+                    "maximum_occurrences": 1,
+                    "occurrence": 1,
+                    "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                    "weight": 20
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 28,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 9888,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30994.626423,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 9894,
+            "ppid": 1278,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 143,
+              "executable_identifier": "/usr/bin/thunar-volman",
+              "outbound_connection_attempts": 0,
+              "tgid": 9888
+            },
+            "source": "ebpf",
+            "tgid": 9888,
+            "timestamp_ns": 30994601407238,
+            "uid": 1000
+          },
+          {
+            "action_id": "eec2a36a58ad4d718ee91d96aa6853c0",
+            "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9888,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 28,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.4851377,
+            "timestamp_utc": "2026-07-29T18:35:59.485138+00:00",
+            "triggered_rules": [
+              {
+                "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                "evidence": {
+                  "ebpf_identifier": "/usr/bin/thunar-volman",
+                  "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                "weight": 20
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 28,
+                "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                "exec_timestamp_ns": 30994567542841,
+                "executable_identifier": "/usr/bin/thunar-volman",
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": {
+                  "action_id": "eec2a36a58ad4d718ee91d96aa6853c0",
+                  "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                  "pid": 9888,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 28,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.4851377,
+                  "timestamp_utc": "2026-07-29T18:35:59.485138+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                      "evidence": {
+                        "ebpf_identifier": "/usr/bin/thunar-volman",
+                        "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                      },
+                      "maximum_occurrences": 1,
+                      "occurrence": 1,
+                      "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                      "weight": 20
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 9888,
+                "ppid": 1278,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1,
+                    "EXECUTABLE_IDENTIFIER_MISMATCH": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                    "evidence": {
+                      "ebpf_identifier": "/usr/bin/thunar-volman",
+                      "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                    },
+                    "maximum_occurrences": 1,
+                    "occurrence": 1,
+                    "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                    "weight": 20
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 28,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 9888,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30994.626423,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 9894,
+            "ppid": 1278,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 144,
+              "executable_identifier": "/usr/bin/thunar-volman",
+              "outbound_connection_attempts": 0,
+              "tgid": 9888
+            },
+            "source": "ebpf",
+            "tgid": 9888,
+            "timestamp_ns": 30994601426863,
+            "uid": 1000
+          },
+          {
+            "action_id": "1991cd078a6f49cbacdd685fb4e0faf5",
+            "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9888,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 28,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.496979,
+            "timestamp_utc": "2026-07-29T18:35:59.496979+00:00",
+            "triggered_rules": [
+              {
+                "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                "evidence": {
+                  "ebpf_identifier": "/usr/bin/thunar-volman",
+                  "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                "weight": 20
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 28,
+                "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                "exec_timestamp_ns": 30994567542841,
+                "executable_identifier": "/usr/bin/thunar-volman",
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": {
+                  "action_id": "1991cd078a6f49cbacdd685fb4e0faf5",
+                  "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                  "pid": 9888,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 28,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.496979,
+                  "timestamp_utc": "2026-07-29T18:35:59.496979+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                      "evidence": {
+                        "ebpf_identifier": "/usr/bin/thunar-volman",
+                        "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                      },
+                      "maximum_occurrences": 1,
+                      "occurrence": 1,
+                      "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                      "weight": 20
+                    },
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 9888,
+                "ppid": 1278,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1,
+                    "EXECUTABLE_IDENTIFIER_MISMATCH": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                    "evidence": {
+                      "ebpf_identifier": "/usr/bin/thunar-volman",
+                      "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                    },
+                    "maximum_occurrences": 1,
+                    "occurrence": 1,
+                    "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                    "weight": 20
+                  },
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 28,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 9888,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30994.626423,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 9894,
+            "ppid": 1278,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 145,
+              "executable_identifier": "/usr/bin/thunar-volman",
+              "outbound_connection_attempts": 0,
+              "tgid": 9888
+            },
+            "source": "ebpf",
+            "tgid": 9888,
+            "timestamp_ns": 30994601436970,
+            "uid": 1000
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "9556e7d3459a461d8dcd88f77ab953e4",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/bin/sudo",
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 9919,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 9919,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 31020.351671,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/bin/sudo",
+            "pid": 9919,
+            "reason": "ELYRA_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 31020.341224045,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.917,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          },
+          {
+            "action_id": "09476738d60249fbbd7881595ab63bc8",
+            "correlation_id": "fdc18e94355745eb9309be906b4f4a2f",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9888,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 28,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.5122848,
+            "timestamp_utc": "2026-07-29T18:35:59.512285+00:00",
+            "triggered_rules": [
+              {
+                "description": "The fanotify path and eBPF executable identifier did not match lexically.",
+                "evidence": {
+                  "ebpf_identifier": "/usr/bin/thunar-volman",
+                  "fanotify_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+                },
+                "maximum_occurrences": 1,
+                "occurrence": 1,
+                "rule": "EXECUTABLE_IDENTIFIER_MISMATCH",
+                "weight": 20
+              },
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "2ab5591f78e44cf19dba83fd61ed7747",
+                  "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1489,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350152.9272454,
+                  "timestamp_utc": "2026-07-29T18:35:52.927245+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1489,
+                "ppid": 1095,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1489,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30886.144328,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 1495,
+            "ppid": 1095,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 102,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1489
+            },
+            "source": "ebpf",
+            "tgid": 1489,
+            "timestamp_ns": 30994601529012,
+            "uid": 1000
+          },
+          {
+            "action_id": "8ddd83a43d704d089c9f82d870a78d27",
+            "correlation_id": "9556e7d3459a461d8dcd88f77ab953e4",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/bin/sudo",
+            "pid": 9919,
+            "reason": "Execution continues under runtime monitoring",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 0,
+            "source": "response",
+            "status": "SUCCEEDED",
+            "timestamp": 1785350159.5357933,
+            "timestamp_utc": "2026-07-29T18:35:59.535793+00:00",
+            "triggered_rules": []
+          },
+          {
+            "action_id": "989dbcfe779147a4b726649d8c5479ef",
+            "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1489,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.5586293,
+            "timestamp_utc": "2026-07-29T18:35:59.558629+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "989dbcfe779147a4b726649d8c5479ef",
+                  "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1489,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.5586293,
+                  "timestamp_utc": "2026-07-29T18:35:59.558629+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1489,
+                "ppid": 1095,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1489,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30886.144328,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 1495,
+            "ppid": 1095,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 103,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1489
+            },
+            "source": "ebpf",
+            "tgid": 1489,
+            "timestamp_ns": 30994601550347,
+            "uid": 1000
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "7eafc849d42349a3a324229f62bee369",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "exit_timestamp_ns": null,
+                "generation": 2,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 9919,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 9919,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 31020.400659,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9919,
+            "reason": "ELYRA_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 31020.342381502,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.778,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          },
+          {
+            "action_id": "0210a8e5bbd947b1964c066e5a498894",
+            "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1489,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.5709445,
+            "timestamp_utc": "2026-07-29T18:35:59.570945+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "0210a8e5bbd947b1964c066e5a498894",
+                  "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1489,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.5709445,
+                  "timestamp_utc": "2026-07-29T18:35:59.570945+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1489,
+                "ppid": 1095,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1489,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30886.144328,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 1495,
+            "ppid": 1095,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 104,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1489
+            },
+            "source": "ebpf",
+            "tgid": 1489,
+            "timestamp_ns": 30994601554462,
+            "uid": 1000
+          },
+          {
+            "action_id": "e34c09e0c7014e6f8e6303728bd617ee",
+            "correlation_id": "7eafc849d42349a3a324229f62bee369",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "pid": 9919,
+            "reason": "Execution continues under runtime monitoring",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 0,
+            "source": "response",
+            "status": "SUCCEEDED",
+            "timestamp": 1785350159.5796344,
+            "timestamp_utc": "2026-07-29T18:35:59.579634+00:00",
+            "triggered_rules": []
+          },
+          {
+            "action_id": "dc18acb5250a4fe79ce38d03710d48c2",
+            "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+            "details": {},
+            "executed_action": "ALLOW_MONITOR",
+            "failure_explanation": null,
+            "path": null,
+            "pid": 1489,
+            "reason": "This correlation already executed an equal or stronger response",
+            "requested_action": "CONTINUE_MONITORING",
+            "schema_version": "1.0",
+            "score": 8,
+            "source": "response",
+            "status": "DUPLICATE_SUPPRESSED",
+            "timestamp": 1785350159.583548,
+            "timestamp_utc": "2026-07-29T18:35:59.583548+00:00",
+            "triggered_rules": [
+              {
+                "description": "The process modified a previously unseen file identifier.",
+                "evidence": {
+                  "distinct_file_key": "51539607568:58"
+                },
+                "maximum_occurrences": 4,
+                "occurrence": 1,
+                "rule": "DISTINCT_FILE_WRITE",
+                "weight": 8
+              }
+            ]
+          },
+          {
+            "comm": "gdbus",
+            "correlation": {
+              "accepted": true,
+              "state": {
+                "action_execution_status": "DUPLICATE_SUPPRESSED",
+                "combined_score": 8,
+                "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": null,
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": {
+                  "action_id": "dc18acb5250a4fe79ce38d03710d48c2",
+                  "correlation_id": "4882f7e6368d486caad9b3177a598b53",
+                  "details": {},
+                  "executed_action": "ALLOW_MONITOR",
+                  "failure_explanation": null,
+                  "path": null,
+                  "pid": 1489,
+                  "reason": "This correlation already executed an equal or stronger response",
+                  "requested_action": "CONTINUE_MONITORING",
+                  "schema_version": "1.0",
+                  "score": 8,
+                  "status": "DUPLICATE_SUPPRESSED",
+                  "timestamp": 1785350159.583548,
+                  "timestamp_utc": "2026-07-29T18:35:59.583548+00:00",
+                  "triggered_rules": [
+                    {
+                      "description": "The process modified a previously unseen file identifier.",
+                      "evidence": {
+                        "distinct_file_key": "51539607568:58"
+                      },
+                      "maximum_occurrences": 4,
+                      "occurrence": 1,
+                      "rule": "DISTINCT_FILE_WRITE",
+                      "weight": 8
+                    }
+                  ]
+                },
+                "parent_correlation_id": null,
+                "pid": 1489,
+                "ppid": 1095,
+                "pre_execution_decision": "UNKNOWN",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 1,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {
+                    "DISTINCT_FILE_WRITE": 1
+                  }
+                },
+                "runtime_indicators": [
+                  {
+                    "description": "The process modified a previously unseen file identifier.",
+                    "evidence": {
+                      "distinct_file_key": "51539607568:58"
+                    },
+                    "maximum_occurrences": 4,
+                    "occurrence": 1,
+                    "rule": "DISTINCT_FILE_WRITE",
+                    "weight": 8
+                  }
+                ],
+                "runtime_score": 8,
+                "schema_version": "1.0",
+                "source": "RUNTIME_ONLY",
+                "status": "ACTIVE",
+                "terminal_reason": null,
+                "tgid": 1489,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 30886.144328,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 1000
+              }
+            },
+            "destination_address": null,
+            "destination_port": null,
+            "device": 51539607568,
+            "distinct_file_key": "51539607568:58",
+            "event_type": "FILE_WRITE",
+            "executable_identifier": null,
+            "exit_code": null,
+            "inode": 58,
+            "pid": 1495,
+            "ppid": 1095,
+            "probe_path_capability": "IDENTIFIER_ONLY",
+            "runtime_summary": {
+              "accepted": true,
+              "distinct_files_modified": 1,
+              "event_count": 105,
+              "executable_identifier": null,
+              "outbound_connection_attempts": 0,
+              "tgid": 1489
+            },
+            "source": "ebpf",
+            "tgid": 1489,
+            "timestamp_ns": 30994601594154,
+            "uid": 1000
+          },
+          {
+            "analysis_status": null,
+            "correlation": {
+              "accepted": true,
+              "late_bound": false,
+              "state": {
+                "action_execution_status": "NOT_EXECUTED_STAGE11",
+                "combined_score": 0,
+                "correlation_id": "1a4886ecc2284ed78e37beb59b959c2b",
+                "exec_timestamp_ns": null,
+                "executable_identifier": null,
+                "executable_path": "/usr/sbin/unix_chkpwd",
+                "exit_timestamp_ns": null,
+                "generation": 1,
+                "last_action_result": null,
+                "parent_correlation_id": null,
+                "pid": 9920,
+                "ppid": 0,
+                "pre_execution_decision": "ALLOW",
+                "pre_execution_indicators": [],
+                "pre_execution_score": 0,
+                "recommended_action": "CONTINUE_MONITORING",
+                "runtime_counters": {
+                  "distinct_files": 0,
+                  "outbound_connections": 0,
+                  "rename_identifiers": 0,
+                  "rule_occurrences": {}
+                },
+                "runtime_indicators": [],
+                "runtime_score": 0,
+                "schema_version": "1.0",
+                "source": "FANOTIFY",
+                "status": "PENDING_EXEC",
+                "terminal_reason": null,
+                "tgid": 9920,
+                "transitions": [
+                  {
+                    "combined_score": 0,
+                    "from": "CONTINUE_MONITORING",
+                    "reason": "STATE_CREATED",
+                    "timestamp_monotonic": 31020.426992,
+                    "to": "CONTINUE_MONITORING"
+                  }
+                ],
+                "uid": 0
+              }
+            },
+            "event_type": "PRE_EXECUTION_DECISION",
+            "executable_kind": "ELF",
+            "final_action": "ALLOW",
+            "indicators": [],
+            "kernel_response": "FAN_ALLOW",
+            "mask": 262144,
+            "mode": "MONITOR_ONLY",
+            "path": "/usr/sbin/unix_chkpwd",
+            "pid": 9920,
+            "reason": "ELYRA_OR_SYSTEM_PATH_EXCLUDED",
+            "received_monotonic": 31020.353783396,
+            "requested_decision": "ALLOW",
+            "response_latency_ms": 0.598,
+            "response_ok": true,
+            "risk_score": null,
+            "score": null,
+            "source": "fanotify"
+          }
+        ]
+      },
+      "status": "OK"
+    },
+    {
+      "check": "daemon_fanotify_available",
+      "critical": false,
+      "detail": {
+        "degraded_components": [],
+        "fanotify_active": true
+      },
+      "status": "OK"
+    },
+    {
+      "check": "daemon_default_monitor_only",
+      "critical": true,
+      "detail": {
+        "excluded_paths": [
+          "/opt/elyra",
+          "/var/log/elyra",
+          "/var/lib/elyra",
+          "/run/elyra",
+          "/usr/lib",
+          "/usr/lib64",
+          "/lib",
+          "/lib64",
+          "/usr/bin",
+          "/bin",
+          "/sbin",
+          "/usr/sbin"
+        ],
+        "fail_closed_paths": [],
+        "fail_policy": "FAIL_OPEN",
+        "max_preexec_file_bytes": 134217728,
+        "max_response_seconds": 2.5,
+        "mode": "MONITOR_ONLY",
+        "monitored_paths": [
+          "/tmp",
+          "/var/tmp",
+          "/home/wafa",
+          "/home/wafa/İndirilenler",
+          "/media",
+          "/mnt"
+        ]
+      },
+      "status": "OK"
+    },
+    {
+      "check": "daemon_ebpf_available",
+      "critical": false,
+      "detail": {
+        "degraded_components": [],
+        "ebpf_active": true
+      },
+      "status": "OK"
+    },
+    {
+      "check": "daemon_audit_integrity",
+      "critical": true,
+      "detail": {
+        "backup_count": 10,
+        "directory_mode": "0o0750",
+        "file_mode": "0o0640",
+        "log_path": "/var/log/elyra/audit.jsonl",
+        "max_bytes": 10485760,
+        "startup_integrity": {
+          "coverage": "RETAINED_WINDOW",
+          "error": null,
+          "error_line": null,
+          "error_segment": null,
+          "first_prev_hash": "f79687b8cb6d1ad21ff17765b5722fff6ed1b1c9d9d30ccf1081485c9a8ffa4b",
+          "last_hash": "aae9f9d816e8df1d15f717e05e3d297d20607748aa630ea3c8871ff2871a7843",
+          "last_sequence": 695783,
+          "record_count": 95158,
+          "recovery_artifact": null,
+          "repaired_trailing_partial": false,
+          "segment_count": 11,
+          "valid": true
+        },
+        "threat_model": "SHA-256 chaining is tamper-evident for the retained records but does not prevent a privileged attacker from replacing all logs and recomputing the chain."
+      },
+      "status": "OK"
+    },
+    {
+      "check": "gui_user_ipc_membership",
+      "critical": true,
+      "detail": {
+        "group": "elyra",
+        "user": "wafa"
+      },
+      "status": "OK"
+    },
+    {
+      "check": "journalctl_access",
+      "critical": false,
+      "detail": "Tem 29 21:35:45 pardus elyra-daemon[9799]: 2026-07-29 21:35:45,739 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/mousepad pid=9911\nTem 29 21:35:45 pardus elyra-daemon[9799]: 2026-07-29 21:35:45,739 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9911\nTem 29 21:35:53 pardus elyra-daemon[9799]: 2026-07-29 21:35:53,064 INFO elyra.service.daemon: response target binding unavailable: neither process nor file identity could be bound\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,508 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/sudo pid=9919\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,509 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9919\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,520 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/sbin/unix_chkpwd pid=9920\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,521 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9920\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,526 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/opt/elyra/releases/1.0.0-20260729T183219Z/.venv/bin/elyra-install-check pid=9922\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,526 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/python3.13 pid=9922\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,527 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9922\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,592 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/systemctl pid=9924\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,593 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9924\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,602 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/systemctl pid=9925\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,602 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9925\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,610 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/systemctl pid=9926\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,611 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9926\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,620 INFO elyra.service.daemon: IPC request: pid=9922 uid=0 user=root action=get_status\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,624 INFO elyra.service.daemon: IPC request: pid=9922 uid=0 user=root action=get_policy\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,625 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/bin/journalctl pid=9929\nTem 29 21:35:59 pardus elyra-daemon[9799]: 2026-07-29 21:35:59,625 INFO elyra.monitor.fanotify.controller: fanotify ALLOW: path=/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 pid=9929\n",
+      "status": "OK"
+    }
+  ],
+  "timestamp_utc": "2026-07-29T18:35:59.632332+00:00"
+}

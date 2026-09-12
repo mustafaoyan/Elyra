@@ -1,7 +1,7 @@
 (function initialiseLandingPage() {
   "use strict";
 
-  const config = window.ELLIOT_DOWNLOAD_CONFIG;
+  const config = window.ELYRA_DOWNLOAD_CONFIG;
   const supportedPlatforms = new Set(["linux"]);
   const platformSelect = document.querySelector("#platform-select");
   const downloadSection = document.querySelector("#download");
@@ -13,7 +13,7 @@
   const platformCards = document.querySelectorAll("[data-platform-card]");
   const platformCurrentLabels = document.querySelectorAll("[data-platform-current]");
   const autoDetectButton = document.querySelector("[data-auto-detect]");
-  const storageKey = "elliot-download-platform";
+  const storageKey = "elyra-download-platform";
 
   if (!config || !platformSelect) {
     return;
