@@ -5,7 +5,7 @@
 **AI devam noktası:** [AI.md](AI.md) — başka bir AI’ın projeyi aynı yerden
 devam ettirmesi için güncel durum, Windows handoff ve Linux başlangıç noktası.
 
-**Landing page:** [https://mustafaoyan.github.io/Siper-Antivirus/](https://mustafaoyan.github.io/Siper-Antivirus/)
+**Landing page:** [https://mustafaoyan.github.io/Elyra/](https://mustafaoyan.github.io/Elyra/)
 
 The landing page detects Windows or Linux and selects the matching installer
 or package. It is published by the repository's GitHub Pages workflow after a

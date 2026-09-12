@@ -94,7 +94,7 @@
     const available = Boolean(config.published && packageInfo && isSafeHttpsUrl(packageInfo.url));
     const fallbackUrl = isSafeHttpsUrl(config.releasePageUrl)
       ? config.releasePageUrl
-      : "https://github.com/mustafaoyan/Siper-Antivirus/releases";
+      : "https://github.com/mustafaoyan/Elyra/releases";
     const label = available ? "Linux paketini indir" : "Linux paketi henüz yayınlanmadı";
     const href = available ? packageInfo.url : fallbackUrl;
 

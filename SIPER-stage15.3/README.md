@@ -3,7 +3,7 @@
 ## 🌐 Live Deployment & Download
 
 The public ELLIOT landing page is published from this repository at
-[https://mustafaoyan.github.io/Siper-Antivirus/](https://mustafaoyan.github.io/Siper-Antivirus/)
+[https://mustafaoyan.github.io/Elyra/](https://mustafaoyan.github.io/Elyra/)
 after the GitHub Pages workflow completes. It detects Windows and Linux and
 selects the matching release asset. Before public release, build, sign and
 checksum the Windows installer and Linux package, then replace the versioned

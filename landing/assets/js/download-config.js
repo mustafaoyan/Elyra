@@ -9,7 +9,7 @@
 (function configureElliotDownloads(global) {
   "use strict";
 
-  const repository = "mustafaoyan/Siper-Antivirus";
+  const repository = "mustafaoyan/Elyra";
   const version = "1.0.2";
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
