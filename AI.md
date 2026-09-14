@@ -133,5 +133,5 @@ L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz
 ## Makine-okunur son durum
 
 ```json
-{"schema":"elyra.ai-context.v2","updated":"2026-09-14","current_milestone":"M2_LOCAL_SIGNATURES_IN_PROGRESS","next_milestone":"M2_YARA_X_EVALUATION","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"f686f78","last_validation":"signature_rules: 4 passed, 1 warning","m2_completed":["provenance-aware local rule bundle schema"]}
+{"schema":"elyra.ai-context.v2","updated":"2026-09-14","current_milestone":"M2_LOCAL_SIGNATURES_IN_PROGRESS","next_milestone":"M2_AUTHENTICODE_TRUST_REPORTING","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"3063f41","last_validation":"signature_rules: 4 passed; yara_adapter: 4 passed; pe_evidence: 59 passed, 1 skipped","m2_completed":["provenance-aware local rule bundle schema","bounded YARA-X adapter","bounded PE directory and packer evidence"]}
 ```
