@@ -133,6 +133,19 @@ def _inspect(reader: _Reader, result: PEAnalysis) -> None:
     )
     if directories > (optional_size - directory_base) // 8:
         raise _InspectionIssue("PE_DATA_DIRECTORIES_TRUNCATED", "Directory count exceeds the declared optional header")
+    directory_values: dict[int, tuple[int, int]] = {}
+    for directory_index in range(min(directories, 16)):
+        directory_offset = directory_base + directory_index * 8
+        directory_values[directory_index] = struct.unpack_from("<II", optional, directory_offset)
+    # Directory presence is structural evidence only. Names, imports and
+    # certificate trust are intentionally not resolved in this bounded pass.
+    result.summary.update(
+        import_directory_present=bool(directory_values.get(1, (0, 0))[1]),
+        export_directory_present=bool(directory_values.get(0, (0, 0))[1]),
+        debug_directory_present=bool(directory_values.get(6, (0, 0))[1]),
+        certificate_table_present=bool(directory_values.get(4, (0, 0))[0] and directory_values.get(4, (0, 0))[1]),
+        packer_indicators=[],
+    )
     table_offset = optional_offset + optional_size
     table_end = table_offset + count * SECTION_HEADER_SIZE
     if table_end > reader.file_size:
@@ -163,6 +176,11 @@ def _inspect(reader: _Reader, result: PEAnalysis) -> None:
             },
         }
         result.sections.append(section)
+        lowered_name = name.lower()
+        if lowered_name in {"upx0", "upx1", "upx2", ".aspack", ".adata", ".themida", ".vmp0", ".vmp1"}:
+            result.summary["packer_indicators"].append(f"SUSPICIOUS_SECTION_NAME:{name}")
+        if raw_size and virtual_size > raw_size * 8:
+            result.summary["packer_indicators"].append(f"HIGH_VIRTUAL_RAW_RATIO:{index}")
         if raw_size:
             if raw_offset < headers_size or raw_offset + raw_size > reader.file_size:
                 raise _InspectionIssue("PE_SECTION_RAW_RANGE_INVALID", f"Section {index} raw data is outside the file or overlaps headers")
@@ -174,9 +192,7 @@ def _inspect(reader: _Reader, result: PEAnalysis) -> None:
         if current[0] < previous[1]:
             raise _InspectionIssue("PE_SECTION_RAW_OVERLAP", "Raw data ranges of PE sections overlap")
     # This is a file offset, not an RVA. Presence does not authenticate anything.
-    certificate_offset = certificate_size = 0
-    if directories > 4:
-        certificate_offset, certificate_size = struct.unpack_from("<II", optional, directory_base + 4 * 8)
+    certificate_offset, certificate_size = directory_values.get(4, (0, 0))
     result.summary.update(
         certificate_table_present=bool(certificate_offset and certificate_size),
         certificate_table_offset=certificate_offset,
