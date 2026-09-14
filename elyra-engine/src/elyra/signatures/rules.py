@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import os
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -18,6 +19,13 @@ SCHEMA_VERSION = "elyra.rules.v1"
 _HEX_64 = re.compile(r"^[0-9a-f]{64}$")
 _SEMVER = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
 _RULE_ID = re.compile(r"^[A-Z][A-Z0-9_.-]{2,127}$")
+
+
+def _version_key(value: str) -> tuple[int, int, int]:
+    match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)(?:[-+].*)?", value)
+    if not match:
+        raise RuleBundleError("invalid semantic version")
+    return tuple(int(part) for part in match.groups())
 
 
 class RuleBundleError(ValueError):
@@ -112,3 +120,36 @@ def load_bundle(path: str | Path, *, trusted_sources: set[str] | None = None) ->
         raise RuleBundleError(f"unable to read rule bundle: {exc}") from exc
     validate_bundle(bundle, trusted_sources=trusted_sources)
     return dict(bundle)
+
+
+class RuleBundleStore:
+    """Install verified offline bundles with downgrade protection and rollback."""
+
+    def __init__(self, path: str | Path) -> None:
+        self.path = Path(path)
+
+    def current(self) -> dict[str, Any] | None:
+        if not self.path.exists():
+            return None
+        return load_bundle(self.path)
+
+    def install(self, bundle: Mapping[str, Any], *, allow_rollback: bool = False) -> dict[str, Any]:
+        validate_bundle(bundle)
+        existing = self.current()
+        if existing and _version_key(str(bundle["bundle_version"])) < _version_key(str(existing["bundle_version"])) and not allow_rollback:
+            raise RuleBundleError("bundle downgrade rejected")
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = self.path.with_name(f".{self.path.name}.new-{os.getpid()}")
+        temporary.write_text(json.dumps(bundle, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        if existing:
+            self.path.with_suffix(self.path.suffix + ".bak").write_bytes(self.path.read_bytes())
+        os.replace(temporary, self.path)
+        return dict(bundle)
+
+    def rollback(self) -> dict[str, Any]:
+        backup = self.path.with_suffix(self.path.suffix + ".bak")
+        if not backup.exists():
+            raise RuleBundleError("no verified bundle backup available")
+        previous = load_bundle(backup)
+        os.replace(backup, self.path)
+        return previous

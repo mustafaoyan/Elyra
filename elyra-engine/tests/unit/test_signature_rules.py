@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from elyra.signatures.rules import RuleBundleError, create_bundle, load_bundle
+from elyra.signatures.rules import RuleBundleError, RuleBundleStore, create_bundle, load_bundle
 
 
 def _bundle():
@@ -55,3 +55,15 @@ def test_duplicate_rule_ids_are_rejected():
                 {"id": "DUPLICATE_RULE", "match_type": "literal", "value": "b", "description": "b"},
             ],
         )
+
+
+def test_store_rejects_downgrade_and_supports_rollback(tmp_path):
+    store = RuleBundleStore(tmp_path / "rules.json")
+    first = _bundle()
+    second = create_bundle(first["bundle_id"], "2.0.0", first["provenance"], first["rules"])
+    store.install(first)
+    store.install(second)
+    with pytest.raises(RuleBundleError, match="downgrade"):
+        store.install(first)
+    restored = store.rollback()
+    assert restored["bundle_version"] == "1.0.0"
