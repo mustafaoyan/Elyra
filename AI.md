@@ -133,5 +133,5 @@ L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz
 ## Makine-okunur son durum
 
 ```json
-{"schema":"elyra.ai-context.v2","updated":"2026-09-12","current_milestone":"M1_COMPLETE_LINUX_L7_READY","next_milestone":"M2_LOCAL_SIGNATURES_AND_STATIC_EVIDENCE","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"dc3a1a0","last_validation":"255 passed, 11 skipped, 0 failed"}
+{"schema":"elyra.ai-context.v2","updated":"2026-09-14","current_milestone":"M2_LOCAL_SIGNATURES_IN_PROGRESS","next_milestone":"M2_YARA_X_EVALUATION","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"f694495","last_validation":"255 passed, 11 skipped, 0 failed (pre-M2)","m2_completed":["provenance-aware local rule bundle schema"]}
 ```
