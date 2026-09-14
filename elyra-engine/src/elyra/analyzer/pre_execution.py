@@ -7,6 +7,7 @@ from concurrent.futures import Future, ThreadPoolExecutor, TimeoutError
 from pathlib import Path
 from typing import Callable
 
+from elyra.ai.analyst import EvidenceAnalyst
 from elyra.scoring.engine import PreExecutionScoringEngine
 
 from .static_analyzer import StaticFileScanner, StaticScanResult
@@ -28,6 +29,7 @@ class PreExecutionAnalyzer:
         timeout: float = 2.0,
         scoring_engine: PreExecutionScoringEngine | None = None,
         scanner: StaticFileScanner | None = None,
+        evidence_analyst: EvidenceAnalyst | None = None,
     ) -> None:
         if max_w <= 0:
             raise ValueError("max_w must be greater than zero")
@@ -39,6 +41,7 @@ class PreExecutionAnalyzer:
         self.timeout = timeout
         self.scanner = scanner or StaticFileScanner()
         self.scoring_engine = scoring_engine or PreExecutionScoringEngine()
+        self.evidence_analyst = evidence_analyst or EvidenceAnalyst()
 
     def close(self) -> None:
         self.pool.shutdown(wait=True, cancel_futures=True)
@@ -97,6 +100,7 @@ class PreExecutionAnalyzer:
 
     def _score_scan(self, scan: StaticScanResult) -> dict[str, object]:
         result = self.scoring_engine.score(scan).to_dict()
+        result["ai_analysis"] = self.evidence_analyst.analyze(result)
         result["scan_status"] = scan.status
         result["file_size"] = scan.file_size
         result["mime_type"] = scan.mime_type

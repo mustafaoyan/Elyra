@@ -143,6 +143,7 @@ def scan_projection(result: Mapping[str, Any]) -> dict[str, Any]:
 
     scan = _mapping(result)
     scoring = _mapping(scan.get("pre_execution_scoring"))
+    ai_analysis = _mapping(scan.get("ai_analysis") or scoring.get("ai_analysis"))
     entropy_summary = _mapping(scan.get("entropy_summary"))
     block_rows = [_mapping(item) for item in _sequence(scan.get("block_entropies"))]
     indicators = [_mapping(item) for item in _sequence(scoring.get("indicators"))]
@@ -202,6 +203,7 @@ def scan_projection(result: Mapping[str, Any]) -> dict[str, Any]:
         "pre_execution_score": None if score is None else int(score),
         "runtime_score": runtime_score,
         "decision": str(scan.get("recommended_decision", scoring.get("decision", "UNKNOWN"))),
+        "ai_analysis": ai_analysis,
         "indicators": indicators,
         "warnings": [_mapping(item) for item in _sequence(scan.get("warnings"))],
         "errors": [_mapping(item) for item in _sequence(scan.get("errors"))],
