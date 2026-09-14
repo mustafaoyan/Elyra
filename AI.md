@@ -133,5 +133,9 @@ L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz
 ## Makine-okunur son durum
 
 ```json
+{"schema":"elyra.ai-context.v2","updated":"2026-09-14","current_milestone":"M3_COMPLETE","next_milestone":"M4_ON_DEVICE_ML","last_commit":"9ca22b0","last_validation":"M3: 8 passed, 1 warning"}
+```
+
+```json
 {"schema":"elyra.ai-context.v2","updated":"2026-09-14","current_milestone":"M3_MEASUREMENT_IN_PROGRESS","next_milestone":"M3_NATIVE_EVALUATION_REPORT","windows_status":"PAUSED_AT_W1","linux_status":"L7_COMPLETE_NATIVE_EVIDENCE_HOST_DEPENDENT","cloud_allowed":false,"trained_model_available":false,"llm_analyst_available":false,"last_commit":"02b0ece","last_validation":"signature/yara/authenticode: 11 passed; pe evidence: 59 passed, 1 skipped; calibration/dataset/metrics tests pending user run","m2_completed":["provenance-aware local rule bundle schema","bounded YARA-X adapter","bounded PE directory and packer evidence","honest Authenticode report","signature parser resource/fuzz safety"],"m3_completed":["deterministic local evaluation metrics","leakage-resistant dataset manifest validation","recommendation-only threshold calibration"]}
 ```
