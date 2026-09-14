@@ -136,6 +136,8 @@ AI Ã§alÄ±ÅŸmalarÄ± artÄ±k tek `elyra.ai/` Ã¼st klasÃ¶rÃ¼nde tutu
 `elyra-engine/src/elyra/ai/` altÄ±nda; feature schema v1 ve cihaz-iÃ§i model
 sÃ¶zleÅŸmesi eklendi. Model kapalÄ±/bozuksa skor Ã¼retmiyor; skor olasÄ±lÄ±k deÄŸil.
 Commit: `af60081`. M4 AI temel testleri: `3 passed, 1 warning`.
+M4 baseline eÄŸitim/deÄŸerlendirme kodu eklendi (`a8d2315`): eÄŸitim Ã§Ä±ktÄ±sÄ±
+varsayÄ±lan olarak devre dÄ±ÅŸÄ± deney manifestidir; runtime politikasÄ±nÄ± deÄŸiÅŸtirmez.
 
 ## Makine-okunur son durum
 
