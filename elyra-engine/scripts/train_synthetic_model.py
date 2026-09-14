@@ -23,6 +23,7 @@ FEATURE_NAMES = (
     "context_indicator_count",
     "file_size_log2",
 )
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _read_records(path: Path) -> list[dict[str, Any]]:
@@ -113,8 +114,8 @@ def train(input_path: Path, output_path: Path, report_path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True, help="synthetic_samples.jsonl")
-    parser.add_argument("--output", type=Path, default=Path("elyra.ai/models/artifacts/elyra-linear-synthetic-v1.json"))
-    parser.add_argument("--report", type=Path, default=Path("elyra.ai/reports/synthetic-training-v1.json"))
+    parser.add_argument("--output", type=Path, default=REPO_ROOT / "elyra.ai/models/artifacts/elyra-linear-synthetic-v1.json")
+    parser.add_argument("--report", type=Path, default=REPO_ROOT / "elyra.ai/reports/synthetic-training-v1.json")
     args = parser.parse_args()
     train(args.input, args.output, args.report)
 
