@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Elyra local AI evidence analysis v1",
+  "type": "object",
+  "required": ["schema_version", "status", "risk_band", "summary", "reasons", "recommendation", "authoritative", "actions_allowed"],
+  "properties": {
+    "schema_version": {"const": "elyra.ai.analysis.v1"},
+    "status": {"enum": ["OK", "INCONCLUSIVE"]},
+    "risk_band": {"enum": ["MINIMAL", "LOW", "MEDIUM", "HIGH", "UNKNOWN"]},
+    "summary": {"type": "string", "maxLength": 512},
+    "reasons": {"type": "array", "maxItems": 8, "items": {"type": "string", "maxLength": 512}},
+    "recommendation": {"enum": ["NO_ADDITIONAL_ACTION", "MONITOR", "REVIEW_RECOMMENDED", "REVIEW_REQUIRED", "REVIEW"]},
+    "authoritative": {"const": false},
+    "actions_allowed": {"const": []}
+  },
+  "additionalProperties": false
+}
