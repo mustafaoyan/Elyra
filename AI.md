@@ -139,6 +139,16 @@ Commit: `af60081`. M4 AI temel testleri: `3 passed, 1 warning`.
 M4 baseline eÄŸitim/deÄŸerlendirme kodu eklendi (`a8d2315`): eÄŸitim Ã§Ä±ktÄ±sÄ±
 varsayÄ±lan olarak devre dÄ±ÅŸÄ± deney manifestidir; runtime politikasÄ±nÄ± deÄŸiÅŸtirmez.
 
+## Sentetik eğitim kaydı (2026-09-14)
+
+Sentetik JSONL veri seti incelendi: 10.000 kayıt, leakage kontrolü başarılı,
+doğrulama sonucu `PASS`. Eğitim için `elyra-engine/scripts/train_synthetic_model.py`
+eklendi. Script null etiketli/incomplete kayıtları supervised eğitimden çıkarır,
+train split istatistikleriyle özellikleri normalize eder, lineer baseline eğitir
+ve ağırlıkları runtime'ın ham `elyra.features.v1` vektörüne geri dönüştürür.
+Model çıktısı deneysel olarak `enabled: false` kalır; gerçek malware tespiti iddiası
+yoktur. Kullanım komutu script yardımında ve çalışma notlarında belgelenmiştir.
+
 ## Makine-okunur son durum
 
 ```json
