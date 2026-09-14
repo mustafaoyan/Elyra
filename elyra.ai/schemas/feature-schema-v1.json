@@ -1,0 +1,11 @@
+{
+  "schema_version": "elyra.features.v1",
+  "features": [
+    "whole_file_entropy",
+    "high_entropy_block_ratio",
+    "static_indicator_count",
+    "context_indicator_count",
+    "file_size_log2"
+  ],
+  "normalization": "model manifest defines bounds; missing values are not imputed as safe"
+}
