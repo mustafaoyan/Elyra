@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Elyra disposable behavior evidence v1",
+  "type": "object",
+  "required": ["schema_version", "status", "authoritative", "actions_allowed"],
+  "properties": {
+    "schema_version": {"const": "elyra.behavior.v1"},
+    "status": {"enum": ["OK", "UNAVAILABLE", "INCONCLUSIVE"]},
+    "fixture_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"},
+    "evidence": {"type": "object"},
+    "reason": {"type": "string", "maxLength": 256},
+    "authoritative": {"const": false},
+    "actions_allowed": {"const": []}
+  },
+  "additionalProperties": false
+}
