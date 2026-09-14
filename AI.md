@@ -135,7 +135,7 @@ L0-L7 geçişi, önceki kapının test/kanıt/dokümanı tamamlanmadan yapılmaz
 AI Ã§alÄ±ÅŸmalarÄ± artÄ±k tek `elyra.ai/` Ã¼st klasÃ¶rÃ¼nde tutuluyor. Python kodu
 `elyra-engine/src/elyra/ai/` altÄ±nda; feature schema v1 ve cihaz-iÃ§i model
 sÃ¶zleÅŸmesi eklendi. Model kapalÄ±/bozuksa skor Ã¼retmiyor; skor olasÄ±lÄ±k deÄŸil.
-Commit: `af60081`. Yeni test sonucu kullanÄ±cÄ± tarafÄ±nda bekleniyor.
+Commit: `af60081`. M4 AI temel testleri: `3 passed, 1 warning`.
 
 ## Makine-okunur son durum
 
