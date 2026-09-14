@@ -24,4 +24,4 @@ def test_active_paths_use_elyra_name() -> None:
         for path in (root / "src").rglob("*")
         if path.is_file()
     ]
-    assert all("elyra" not in path.lower() for path in active_files)
+    assert all("elliot" not in path.lower() and "siper" not in path.lower() for path in active_files)

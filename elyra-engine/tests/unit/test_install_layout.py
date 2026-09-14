@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_final_project_version() -> None:
-    assert read_project_version(ROOT / "pyproject.toml") == "1.0.0"
+    assert read_project_version(ROOT / "pyproject.toml") == "1.0.2"
 
 
 def test_production_paths_are_absolute_and_consistent() -> None:

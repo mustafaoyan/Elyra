@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_final_version_is_consistent() -> None:
     with (ROOT / "pyproject.toml").open("rb") as stream:
         version = tomllib.load(stream)["project"]["version"]
-    assert version == "1.0.0"
+    assert version == "1.0.2"
     assert __version__ == version
 
 
@@ -127,8 +127,8 @@ def test_elyra_public_branding_contract() -> None:
     assert "Name=Elyra Security Monitor" in desktop
     assert "Exec=/usr/local/bin/elyra-gui" in desktop
     view = (ROOT / "src/elyra/gui/view.py").read_text(encoding="utf-8")
-    assert "Elyra — Pardus Security Monitor" in view
-    assert 'text="ELYRA"' in view
+    assert "ELYRA — Local Zero-Day Defence" in view
+    assert 'text="◈  ELYRA"' in view
 
 
 def test_elyra_service_alias_is_declared() -> None:

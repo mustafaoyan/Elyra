@@ -23,7 +23,7 @@ static file analysis, fanotify pre-execution decisions, filtered BCC/eBPF
 runtime telemetry, secure response operations, an unprivileged GUI and
 structured tamper-evident auditing.
 
-> **Final controlled release:** `1.0.0`  
+> **Current controlled release:** `1.0.2`  
 > **Verified target:** Pardus GNU/Linux 25.1, x86_64, Linux 6.12-series kernel  
 > **Default production policy:** `MONITOR_ONLY`  
 > **Automatic terminate/quarantine:** disabled unless explicitly authorised
@@ -178,7 +178,7 @@ and embedded into the package:
 
 ```bash
 ./scripts/build_pardus_deb.sh
-sudo apt install ./dist/debian/elyra-pardus_1.0.0-1_amd64.deb
+sudo apt install ./dist/debian/elyra-pardus_1.0.2-1_amd64.deb
 sudo usermod -aG elyra "$USER"
 ```
 
@@ -224,6 +224,16 @@ ELYRA remains explicit when a component is unavailable:
 - GUI IPC failure: the GUI displays `DISCONNECTED` and never invents data;
 - audit integrity failure: startup reports the failure and preserves corrupted
   material for investigation.
+
+## Known limitations
+
+- The ML and local AI components are recommendation-only and are not production
+  malware verdicts.
+- Synthetic training data cannot establish real-world zero-day detection rates.
+- Windows monitoring remains monitor-only until a separately signed native
+  minifilter is available.
+- Native fanotify, eBPF and disposable-VM evidence depends on the target Linux
+  kernel, permissions and virtualization capabilities.
 
 ## Final evidence and submission
 
