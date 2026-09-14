@@ -1,0 +1,32 @@
+{
+  "model_id": "elyra-linear-synthetic-v1",
+  "model_version": "0.1.0-synthetic",
+  "feature_schema": "elyra.features.v1",
+  "weights": [
+    1.2541215077,
+    -4.7906832724,
+    1.5314992359,
+    1.9270437636,
+    -0.0205746839
+  ],
+  "bias": -10.4346539534,
+  "enabled": false,
+  "training_status": "EXPERIMENT_ONLY_NOT_PRODUCTION_VALIDATED",
+  "training_data": "synthetic_samples.jsonl",
+  "normalisation": {
+    "centres": [
+      6.217177411764706,
+      0.4820874117647059,
+      2.132156862745098,
+      2.1335294117647057,
+      15.914841470588236
+    ],
+    "scales": [
+      1.8401039030508861,
+      0.3189486238460687,
+      2.439580736821905,
+      2.448611710328626,
+      6.761580479134123
+    ]
+  }
+}

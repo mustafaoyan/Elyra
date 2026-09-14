@@ -1,0 +1,130 @@
+{
+  "dataset_name": "elyra_synthetic_static_v1",
+  "generator_version": "1.0.0",
+  "seed": 12345,
+  "record_count": 10000,
+  "split_distribution": {
+    "train": 6000,
+    "validation": 2000,
+    "test": 2000
+  },
+  "label_distribution": {
+    "suspicious": 4000,
+    "benign": 4500,
+    "inconclusive": 1500
+  },
+  "scenario_distribution_overall": {
+    "boundary_case": 1236,
+    "combined_static_evidence": 2760,
+    "ordinary_text": 1224,
+    "high_entropy_only": 1041,
+    "encrypted_benign": 720,
+    "source_code": 864,
+    "compressed_benign": 720,
+    "malformed_metadata": 795,
+    "suspicious_location_context": 490,
+    "partial_scan": 150
+  },
+  "scenario_distribution_by_split": {
+    "train": {
+      "boundary_case": 816,
+      "combined_static_evidence": 1800,
+      "ordinary_text": 756,
+      "high_entropy_only": 639,
+      "encrypted_benign": 432,
+      "source_code": 540,
+      "compressed_benign": 432,
+      "malformed_metadata": 585
+    },
+    "validation": {
+      "boundary_case": 210,
+      "combined_static_evidence": 480,
+      "malformed_metadata": 105,
+      "compressed_benign": 144,
+      "suspicious_location_context": 245,
+      "high_entropy_only": 201,
+      "encrypted_benign": 144,
+      "ordinary_text": 234,
+      "source_code": 162,
+      "partial_scan": 75
+    },
+    "test": {
+      "combined_static_evidence": 480,
+      "ordinary_text": 234,
+      "high_entropy_only": 201,
+      "compressed_benign": 144,
+      "suspicious_location_context": 245,
+      "boundary_case": 210,
+      "source_code": 162,
+      "malformed_metadata": 105,
+      "partial_scan": 75,
+      "encrypted_benign": 144
+    }
+  },
+  "feature_statistics": {
+    "whole_file_entropy": {
+      "min": 0.0137,
+      "max": 8.0,
+      "mean": 6.1628,
+      "std": 1.8706,
+      "missing_count": 393
+    },
+    "high_entropy_block_ratio": {
+      "min": 0.0,
+      "max": 0.9999,
+      "mean": 0.4851,
+      "std": 0.3109,
+      "missing_count": 420
+    },
+    "static_indicator_count": {
+      "min": 0,
+      "max": 8,
+      "mean": 2.0463,
+      "std": 2.3316,
+      "missing_count": 696
+    },
+    "context_indicator_count": {
+      "min": 0,
+      "max": 8,
+      "mean": 2.1141,
+      "std": 2.3672,
+      "missing_count": 831
+    },
+    "file_size_log2": {
+      "min": 4.0002,
+      "max": 31.995,
+      "mean": 16.0478,
+      "std": 6.8738,
+      "missing_count": 242
+    }
+  },
+  "missing_value_count": 2582,
+  "duplicate_sha256_count": 0,
+  "duplicate_feature_vector_count": 0,
+  "data_leakage_check": {
+    "train_validation_test_feature_vector_overlap_count": 0,
+    "passed": true
+  },
+  "boundary_case_count": 1236,
+  "high_entropy_benign_count_overall": 2016,
+  "high_entropy_benign_count_in_test": 414,
+  "validation_checks": {
+    "unique_sample_id": true,
+    "unique_sha256": true,
+    "json_valid": true,
+    "required_fields_complete": true,
+    "entropy_in_0_8": true,
+    "high_entropy_ratio_in_0_1": true,
+    "no_nan_or_infinity": true,
+    "no_negative_values": true,
+    "label_only_true_false_null": true,
+    "split_only_train_validation_test": true,
+    "feature_schema_consistent": true,
+    "no_train_test_feature_vector_leakage": true,
+    "high_entropy_alone_never_forces_deny": true,
+    "combined_evidence_reaches_high_risk": true,
+    "inconclusive_separable_from_training": true
+  },
+  "validation_result": "PASS",
+  "failed_checks": []
+}

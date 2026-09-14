@@ -1,0 +1,23 @@
+{
+  "dataset_name": "elyra_synthetic_static_v1",
+  "schema_version": "elyra.features.v1",
+  "generator_version": "1.0.0",
+  "seed": 12345,
+  "record_count": 10000,
+  "splits": {
+    "train": 6000,
+    "validation": 2000,
+    "test": 2000
+  },
+  "label_distribution": {
+    "benign": 4500,
+    "suspicious": 4000,
+    "inconclusive": 1500
+  },
+  "safety": {
+    "contains_real_malware": false,
+    "contains_executable_payloads": false,
+    "contains_network_data": false,
+    "contains_personal_data": false
+  }
+}

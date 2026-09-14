@@ -149,6 +149,10 @@ ve ağırlıkları runtime'ın ham `elyra.features.v1` vektörüne geri dönüş
 Model çıktısı deneysel olarak `enabled: false` kalır; gerçek malware tespiti iddiası
 yoktur. Kullanım komutu script yardımında ve çalışma notlarında belgelenmiştir.
 
+Sentetik veri seti `elyra.ai/data/synthetic/v1/` altında sürümlü olarak repoya
+eklendi. Gerçek veri için ayrılmış `elyra.ai/data/real/` bölümü şimdilik boştur;
+provenance, lisans ve gizlilik kontrolleri tamamlanmadan gerçek örnek eklenmeyecek.
+
 ## Makine-okunur son durum
 
 ```json

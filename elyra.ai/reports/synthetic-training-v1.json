@@ -1,0 +1,62 @@
+{
+  "model": {
+    "model_id": "elyra-linear-synthetic-v1",
+    "model_version": "0.1.0-synthetic",
+    "feature_schema": "elyra.features.v1",
+    "enabled": false,
+    "training_status": "EXPERIMENT_ONLY_NOT_PRODUCTION_VALIDATED",
+    "training_data": "synthetic_samples.jsonl",
+    "normalisation": {
+      "centres": [
+        6.217177411764706,
+        0.4820874117647059,
+        2.132156862745098,
+        2.1335294117647057,
+        15.914841470588236
+      ],
+      "scales": [
+        1.8401039030508861,
+        0.3189486238460687,
+        2.439580736821905,
+        2.448611710328626,
+        6.761580479134123
+      ]
+    }
+  },
+  "input_record_count": 8500,
+  "labelled_split_counts": {
+    "train": 5100,
+    "validation": 1700,
+    "test": 1700
+  },
+  "metrics": {
+    "train": {
+      "sample_count": 5100,
+      "accuracy": 0.9350980392156862,
+      "precision": 0.9297881179891981,
+      "recall": 0.9325,
+      "false_positive_rate": 0.06259259259259259,
+      "mean_predicted_risk": 0.474798
+    },
+    "validation": {
+      "sample_count": 1700,
+      "accuracy": 0.9335294117647058,
+      "precision": 0.9123649459783914,
+      "recall": 0.95,
+      "false_positive_rate": 0.0811111111111111,
+      "mean_predicted_risk": 0.49228
+    },
+    "test": {
+      "sample_count": 1700,
+      "accuracy": 0.9352941176470588,
+      "precision": 0.9126794258373205,
+      "recall": 0.95375,
+      "false_positive_rate": 0.0811111111111111,
+      "mean_predicted_risk": 0.493827
+    }
+  },
+  "safety": {
+    "real_malware_used": false,
+    "model_enabled": false
+  }
+}
