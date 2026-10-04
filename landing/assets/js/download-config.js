@@ -10,7 +10,7 @@
   "use strict";
 
   const repository = "mustafaoyan/Elyra";
-  const version = "1.1.0";
+  const version = "1.1.1";
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
 

@@ -14,7 +14,7 @@ from .chat_engine import ChatEngineUnavailable, LocalChatEngine
 from .model_manager import download_model
 from .updater import check_for_update, download_and_launch
 
-CURRENT_VERSION = "1.1.0"
+CURRENT_VERSION = "1.1.1"
 BG = "#0B0C10"
 PANEL = "#11141D"
 PANEL_ALT = "#161B27"
