@@ -23,6 +23,13 @@ Model sonucu tek başına karantina/silme veya kernel kararı veremez. Model yok
 bozuk manifest veya zaman aşımı `UNAVAILABLE`/`INCONCLUSIVE` olarak raporlanır.
 ## Kurulabilir AI asistanı
 
+Elyra'nın sohbet katmanı doğrudan uygulamanın içine bağlanır. Ollama, harici
+sunucu veya bulut API'si kullanılmaz. GGUF model dosyası
+`%USERPROFILE%/.elyra/models/chat/model.gguf` (Windows) ya da
+`~/.elyra/models/chat/model.gguf` (Linux) konumundan yüklenir. Model henüz
+kurulu değilse güvenlik kanıtı analizleri çalışmaya devam eder ve sohbet alanı
+modelin eksik olduğunu açıkça bildirir.
+
 GitHub Release ile yayımlanan `elyra-ai-linux_<version>-1_amd64.deb` paketi
 yerel `elyra-ai` komutunu ve masaüstü girişini kurar:
 

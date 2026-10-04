@@ -30,6 +30,9 @@ elyra-windows-local = "elyra.service.windows_local:main"
 elyra-ai = "elyra.ai.assistant:main"
 
 [project.optional-dependencies]
+chat = [
+  "llama-cpp-python>=0.3,<1",
+]
 dev = [
   "pytest>=8.3,<10",
   "pytest-cov>=5,<8",

@@ -9,6 +9,7 @@ from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
 from .analyst import EvidenceAnalyst
+from .chat_engine import ChatEngineUnavailable, LocalChatEngine
 from .updater import check_for_update, download_and_launch
 
 CURRENT_VERSION = "1.0.9"
@@ -21,6 +22,7 @@ class AssistantWindow(tk.Tk):
         self.geometry("820x600")
         self.minsize(680, 460)
         self.analyst = EvidenceAnalyst()
+        self.chat = LocalChatEngine()
         self._build_ui()
         self.after(250, self._check_update)
 
@@ -55,7 +57,10 @@ class AssistantWindow(tk.Tk):
             return
         self.question.delete(0, "end")
         self._write(f"Sen: {text}")
-        self._write("Elyra: Bu sürüm yalnızca kanıt JSON dosyalarını açıklayabilir. 'Kanıt JSON aç' düğmesini kullanın.\n")
+        try:
+            self._write(f"Elyra: {self.chat.respond(text)}\n")
+        except ChatEngineUnavailable:
+            self._write("Elyra: Yerel sohbet modeli henüz kurulmamış. Kanıt JSON analizi için 'Kanıt JSON aç' düğmesini kullanabilirsiniz.\n")
 
     def _choose_evidence(self) -> None:
         filename = filedialog.askopenfilename(title="Elyra kanıt JSON dosyası seçin", filetypes=[("JSON files", "*.json"), ("All files", "*.*")])
