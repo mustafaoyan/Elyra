@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "elyra-pardus"
-version = "1.0.4"
+version = "1.0.5"
 description = "Elyra: local-first, explainable entropy-based endpoint defense engine"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -27,6 +27,7 @@ elyra-integration-check = "elyra.service.integration_check:main"
 elyra-submission-check = "elyra.release.submission:main"
 elyra-release-build = "elyra.release.bundle:main"
 elyra-windows-local = "elyra.service.windows_local:main"
+elyra-ai = "elyra.ai.assistant:main"
 
 [project.optional-dependencies]
 dev = [

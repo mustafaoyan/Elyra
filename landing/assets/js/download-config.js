@@ -10,7 +10,7 @@
   "use strict";
 
   const repository = "mustafaoyan/Elyra";
-  const version = "1.0.4";
+  const version = "1.0.5";
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
 
@@ -24,6 +24,11 @@
         label: "Linux x86_64 portable bundle",
         filename: `elyra-linux-${version}-x86_64.tar.gz`,
         url: `${releaseBaseUrl}/elyra-linux-${version}-x86_64.tar.gz`,
+      }),
+      ai: Object.freeze({
+        label: "Elyra AI Assistant Debian package",
+        filename: `elyra-ai-linux_${version}-1_amd64.deb`,
+        url: `${releaseBaseUrl}/elyra-ai-linux_${version}-1_amd64.deb`,
       }),
     }),
   });

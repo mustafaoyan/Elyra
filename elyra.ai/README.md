@@ -21,3 +21,16 @@ adlarında nokta kullanılamadığı için bu ayrım kasıtlıdır.
 
 Model sonucu tek başına karantina/silme veya kernel kararı veremez. Model yokluğu,
 bozuk manifest veya zaman aşımı `UNAVAILABLE`/`INCONCLUSIVE` olarak raporlanır.
+## Kurulabilir AI asistanı
+
+GitHub Release ile yayımlanan `elyra-ai-linux_<version>-1_amd64.deb` paketi
+yerel `elyra-ai` komutunu ve masaüstü girişini kurar:
+
+```bash
+sudo apt install ./elyra-ai-linux_<version>-1_amd64.deb
+elyra-ai --evidence ./evidence.json
+```
+
+İlk sürüm kanıtla sınırlıdır; dosya çalıştırmaz, karantina politikası değiştirmez
+ve buluta veri göndermez. Çalışan kaynak kodun tek kopyası
+`../elyra-engine/src/elyra/ai/` altında tutulur.

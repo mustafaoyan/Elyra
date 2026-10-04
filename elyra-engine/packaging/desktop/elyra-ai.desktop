@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Elyra AI Assistant
+Name[tr]=Elyra Yapay Zeka Asistanı
+Comment=Local evidence analysis assistant for Elyra
+Comment[tr]=Elyra için yerel kanıt analiz asistanı
+Exec=/usr/local/bin/elyra-ai
+Icon=security-high
+Terminal=true
+Categories=System;Security;Utility;
+StartupNotify=true

@@ -28,6 +28,9 @@ jobs:
       - name: Build portable Linux bundle
         working-directory: elyra-engine
         run: bash scripts/build_portable_linux_bundle.sh dist/portable
+      - name: Build installable AI assistant package
+        working-directory: elyra-engine
+        run: bash scripts/build_ai_deb.sh dist/ai-debian
       - name: Generate release checksums
         working-directory: elyra-engine
         run: sha256sum dist/debian/*.deb > dist/debian/SHA256SUMS
@@ -40,3 +43,5 @@ jobs:
             elyra-engine/dist/debian/SHA256SUMS
             elyra-engine/dist/portable/*.tar.gz
             elyra-engine/dist/portable/*.sha256
+            elyra-engine/dist/ai-debian/*.deb
+            elyra-engine/dist/ai-debian/*.sha256

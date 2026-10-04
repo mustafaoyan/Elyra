@@ -1,3 +1,8 @@
+# Elyra 1.0.5 Release Notes
+
+- Adds the installable local `elyra-ai` evidence assistant package.
+- Publishes the AI Debian package alongside the Linux engine artifacts.
+
 # Elyra 1.0.0 Release Notes
 
 ELYRA 1.0.0 is the final controlled TEKNOFEST/Pardus competition release.

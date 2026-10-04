@@ -13,6 +13,7 @@
   const platformCards = document.querySelectorAll("[data-platform-card]");
   const platformCurrentLabels = document.querySelectorAll("[data-platform-current]");
   const autoDetectButton = document.querySelector("[data-auto-detect]");
+  const aiDownloadLinks = document.querySelectorAll("[data-ai-download-link]");
   const storageKey = "elyra-download-platform";
 
   if (!config || !platformSelect) {
@@ -138,6 +139,17 @@
   releaseVersions.forEach((element) => {
     element.textContent = `${config.releaseTag} (${config.version})`;
   });
+
+  const aiPackage = config.downloads.ai;
+  if (aiPackage && isSafeHttpsUrl(aiPackage.url)) {
+    aiDownloadLinks.forEach((link) => {
+      link.href = aiPackage.url;
+      link.classList.remove("download-option--disabled");
+      link.removeAttribute("aria-disabled");
+      link.querySelector(".download-option__badge")?.replaceChildren("DEB İNDİR");
+      link.querySelector("small")?.replaceChildren("Yerel AI analiz asistanını kur");
+    });
+  }
 
   const yearElement = document.querySelector("[data-current-year]");
   if (yearElement) {
