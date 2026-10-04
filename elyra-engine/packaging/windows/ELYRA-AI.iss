@@ -18,6 +18,8 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=lowest
 WizardStyle=modern
+SetupIconFile=..\..\packaging\windows\elyra.ico
+UninstallDisplayIcon={app}\{#MyAppExeName}
 [Files]
 Source: "..\..\dist\ELYRA-AI\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 [Icons]

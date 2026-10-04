@@ -11,7 +11,7 @@ from tkinter import filedialog, messagebox, ttk
 from .analyst import EvidenceAnalyst
 from .updater import check_for_update, download_and_launch
 
-CURRENT_VERSION = "1.0.8"
+CURRENT_VERSION = "1.0.9"
 
 
 class AssistantWindow(tk.Tk):
