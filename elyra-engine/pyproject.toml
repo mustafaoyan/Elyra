@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "elyra-pardus"
-version = "1.0.9"
+version = "1.1.0"
 description = "Elyra: local-first, explainable entropy-based endpoint defense engine"
 readme = "README.md"
 requires-python = ">=3.10"

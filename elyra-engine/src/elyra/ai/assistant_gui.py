@@ -10,9 +10,10 @@ from tkinter import filedialog, messagebox, ttk
 
 from .analyst import EvidenceAnalyst
 from .chat_engine import ChatEngineUnavailable, LocalChatEngine
+from .model_manager import download_model
 from .updater import check_for_update, download_and_launch
 
-CURRENT_VERSION = "1.0.9"
+CURRENT_VERSION = "1.1.0"
 
 
 class AssistantWindow(tk.Tk):
@@ -45,7 +46,9 @@ class AssistantWindow(tk.Tk):
         self.question.pack(side="left", fill="x", expand=True, padx=(0, 8))
         self.question.bind("<Return>", lambda _event: self._answer())
         ttk.Button(controls, text="Gönder", command=self._answer).pack(side="left", padx=(0, 8))
-        ttk.Button(controls, text="Kanıt JSON aç", command=self._choose_evidence).pack(side="left")
+        ttk.Button(controls, text="Kanıt JSON aç", command=self._choose_evidence).pack(side="left", padx=(0, 8))
+        self.model_button = ttk.Button(controls, text="Yerel modeli kur", command=self._install_model)
+        self.model_button.pack(side="left")
 
     def _write(self, text: str) -> None:
         self.output.insert("end", text + "\n")
@@ -72,6 +75,30 @@ class AssistantWindow(tk.Tk):
             self._write(f"Kanıt: {filename}\n{json.dumps(result, ensure_ascii=False, indent=2)}\n")
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             messagebox.showerror("Analiz başarısız", str(exc))
+
+    def _install_model(self) -> None:
+        if self.chat.available:
+            messagebox.showinfo("Model hazır", "Yerel sohbet modeli zaten kurulu.")
+            return
+        if not messagebox.askyesno("Yerel model kurulumu", "Yaklaşık 1,1 GB boyutunda yerel sohbet modeli indirilsin mi?"):
+            return
+        self.model_button.configure(state="disabled", text="Model indiriliyor...")
+        def worker() -> None:
+            try:
+                path = download_model()
+                self.after(0, lambda: self._model_ready(path))
+            except Exception as exc:
+                self.after(0, lambda: self._model_failed(exc))
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _model_ready(self, path: Path) -> None:
+        self.model_button.configure(state="normal", text="Yerel model hazır")
+        self.chat = LocalChatEngine(path)
+        messagebox.showinfo("Model hazır", "Elyra artık yerel sohbet modelini kullanabilir.")
+
+    def _model_failed(self, error: Exception) -> None:
+        self.model_button.configure(state="normal", text="Yerel modeli kur")
+        messagebox.showerror("Model indirilemedi", str(error))
 
     def _check_update(self) -> None:
         try:

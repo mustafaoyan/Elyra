@@ -30,6 +30,11 @@ sunucu veya bulut API'si kullanılmaz. GGUF model dosyası
 kurulu değilse güvenlik kanıtı analizleri çalışmaya devam eder ve sohbet alanı
 modelin eksik olduğunu açıkça bildirir.
 
+İlk çalıştırmada **Yerel modeli kur** düğmesi yaklaşık 1,1 GB olan Qwen2.5
+1.5B Instruct GGUF Q4_K_M modelini indirir. Model uygulama içindeki gömülü
+runtime tarafından yüklenir; ayrı Ollama veya sunucu kurulmaz. Model lisansı
+Apache-2.0'dır. Kaynak model: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF
+
 GitHub Release ile yayımlanan `elyra-ai-linux_<version>-1_amd64.deb` paketi
 yerel `elyra-ai` komutunu ve masaüstü girişini kurar:
 

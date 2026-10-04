@@ -61,7 +61,7 @@ jobs:
         working-directory: elyra-engine
         shell: powershell
         run: |
-          python -m pip install --upgrade pip pyinstaller
+          python -m pip install --upgrade pip pyinstaller llama-cpp-python
           $version = $env:GITHUB_REF_NAME -replace '^v', ''
           python scripts/build_windows_ai_release.py --version $version --clean
       - name: Upload Windows AI installer

@@ -15,7 +15,7 @@ from typing import Any
 from .analyst import EvidenceAnalyst
 from .updater import check_for_update, download_and_launch
 
-CURRENT_VERSION = "1.0.7"
+CURRENT_VERSION = "1.1.0"
 
 
 def _load_evidence(path: Path) -> dict[str, Any]:

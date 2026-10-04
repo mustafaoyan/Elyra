@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_final_version_is_consistent() -> None:
     with (ROOT / "pyproject.toml").open("rb") as stream:
         version = tomllib.load(stream)["project"]["version"]
-    assert version == "1.0.9"
+    assert version == "1.1.0"
     assert __version__ == version
 
 

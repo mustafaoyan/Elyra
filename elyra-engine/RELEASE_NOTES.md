@@ -1,4 +1,4 @@
-# Elyra 1.0.9 Release Notes
+# Elyra 1.1.0 Release Notes
 
 - Adds the installable local `elyra-ai` evidence assistant package.
 - Publishes the AI Debian package alongside the Linux engine artifacts.
@@ -6,6 +6,7 @@
 - Adds startup release checking, checksum verification and user-confirmed installer launch.
 - Replaces the terminal-only Windows assistant with a native desktop GUI.
 - Adds the branded ELYRA shield/E icon to the EXE, installer and shortcuts.
+- Adds first-run download and embedded loading for the local GGUF chat model.
 
 # Elyra 1.0.0 Release Notes
 
