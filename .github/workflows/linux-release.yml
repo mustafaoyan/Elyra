@@ -45,3 +45,28 @@ jobs:
             elyra-engine/dist/portable/*.sha256
             elyra-engine/dist/ai-debian/*.deb
             elyra-engine/dist/ai-debian/*.sha256
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Inno Setup
+        shell: powershell
+        run: choco install innosetup --no-progress -y
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build Windows AI installer
+        working-directory: elyra-engine
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip pyinstaller
+          $version = $env:GITHUB_REF_NAME -replace '^v', ''
+          python scripts/build_windows_ai_release.py --version $version --clean
+      - name: Upload Windows AI installer
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            elyra-engine/dist/windows-ai/*.exe
+            elyra-engine/dist/windows-ai/SHA256SUMS.txt

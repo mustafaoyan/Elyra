@@ -14,6 +14,7 @@
   const platformCurrentLabels = document.querySelectorAll("[data-platform-current]");
   const autoDetectButton = document.querySelector("[data-auto-detect]");
   const aiDownloadLinks = document.querySelectorAll("[data-ai-download-link]");
+  const windowsAiDownloadLinks = document.querySelectorAll("[data-windows-ai-download-link]");
   const storageKey = "elyra-download-platform";
 
   if (!config || !platformSelect) {
@@ -149,6 +150,10 @@
       link.querySelector(".download-option__badge")?.replaceChildren("DEB İNDİR");
       link.querySelector("small")?.replaceChildren("Yerel AI analiz asistanını kur");
     });
+  }
+  const windowsAiPackage = config.downloads.windowsAi;
+  if (windowsAiPackage && isSafeHttpsUrl(windowsAiPackage.url)) {
+    windowsAiDownloadLinks.forEach((link) => { link.href = windowsAiPackage.url; });
   }
 
   const yearElement = document.querySelector("[data-current-year]");

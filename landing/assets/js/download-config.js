@@ -10,7 +10,7 @@
   "use strict";
 
   const repository = "mustafaoyan/Elyra";
-  const version = "1.0.5";
+  const version = "1.0.6";
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
 
@@ -29,6 +29,11 @@
         label: "Elyra AI Assistant Debian package",
         filename: `elyra-ai-linux_${version}-1_amd64.deb`,
         url: `${releaseBaseUrl}/elyra-ai-linux_${version}-1_amd64.deb`,
+      }),
+      windowsAi: Object.freeze({
+        label: "Elyra AI Assistant Windows installer",
+        filename: `ELYRA-AI-Setup-${version}-x64.exe`,
+        url: `${releaseBaseUrl}/ELYRA-AI-Setup-${version}-x64.exe`,
       }),
     }),
   });
