@@ -37,7 +37,6 @@ cp -a "$PROJECT_ROOT/README.md" "$PROJECT_ROOT/LICENSE" "$PROJECT_ROOT/SECURITY.
     "$PROJECT_ROOT/RELEASE_NOTES.md" "$PROJECT_ROOT/docs" "$PAYLOAD/release/"
 cp "$PROJECT_ROOT/packaging/systemd/elyra.service" "$ROOT/etc/systemd/system/elyra.service"
 cp "$PROJECT_ROOT/scripts/launch_gui.sh" "$ROOT/usr/local/bin/elyra-gui"
-ln -s elyra-gui "$ROOT/usr/local/bin/elyra-gui"
 cp "$PROJECT_ROOT/packaging/desktop/elyra.desktop" "$ROOT/usr/share/applications/elyra.desktop"
 cp "$PROJECT_ROOT/packaging/sysusers/elyra.conf" "$ROOT/usr/lib/sysusers.d/elyra.conf"
 chmod 0755 "$ROOT/usr/local/bin/elyra-gui"
