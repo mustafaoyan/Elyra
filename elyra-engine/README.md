@@ -23,7 +23,7 @@ static file analysis, fanotify pre-execution decisions, filtered BCC/eBPF
 runtime telemetry, secure response operations, an unprivileged GUI and
 structured tamper-evident auditing.
 
-> **Current controlled release:** `1.0.7`
+> **Current controlled release:** `1.0.8`
 > **Verified target:** Pardus GNU/Linux 25.1, x86_64, Linux 6.12-series kernel  
 > **Default production policy:** `MONITOR_ONLY`  
 > **Automatic terminate/quarantine:** disabled unless explicitly authorised
@@ -178,7 +178,7 @@ and embedded into the package:
 
 ```bash
 ./scripts/build_pardus_deb.sh
-sudo apt install ./dist/debian/elyra-linux_1.0.7-1_amd64.deb
+sudo apt install ./dist/debian/elyra-linux_1.0.8-1_amd64.deb
 sudo usermod -aG elyra "$USER"
 ```
 
