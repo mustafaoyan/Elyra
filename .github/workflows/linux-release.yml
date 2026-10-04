@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build Debian/Pardus package
+      - name: Build Debian/Ubuntu package
         working-directory: elyra-engine
         run: |
           sudo apt-get update
@@ -25,6 +25,9 @@ jobs:
           test -f requirements.txt
           test -f LICENSE
           bash scripts/build_pardus_deb.sh dist/debian
+      - name: Build portable Linux bundle
+        working-directory: elyra-engine
+        run: bash scripts/build_portable_linux_bundle.sh dist/portable
       - name: Generate release checksums
         working-directory: elyra-engine
         run: sha256sum dist/debian/*.deb > dist/debian/SHA256SUMS
@@ -35,3 +38,5 @@ jobs:
           files: |
             elyra-engine/dist/debian/*.deb
             elyra-engine/dist/debian/SHA256SUMS
+            elyra-engine/dist/portable/*.tar.gz
+            elyra-engine/dist/portable/*.sha256

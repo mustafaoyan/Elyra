@@ -10,7 +10,7 @@
   "use strict";
 
   const repository = "mustafaoyan/Elyra";
-  const version = "1.0.2";
+  const version = "1.0.3";
   const releaseTag = `v${version}`;
   const releaseBaseUrl = `https://github.com/${repository}/releases/download/${releaseTag}`;
 
@@ -21,9 +21,9 @@
     releasePageUrl: `https://github.com/${repository}/releases`,
     downloads: Object.freeze({
       linux: Object.freeze({
-        label: "Linux / Pardus (64-bit .deb)",
-        filename: `elyra-pardus_${version}-1_amd64.deb`,
-        url: `${releaseBaseUrl}/elyra-pardus_${version}-1_amd64.deb`,
+        label: "Linux x86_64 portable bundle",
+        filename: `elyra-linux-${version}-x86_64.tar.gz`,
+        url: `${releaseBaseUrl}/elyra-linux-${version}-x86_64.tar.gz`,
       }),
     }),
   });

@@ -15,7 +15,7 @@ with open(sys.argv[1], 'rb') as stream:
 PY
 )
 DEBIAN_VERSION="${VERSION}-1"
-PACKAGE_NAME="elyra-pardus_${DEBIAN_VERSION}_amd64"
+PACKAGE_NAME="elyra-linux_${DEBIAN_VERSION}_amd64"
 WORK=$(mktemp -d -t elyra-deb-XXXXXX)
 trap 'rm -rf "$WORK"' EXIT
 ROOT="$WORK/$PACKAGE_NAME"

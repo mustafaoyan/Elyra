@@ -71,16 +71,16 @@
   function messageFor(platform, source) {
     if (platform === "linux") {
       return source === "detected"
-        ? "Linux algılandı. Debian/Pardus paketin hazır."
-        : "Linux / Pardus seçildi. Paketin hazır.";
+        ? "Linux algılandı. Taşınabilir x86_64 paket hazır."
+        : "Linux seçildi. Taşınabilir paket hazır.";
     }
     if (platform === "windows") {
       return "Windows sÃ¼rÃ¼mÃ¼ hazÄ±rlanÄ±yor. Linux/Pardus paketi ÅŸu anda aktif.";
     }
     if (platform === "unsupported") {
-      return "Bu tarayıcı desteklenmeyen bir platformda görünüyor. Linux/Pardus paketini seçin.";
+      return "Bu tarayıcı desteklenmeyen bir platformda görünüyor. Linux paketini seçin.";
     }
-    return "İşletim sistemi algılanamadı. Linux/Pardus paketini seçin.";
+    return "İşletim sistemi algılanamadı. Linux paketini seçin.";
   }
 
   function updatePlatformCards(platform) {
