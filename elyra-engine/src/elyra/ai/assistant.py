@@ -13,6 +13,9 @@ from pathlib import Path
 from typing import Any
 
 from .analyst import EvidenceAnalyst
+from .updater import check_for_update, download_and_launch
+
+CURRENT_VERSION = "1.0.7"
 
 
 def _load_evidence(path: Path) -> dict[str, Any]:
@@ -32,9 +35,22 @@ def main(argv: list[str] | None = None) -> int:
         description="Elyra local evidence assistant (no cloud, no file execution).",
     )
     parser.add_argument("--evidence", type=Path, help="an existing scanner evidence JSON file")
-    parser.add_argument("--version", action="version", version="elyra-ai 0.1.0")
+    parser.add_argument("--version", action="version", version=f"elyra-ai {CURRENT_VERSION}")
+    parser.add_argument("--no-update-check", action="store_true", help="skip the startup update check")
     args = parser.parse_args(argv)
     analyst = EvidenceAnalyst()
+
+    if not args.no_update_check:
+        try:
+            update = check_for_update(CURRENT_VERSION)
+            if update:
+                print(f"Yeni Elyra AI güncellemesi var: {update.current_version} -> {update.latest_version}.")
+                if input("Güncellemeyi indirip kurulum başlatılsın mı? [y/N] ").strip().lower() in {"y", "yes", "e", "evet"}:
+                    installer = download_and_launch(update)
+                    print(f"Kurulum başlatıldı: {installer}")
+                    return 0
+        except Exception as exc:  # Update failure must never block local analysis.
+            print(f"Güncelleme kontrolü yapılamadı; mevcut sürümle devam ediliyor: {exc}")
 
     if args.evidence:
         try:
