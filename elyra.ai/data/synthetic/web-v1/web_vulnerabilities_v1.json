@@ -1,0 +1,187 @@
+[
+  {
+    "vulnerability_cve_category": "SQL Injection - Union-Based (CWE-89)",
+    "vulnerable_architecture": "A Node.js/Express reporting endpoint builds a raw SQL query by string-concatenating a 'sort' query parameter into an ORDER BY clause, with no allowlist of valid column names.",
+    "theoretical_attack_kill_chain": [
+      "Attacker sends baseline request with sort=name to confirm normal ordering behavior",
+      "Attacker injects sort=(SELECT 1) to test for raw query evaluation",
+      "Attacker determines column count via sort=1 UNION SELECT NULL,NULL,NULL--",
+      "Attacker extracts schema metadata using placeholder payload: sort=1 UNION SELECT table_name,NULL,NULL FROM information_schema.tables--",
+      "Attacker pivots to extracting non-sensitive placeholder values from a target table for demonstration purposes only"
+    ],
+    "synthetic_server_logs": [
+      "203.0.113.90 - - [04/Oct/2026:10:02:14 +0000] \"GET /api/reports?sort=name HTTP/1.1\" 200 3321 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)\"",
+      "203.0.113.90 - - [04/Oct/2026:10:02:21 +0000] \"GET /api/reports?sort=1%20UNION%20SELECT%20NULL,NULL,NULL-- HTTP/1.1\" 200 1120 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)\"",
+      "203.0.113.90 - - [04/Oct/2026:10:02:29 +0000] \"GET /api/reports?sort=1%20UNION%20SELECT%20table_name,NULL,NULL%20FROM%20information_schema.tables-- HTTP/1.1\" 200 4890 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)\"",
+      "[app-log] ERROR: SequelizeDatabaseError: syntax error at ReportService.js:112 — unexpected token NULL"
+    ],
+    "detection_logic_for_ai": "Flag query parameters containing SQL keywords (UNION, SELECT, information_schema) in non-SQL-intended fields like 'sort'; alert on abrupt response-size changes following parameter mutation; correlate repeated ORDER BY injections with database error log spikes from the same source IP.",
+    "secure_code_remediation": "const ALLOWED_SORT_COLUMNS = ['name','date','id']; const sortCol = ALLOWED_SORT_COLUMNS.includes(req.query.sort) ? req.query.sort : 'name'; db.query('SELECT * FROM reports ORDER BY ??', [sortCol]);"
+  },
+  {
+    "vulnerability_cve_category": "Server-Side Request Forgery via Webhook Validator (CWE-918)",
+    "vulnerable_architecture": "A SaaS platform lets users register a webhook URL and 'test' it server-side; the test function fetches the URL directly without restricting destination IP ranges or schemes.",
+    "theoretical_attack_kill_chain": [
+      "Attacker registers a webhook pointing to an external test endpoint to confirm server-side fetch behavior",
+      "Attacker changes the webhook URL to a cloud metadata endpoint placeholder: http://169.254.169.254/latest/meta-data/iam/security-credentials/",
+      "Attacker tries alternate schemes (file://, gopher://) to test filter bypass resilience",
+      "Attacker uses a DNS-rebinding placeholder domain that resolves externally first, then to an internal IP, to bypass naive first-request allowlisting"
+    ],
+    "synthetic_server_logs": [
+      "198.51.100.63 - - [04/Oct/2026:11:15:02 +0000] \"POST /api/webhooks/test HTTP/1.1\" 200 211 \"-\" \"curl/8.4.0\"",
+      "198.51.100.63 - - [04/Oct/2026:11:15:40 +0000] \"POST /api/webhooks/test HTTP/1.1\" 200 756 \"-\" \"curl/8.4.0\" body={\"url\":\"http://169.254.169.254/latest/meta-data/iam/security-credentials/\"}",
+      "198.51.100.63 - - [04/Oct/2026:11:16:05 +0000] \"POST /api/webhooks/test HTTP/1.1\" 400 88 \"-\" \"curl/8.4.0\" body={\"url\":\"file:///etc/passwd\"}",
+      "[app-log] WARN: Outbound fetch to link-local address 169.254.169.254 blocked by egress policy — source: webhook-tester-svc"
+    ],
+    "detection_logic_for_ai": "Monitor outbound requests initiated by server-side fetch utilities for destinations in RFC1918, loopback, and link-local ranges; flag non-HTTP(S) schemes (file://, gopher://, dict://) in user-supplied URLs; alert on repeated webhook URL changes within short time windows from a single account.",
+    "secure_code_remediation": "def validate_webhook_url(url):\n    parsed = urlparse(url)\n    if parsed.scheme not in ('http','https'):\n        raise ValueError('Invalid scheme')\n    ip = ipaddress.ip_address(socket.gethostbyname(parsed.hostname))\n    if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved:\n        raise ValueError('Blocked internal destination')\n    return True"
+  },
+  {
+    "vulnerability_cve_category": "Insecure Deserialization - Python Pickle (CWE-502)",
+    "vulnerable_architecture": "A background job queue stores serialized Python objects (via pickle) in a Redis-backed cache, and worker processes deserialize the data on retrieval without integrity verification (no HMAC signing).",
+    "theoretical_attack_kill_chain": [
+      "Attacker identifies that cached job payloads are base64-encoded pickle streams by inspecting response headers/cookies",
+      "Attacker confirms deserialization occurs server-side by submitting a malformed pickle stream and observing an UnpicklingError in logs",
+      "Attacker crafts a placeholder object referencing a benign __reduce__ method (e.g., returning a harmless tuple) purely to demonstrate code-path triggering, without any real payload",
+      "Attacker submits the crafted object as a job payload to confirm execution during deserialization"
+    ],
+    "synthetic_server_logs": [
+      "192.0.2.140 - - [04/Oct/2026:13:05:11 +0000] \"POST /api/jobs/enqueue HTTP/1.1\" 202 144 \"-\" \"python-requests/2.31\" body=gANjYnVpbHRpbnMKZXZhbAo...",
+      "192.0.2.140 - - [04/Oct/2026:13:05:44 +0000] \"POST /api/jobs/enqueue HTTP/1.1\" 500 302 \"-\" \"python-requests/2.31\" body=gANjYmFkX21vZHVsZQo...",
+      "[worker-log] ERROR: pickle.UnpicklingError: could not find module 'bad_module' at JobWorker.py:67",
+      "[worker-log] WARN: Deserialized object triggered __reduce__ invocation — class reference: builtins.eval (flagged as suspicious pattern)"
+    ],
+    "detection_logic_for_ai": "Flag any pickle stream containing references to builtins.eval, os.system, subprocess, or other code-execution primitives in __reduce__ metadata; alert on UnpicklingError spikes; treat any use of raw pickle.loads() on data crossing a trust boundary as a high-severity architectural finding regardless of payload content.",
+    "secure_code_remediation": "import json\n# Replace pickle with a safe, schema-validated format\njob_data = json.loads(payload)\nvalidate_schema(job_data, JOB_SCHEMA)\n# Never call pickle.loads() on untrusted or network-sourced data"
+  },
+  {
+    "vulnerability_cve_category": "Insecure Direct Object Reference - IDOR (CWE-639)",
+    "vulnerable_architecture": "A billing API exposes invoice details at /api/invoices/{id} using a sequential integer primary key, and the authorization check only verifies that the requester is logged in, not that they own the specific invoice.",
+    "theoretical_attack_kill_chain": [
+      "Attacker logs in as a legitimate low-privilege user and retrieves their own invoice at /api/invoices/4471",
+      "Attacker increments the ID to /api/invoices/4472 and observes a 200 OK response containing another customer's placeholder invoice data",
+      "Attacker scripts sequential enumeration across a range of IDs to confirm the pattern is systemic",
+      "Attacker notes which responses return 200 vs 403 to map the accessible ID space"
+    ],
+    "synthetic_server_logs": [
+      "192.0.2.201 - - [04/Oct/2026:09:40:02 +0000] \"GET /api/invoices/4471 HTTP/1.1\" 200 1890 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOi...user4471",
+      "192.0.2.201 - - [04/Oct/2026:09:40:05 +0000] \"GET /api/invoices/4472 HTTP/1.1\" 200 1902 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOi...user4471",
+      "192.0.2.201 - - [04/Oct/2026:09:40:06 +0000] \"GET /api/invoices/4473 HTTP/1.1\" 200 1877 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOi...user4471",
+      "192.0.2.201 - - [04/Oct/2026:09:40:07 +0000] \"GET /api/invoices/4474 HTTP/1.1\" 200 1899 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOi...user4471",
+      "[app-log] INFO: 40 sequential invoice requests from single session token within 12 seconds — no ownership validation performed"
+    ],
+    "detection_logic_for_ai": "Detect sequential or near-sequential resource ID access patterns from a single authenticated session in a short time window; cross-reference requested resource owner ID against authenticated user ID at the log level; flag high-velocity enumeration (>N requests/minute to a parameterized ID endpoint).",
+    "secure_code_remediation": "@app.get('/api/invoices/{invoice_id}')\ndef get_invoice(invoice_id: int, current_user: User = Depends(get_current_user)):\n    invoice = db.get_invoice(invoice_id)\n    if invoice.owner_id != current_user.id:\n        raise HTTPException(status_code=403, detail='Forbidden')\n    return invoice"
+  },
+  {
+    "vulnerability_cve_category": "Remote Code Execution via Unrestricted File Upload (CWE-434)",
+    "vulnerable_architecture": "A profile-picture upload feature on a PHP application validates file type only via client-supplied MIME-type header and file extension string matching, storing uploads directly in a web-accessible directory with execute permissions.",
+    "theoretical_attack_kill_chain": [
+      "Attacker uploads a benign .jpg to confirm the upload pipeline and storage path",
+      "Attacker renames a placeholder test script to profile.php.jpg to probe double-extension handling",
+      "Attacker uploads a file with a spoofed Content-Type: image/jpeg header while the body contains non-image placeholder text, to test MIME validation depth",
+      "Attacker requests the uploaded file path directly to check whether the server executes it based on the true extension"
+    ],
+    "synthetic_server_logs": [
+      "203.0.113.17 - - [04/Oct/2026:16:20:03 +0000] \"POST /upload/profile HTTP/1.1\" 200 112 \"-\" \"Mozilla/5.0\" Content-Type: multipart/form-data; filename=\"avatar.jpg\"",
+      "203.0.113.17 - - [04/Oct/2026:16:21:17 +0000] \"POST /upload/profile HTTP/1.1\" 200 118 \"-\" \"Mozilla/5.0\" Content-Type: multipart/form-data; filename=\"test.php.jpg\"",
+      "203.0.113.17 - - [04/Oct/2026:16:21:40 +0000] \"GET /uploads/test.php.jpg HTTP/1.1\" 500 240 \"-\" \"Mozilla/5.0\"",
+      "[app-log] ERROR: PHP Parse error in /uploads/test.php.jpg on line 1 — unexpected token (file executed by handler)",
+      "[app-log] WARN: Upload directory /uploads/ served with execute permissions — flagged by config auditor"
+    ],
+    "detection_logic_for_ai": "Flag uploads where the filename contains multiple extensions or a server-executable extension (.php, .jsp, .asp) regardless of declared Content-Type; alert on any subsequent GET request to an uploaded file path that returns a server-side error indicating interpretation rather than static serving; verify magic-byte file signature matches declared type.",
+    "secure_code_remediation": "$allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png'];\n$finfo = finfo_open(FILEINFO_MIME_TYPE);\n$realType = finfo_file($finfo, $tmpPath);\nif (!array_key_exists($realType, $allowed)) { die('Invalid file type'); }\n$safeName = bin2hex(random_bytes(16)) . '.' . $allowed[$realType];\nmove_uploaded_file($tmpPath, '/var/uploads_noexec/' . $safeName);"
+  },
+  {
+    "vulnerability_cve_category": "XML External Entity Injection - XXE (CWE-611)",
+    "vulnerable_architecture": "A Java-based invoice-import feature parses user-uploaded XML files using a DocumentBuilderFactory with external entity resolution enabled by default.",
+    "theoretical_attack_kill_chain": [
+      "Attacker uploads a well-formed XML invoice to confirm the parser accepts and processes files",
+      "Attacker submits an XML file declaring a placeholder external entity pointing to a local, non-sensitive test file to confirm entity expansion occurs",
+      "Attacker observes the parsed output reflects file content, confirming XXE",
+      "Attacker tests a placeholder SSRF-style entity referencing an internal test URL to assess blended XXE/SSRF impact"
+    ],
+    "synthetic_server_logs": [
+      "192.0.2.88 - - [04/Oct/2026:08:11:09 +0000] \"POST /api/invoices/import HTTP/1.1\" 200 340 \"-\" \"Mozilla/5.0\" Content-Type: application/xml",
+      "192.0.2.88 - - [04/Oct/2026:08:12:30 +0000] \"POST /api/invoices/import HTTP/1.1\" 200 982 \"-\" \"Mozilla/5.0\" Content-Type: application/xml body=<!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///tmp/test_placeholder.txt\">]><invoice>&xxe;</invoice>",
+      "[app-log] WARN: XML parser resolved external entity reference to local filesystem path /tmp/test_placeholder.txt",
+      "[app-log] ERROR: Unexpected content in invoice field 'description' — matches local file content pattern"
+    ],
+    "detection_logic_for_ai": "Scan inbound XML payloads for DOCTYPE declarations containing ENTITY and SYSTEM/PUBLIC keywords; flag any XML parse operation that results in file-path-like or URL-like content being reflected in application output; alert on parser configuration lacking FEATURE_SECURE_PROCESSING or external entity disabling.",
+    "secure_code_remediation": "DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setXIncludeAware(false);\ndbf.setExpandEntityReferences(false);"
+  },
+  {
+    "vulnerability_cve_category": "Server-Side Template Injection - SSTI (CWE-1336)",
+    "vulnerable_architecture": "A Flask application renders user-supplied 'nickname' input directly into a Jinja2 template string via render_template_string() instead of passing it as a safe context variable.",
+    "theoretical_attack_kill_chain": [
+      "Attacker submits a nickname containing a benign template expression placeholder: {{7*7}}",
+      "Attacker observes the rendered page displays 49, confirming server-side template evaluation",
+      "Attacker probes object traversal depth with a placeholder expression: {{ self.__class__.__init__.__globals__ }}",
+      "Attacker notes which globals/builtins are exposed to assess theoretical blast radius, without constructing a working RCE payload"
+    ],
+    "synthetic_server_logs": [
+      "198.51.100.204 - - [04/Oct/2026:12:30:11 +0000] \"POST /profile/update HTTP/1.1\" 200 88 \"-\" \"Mozilla/5.0\" body=nickname=Alex",
+      "198.51.100.204 - - [04/Oct/2026:12:30:45 +0000] \"POST /profile/update HTTP/1.1\" 200 94 \"-\" \"Mozilla/5.0\" body=nickname={{7*7}}",
+      "198.51.100.204 - - [04/Oct/2026:12:30:47 +0000] \"GET /profile HTTP/1.1\" 200 1203 \"-\" \"Mozilla/5.0\" response_contains=\"Welcome, 49\"",
+      "198.51.100.204 - - [04/Oct/2026:12:31:20 +0000] \"POST /profile/update HTTP/1.1\" 200 341 \"-\" \"Mozilla/5.0\" body=nickname={{self.__class__.__init__.__globals__}}",
+      "[app-log] WARN: Jinja2 template rendered user input directly via render_template_string — introspection expression detected"
+    ],
+    "detection_logic_for_ai": "Flag user input fields containing template delimiter patterns ({{ }}, {% %}, ${ }) regardless of target language; alert when rendered output contains evaluated arithmetic or object-introspection artifacts (e.g., a numeric result where text was expected, or class/module names); treat any use of render_template_string() on user-controlled strings as a high-risk code pattern during static analysis.",
+    "secure_code_remediation": "from flask import render_template\n# Always use a static template file with the value passed as context, never embedded in the template string\nreturn render_template('profile.html', nickname=escape(user_nickname))"
+  },
+  {
+    "vulnerability_cve_category": "Broken Authentication - JWT Algorithm Confusion (CWE-347)",
+    "vulnerable_architecture": "An API verifies JWTs by calling a verification library in a mode that trusts the 'alg' header from the token itself, allowing an RS256-signed-token verifier to be downgraded to HS256 and validated using the public key as an HMAC secret.",
+    "theoretical_attack_kill_chain": [
+      "Attacker obtains the application's public RSA key from a public JWKS endpoint (standard, non-sensitive exposure)",
+      "Attacker crafts a placeholder JWT with header alg changed from RS256 to HS256",
+      "Attacker signs the placeholder token using the public key string as the HMAC secret",
+      "Attacker submits the forged token to an authenticated endpoint to test whether the server's verification logic accepts the downgraded algorithm"
+    ],
+    "synthetic_server_logs": [
+      "192.0.2.55 - - [04/Oct/2026:15:02:08 +0000] \"GET /.well-known/jwks.json HTTP/1.1\" 200 612 \"-\" \"Mozilla/5.0\"",
+      "192.0.2.55 - - [04/Oct/2026:15:03:12 +0000] \"GET /api/admin/dashboard HTTP/1.1\" 401 55 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOiJSUzI1NiJ9...",
+      "192.0.2.55 - - [04/Oct/2026:15:04:30 +0000] \"GET /api/admin/dashboard HTTP/1.1\" 200 2210 \"-\" \"Mozilla/5.0\" Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...",
+      "[app-log] WARN: JWT verified with algorithm HS256 using key material originally provisioned for RS256 — algorithm mismatch flagged",
+      "[app-log] ERROR: Privilege-elevated route accessed with token lacking expected issuer claim validation"
+    ],
+    "detection_logic_for_ai": "Compare the 'alg' field declared in JWT headers against the application's expected fixed algorithm at verification time, rejecting any mismatch; alert when a token verified via HS256 uses key material known to be an RSA public key; flag auth success events immediately following a prior 401 from the same IP using a structurally different token header.",
+    "secure_code_remediation": "import jwt\n# Pin the expected algorithm explicitly; never trust the token's own 'alg' header\ndecoded = jwt.decode(token, public_key, algorithms=['RS256'], audience='api.example.com')"
+  },
+  {
+    "vulnerability_cve_category": "Path Traversal / Local File Disclosure (CWE-22)",
+    "vulnerable_architecture": "A document-download endpoint builds a filesystem path by concatenating a 'filename' query parameter with a base directory, without normalizing or restricting the resulting path to the intended folder.",
+    "theoretical_attack_kill_chain": [
+      "Attacker requests a legitimate file to confirm the endpoint's base behavior: /download?file=report_q1.pdf",
+      "Attacker submits a relative-path placeholder: /download?file=../../../../etc/placeholder_test.txt",
+      "Attacker observes the server returns content outside the intended documents directory",
+      "Attacker iterates traversal depth and URL-encodes slashes to test filter bypass resilience"
+    ],
+    "synthetic_server_logs": [
+      "203.0.113.133 - - [04/Oct/2026:07:55:02 +0000] \"GET /download?file=report_q1.pdf HTTP/1.1\" 200 88234 \"-\" \"Mozilla/5.0\"",
+      "203.0.113.133 - - [04/Oct/2026:07:55:40 +0000] \"GET /download?file=..%2f..%2f..%2f..%2fetc%2fplaceholder_test.txt HTTP/1.1\" 200 512 \"-\" \"Mozilla/5.0\"",
+      "203.0.113.133 - - [04/Oct/2026:07:56:02 +0000] \"GET /download?file=..%2f..%2f..%2fapp%2fconfig%2fsettings_placeholder.yml HTTP/1.1\" 200 1180 \"-\" \"Mozilla/5.0\"",
+      "[app-log] WARN: Resolved file path escaped base directory /var/app/documents — resolved to /etc/placeholder_test.txt"
+    ],
+    "detection_logic_for_ai": "Flag filename/path parameters containing '../', URL-encoded traversal sequences (%2e%2e%2f), or absolute path indicators; validate that resolved canonical paths remain within the intended base directory at request time; alert on repeated requests to the same endpoint with varying traversal depth from one source.",
+    "secure_code_remediation": "import os\nbase_dir = os.path.realpath('/var/app/documents')\nrequested = os.path.realpath(os.path.join(base_dir, filename))\nif not requested.startswith(base_dir + os.sep):\n    raise PermissionError('Invalid file path')\nreturn send_file(requested)"
+  },
+  {
+    "vulnerability_cve_category": "Cross-Site Request Forgery - CSRF (CWE-352)",
+    "vulnerable_architecture": "A banking-style fund-transfer form processes POST requests based solely on an authenticated session cookie, with no anti-CSRF token, no SameSite cookie attribute, and no origin/referer validation.",
+    "theoretical_attack_kill_chain": [
+      "Attacker identifies the transfer endpoint accepts simple POST requests with only amount and destination_account parameters",
+      "Attacker hosts a placeholder HTML page containing an auto-submitting form targeting the transfer endpoint with test parameter values",
+      "Victim, while authenticated to the target site in another tab, visits the attacker's placeholder page",
+      "Victim's browser automatically submits the forged request, including the victim's valid session cookie, to the transfer endpoint"
+    ],
+    "synthetic_server_logs": [
+      "198.51.100.9 - - [04/Oct/2026:17:10:00 +0000] \"GET /transfer HTTP/1.1\" 200 3012 \"-\" \"Mozilla/5.0\" Referer: https://bank.example/dashboard",
+      "198.51.100.9 - - [04/Oct/2026:17:12:45 +0000] \"POST /transfer HTTP/1.1\" 200 140 \"-\" \"Mozilla/5.0\" Referer: https://attacker-test.example/poc.html Cookie: session=abc123validsession",
+      "[app-log] WARN: POST to /transfer accepted with cross-origin Referer (attacker-test.example) and no CSRF token present",
+      "[app-log] INFO: Transfer request processed: amount=1.00 destination=TEST-ACCT-0000 — flagged post-hoc by fraud review"
+    ],
+    "detection_logic_for_ai": "Flag state-changing POST/PUT/DELETE requests lacking a valid anti-CSRF token even when the session cookie is valid; alert when Origin or Referer headers indicate a cross-origin source for sensitive form submissions; treat absence of SameSite=Strict/Lax cookie attributes on session cookies as a contributing architectural risk factor.",
+    "secure_code_remediation": "# Server: require and validate a per-session CSRF token\n@app.route('/transfer', methods=['POST'])\n@csrf.protect\ndef transfer():\n    ...\n\n# Cookie configuration\nresponse.set_cookie('session', value, samesite='Strict', secure=True, httponly=True)"
+  }
+]

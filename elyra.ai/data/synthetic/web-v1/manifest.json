@@ -1,0 +1,32 @@
+{
+  "dataset_id": "elyra-web-vulnerability-synthetic-v1",
+  "dataset_version": "1.0.0",
+  "schema": "elyra.web_vulnerability.v1",
+  "source": "user-provided synthetic dataset",
+  "record_count": 10,
+  "categories": [
+    "CWE-22",
+    "CWE-89",
+    "CWE-1336",
+    "CWE-347",
+    "CWE-352",
+    "CWE-434",
+    "CWE-502",
+    "CWE-611",
+    "CWE-639",
+    "CWE-918"
+  ],
+  "label_fields": ["vulnerability_cve_category", "detection_logic_for_ai", "secure_code_remediation"],
+  "splits": {
+    "train": 8,
+    "validation": 1,
+    "test": 1,
+    "note": "One example per category is insufficient for a statistically meaningful classifier; augmentation is required before production training."
+  },
+  "safety": {
+    "synthetic_only": true,
+    "payloads_executed": false,
+    "real_targets_used": false,
+    "model_enabled": false
+  }
+}
