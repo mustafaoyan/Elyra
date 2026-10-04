@@ -12,7 +12,7 @@
   "bias": -10.4346539534,
   "enabled": false,
   "training_status": "EXPERIMENT_ONLY_NOT_PRODUCTION_VALIDATED",
-  "training_data": "synthetic_samples.jsonl",
+  "training_data": "samples.jsonl",
   "normalisation": {
     "centres": [
       6.217177411764706,
