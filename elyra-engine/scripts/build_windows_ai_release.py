@@ -26,7 +26,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.clean:
         for path in (app_dist, build, installer_dist):
             if path.exists(): shutil.rmtree(path)
-    command = [pyinstaller, "--noconfirm", "--clean", "--windowed", "--icon", str(PROJECT_ROOT / "packaging" / "windows" / "elyra.ico"), "--name", "ELYRA-AI", "--paths", str(PROJECT_ROOT / "src"), "--distpath", str(dist), "--workpath", str(build), str(PROJECT_ROOT / "packaging" / "windows" / "elyra_ai.py")]
+    icon = PROJECT_ROOT / "packaging" / "windows" / "elyra.ico"
+    command = [pyinstaller, "--noconfirm", "--clean", "--windowed", "--icon", str(icon), "--add-data", f"{icon};.", "--name", "ELYRA-AI", "--paths", str(PROJECT_ROOT / "src"), "--distpath", str(dist), "--workpath", str(build), str(PROJECT_ROOT / "packaging" / "windows" / "elyra_ai.py")]
     subprocess.run(command, cwd=PROJECT_ROOT, check=True)
     template = (PROJECT_ROOT / "packaging" / "windows" / "ELYRA-AI.iss").read_text(encoding="utf-8")
     generated = build / "ELYRA-AI.generated.iss"
