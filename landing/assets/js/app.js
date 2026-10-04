@@ -38,7 +38,10 @@
     if (/android|iphone|ipad|ipod|mac os|macintosh/.test(hints)) {
       return "unsupported";
     }
-    if (/linux|x11|unix|win/.test(hints)) {
+    if (/win/.test(hints)) {
+      return "windows";
+    }
+    if (/linux|x11|unix/.test(hints)) {
       return "linux";
     }
     return "unknown";
@@ -70,6 +73,9 @@
       return source === "detected"
         ? "Linux algılandı. Debian/Pardus paketin hazır."
         : "Linux / Pardus seçildi. Paketin hazır.";
+    }
+    if (platform === "windows") {
+      return "Windows sÃ¼rÃ¼mÃ¼ hazÄ±rlanÄ±yor. Linux/Pardus paketi ÅŸu anda aktif.";
     }
     if (platform === "unsupported") {
       return "Bu tarayıcı desteklenmeyen bir platformda görünüyor. Linux/Pardus paketini seçin.";
@@ -153,4 +159,15 @@
       platformSelect.focus();
     });
   }
+
+  document.querySelectorAll('a[href="#download"]').forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      downloadSection.classList.remove("is-open");
+      window.setTimeout(() => downloadSection.classList.add("is-open"), 20);
+    });
+  });
+
+  document.querySelectorAll('.download-option--disabled[href]').forEach((link) => {
+    link.addEventListener("click", (event) => event.preventDefault());
+  });
 })();

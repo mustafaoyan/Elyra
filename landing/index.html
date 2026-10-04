@@ -201,11 +201,43 @@
             <p class="release-version">Release channel: <strong data-release-version>configured release</strong></p>
           </div>
           <div class="download-controls">
+            <div class="download-catalog" aria-label="Elyra indirme seçenekleri">
+              <section class="download-category">
+                <div class="download-category__heading">
+                  <span class="download-category__icon" aria-hidden="true">◈</span>
+                  <div><p class="eyebrow">Koruma katmanı</p><h3>Antivirüs</h3></div>
+                </div>
+                <div class="download-options">
+                  <a class="download-option download-option--active" data-download-link href="https://github.com/mustafaoyan/Elyra/releases">
+                    <span class="download-option__icon" aria-hidden="true">◉</span>
+                    <span><strong>Linux / Pardus</strong><small data-download-label>64-bit .deb paketini indir</small></span>
+                    <span class="download-option__arrow" aria-hidden="true">↓</span>
+                  </a>
+                  <span class="download-option download-option--disabled" aria-disabled="true">
+                    <span class="download-option__icon" aria-hidden="true">⊞</span>
+                    <span><strong>Windows</strong><small>Yakında kullanıma açılacak</small></span>
+                    <span class="download-option__badge">YAKINDA</span>
+                  </span>
+                </div>
+              </section>
+              <section class="download-category download-category--assistant">
+                <div class="download-category__heading">
+                  <span class="download-category__icon" aria-hidden="true">✦</span>
+                  <div><p class="eyebrow">Konuşan güvenlik</p><h3>Yapay Zekâ Asistanı</h3></div>
+                </div>
+                <a class="download-option download-option--disabled" aria-disabled="true" href="#ai-assistant">
+                  <span class="download-option__icon" aria-hidden="true">✧</span>
+                  <span><strong>Elyra AI Assistant</strong><small>Yerel sohbet ve analiz katmanı</small></span>
+                  <span class="download-option__badge">YAKINDA</span>
+                </a>
+              </section>
+            </div>
             <label for="platform-select">İşletim sisteminiz</label>
             <div class="select-wrap">
               <select id="platform-select" name="platform" aria-describedby="platform-help">
                 <option value="unknown">Platform seçin</option>
                 <option value="linux">Linux / Pardus (64-bit .deb)</option>
+                <option value="windows" disabled>Windows (yakında)</option>
               </select>
               <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"/></svg>
             </div>
